@@ -1,0 +1,240 @@
+/* ─────────────────────────────────────────────
+   Cookie Kitchen — styles.css
+   Mobile-first, no framework, GitHub Pages ready
+───────────────────────────────────────────── */
+
+/* ── Design tokens ───────────────────────── */
+:root {
+  /* Colors */
+  --color-brand: #7b1e00;       /* dark reddish-brown for logo */
+  --color-text: #1a1a1a;        /* near-black for tagline */
+  --color-nav: #888888;         /* muted gray for nav links */
+  --color-nav-hover: #555555;
+
+  /* Background gradient colors */
+  --bg-cream: #fff9f2;          /* top — very light cream */
+  --bg-peach: #ffecd6;          /* mid — soft peach */
+  --bg-glow: #f4874a;           /* bottom glow — warm orange */
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Bricolage Grotesque', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Layout */
+  --page-padding: 2rem;
+  --header-padding-top: 2rem;
+}
+
+/* ── Reset & base ─────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Smooth anchor scrolling for legal links */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--bg-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Page wrapper ─────────────────────────── */
+/* Full-viewport hero section with gradient background */
+.page {
+  position: relative;
+  min-height: 100svh;           /* svh = small viewport height — handles mobile chrome */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Warm cream gradient that deepens to peach toward the bottom */
+  background: radial-gradient(
+      ellipse 80% 50% at 50% 110%,
+      var(--bg-glow) 0%,
+      var(--bg-peach) 40%,
+      var(--bg-cream) 75%
+  );
+}
+
+/* ── Orange glow overlay ─────────────────── */
+/* The soft radial orange bloom at the bottom-center */
+.glow {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 45%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(230, 100, 30, 0.35) 0%,
+    rgba(244, 135, 74, 0.15) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ───────────────────────────────── */
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;       /* mobile: stack brand above nav */
+  gap: var(--space-sm);
+  padding: var(--header-padding-top) var(--page-padding);
+}
+
+/* ── Brand block ──────────────────────────── */
+.brand__name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);  /* scales 32px → 51px */
+  font-weight: 800;
+  color: var(--color-brand);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.brand__tagline {
+  font-family: var(--font-body);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}
+
+/* ── Navigation ───────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav__link {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;         /* 13px */
+  color: var(--color-nav);
+  transition: color 0.15s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--color-nav-hover);
+  text-decoration: underline;
+  outline: none;
+}
+
+.nav__sep {
+  font-size: 0.75rem;
+  color: var(--color-nav);
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* ── Hero section ─────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 1;
+  flex: 1;                      /* fills remaining space below header */
+  display: flex;
+  align-items: flex-end;        /* anchors illustration to the bottom */
+  justify-content: center;
+  min-height: 0;                /* prevents flex child from overflowing */
+}
+
+/* The <figure> is just a semantic wrapper — no extra layout needed */
+.hero__figure {
+  width: 100%;
+  max-width: 960px;
+  padding: 0 var(--page-padding);
+}
+
+/* Mascot image — transparent PNG, sits naturally on the gradient background */
+.hero__mascot {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(200, 80, 0, 0.2));
+}
+
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Desktop (≥ 768px)
+───────────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    --page-padding: 3rem;
+    --header-padding-top: 2.5rem;
+  }
+
+  /* Header: brand on the left, nav on the right — single row */
+  .header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  /* Nav moves to the right of the header */
+  .nav {
+    padding-top: 0.2rem;        /* optical alignment with brand text cap-height */
+  }
+
+  /* Hero gets more vertical breathing room */
+  .hero__figure {
+    max-width: 1100px;
+    padding: 0 var(--page-padding);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Large desktop (≥ 1280px)
+───────────────────────────────────────────── */
+@media (min-width: 1280px) {
+  :root {
+    --page-padding: 4rem;
+  }
+
+  .hero__figure {
+    max-width: 1200px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   ACCESSIBILITY — Reduced motion
+───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

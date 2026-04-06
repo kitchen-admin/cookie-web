@@ -1014,7 +1014,7 @@ a   { color: inherit; text-decoration: none; }
   .testimonials__grid { grid-template-columns: repeat(3, 1fr); }
 
   /* Connected pill form */
-  .waitlist-form { flex-direction: row; align-items: stretch; }
+  .waitlist-form { flex-direction: row; align-items: stretch; gap: 0; }
   .waitlist-input { flex: 1; border-radius: var(--radius-sm) 0 0 var(--radius-sm); border-right: none; }
   .waitlist-input:focus { border-right: none; }
   .waitlist-btn { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; white-space: nowrap; }

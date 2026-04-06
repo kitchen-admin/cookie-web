@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const forms = document.querySelectorAll('.waitlist-form');
   const modal = document.getElementById('waitlist-modal');
   const modalClose = document.getElementById('modal-close');
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzUSn-mA-klV2fVbkM6c_mtGBGVYw4akafiSDZAH6mtvTkaJ9iSuZ66rRUvz3674clE/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzOHx3tnmxrKcNx1Lhc0Ok9CrGztqwjOtegKO375HqQgzprlWF9icPi2sEDp4tBaEwqOQ/exec';
 
   const showModal = () => {
     if (modal) {
@@ -76,18 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (buttonTextSpan) buttonTextSpan.innerText = 'Submitting...';
       
       try {
-        const response = await fetch(WEB_APP_URL, {
+          await fetch(WEB_APP_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email: email })
+          body: new URLSearchParams({
+            email: email
+          })
         });
+    //    const response = await fetch(WEB_APP_URL, {
+      //    method: 'POST',
+        //  headers: {
+          //  'Content-Type': 'application/json'
+     //     },
+     //     body: JSON.stringify({ email: email })
+      //  });
         
-        // Google Apps script with JSON response might still resolve successfully
-        if (!response.ok && response.type !== 'opaque') {
-          throw new Error('Network response was not ok');
-        }
         
         showModal();
         form.reset();

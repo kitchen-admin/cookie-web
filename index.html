@@ -1,382 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Cookie Kitchen - Never wonder what to cook again. Personalised meals for breakfast, lunch and dinner, built around your kitchen. Join the waitlist."
-    />
-    <title>Cookie Kitchen</title>
-    <link rel="icon" type="image/png" href="assets/logo.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Cookie Kitchen - Hit your macros effortlessly with what's already in your kitchen. Your intelligent fitness nutrition companion. Join the waitlist." />
+  <title>Cookie Kitchen</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
 
-  <body>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-    <!-- ═══════════════════════════════════════
+<body>
+
+  <!-- ═══════════════════════════════════════
          HERO
     ═══════════════════════════════════════ -->
-    <div class="page">
+  <div class="page">
 
-      <span class="floatie" style="top:18%;left:3%;font-size:3rem;--delay:-1s">🍪</span>
-      <span class="floatie" style="top:62%;left:2%;font-size:1.4rem;--delay:-3.5s">🥕</span>
-      <span class="floatie" style="top:25%;right:3%;font-size:2rem;--delay:-5s">🧄</span>
-      <span class="floatie" style="top:70%;right:1%;font-size:2.5rem;--delay:-2s">🫙</span>
-      <span class="floatie" style="top:82%;left:12%;font-size:2rem;--delay:-4s">🌿</span>
+    <span class="floatie" style="top:18%;left:3%;font-size:3rem;--delay:-1s">🥑</span>
+    <span class="floatie" style="top:62%;left:2%;font-size:1.4rem;--delay:-3.5s">💪</span>
+    <span class="floatie" style="top:25%;right:3%;font-size:2rem;--delay:-5s">🥩</span>
+    <span class="floatie" style="top:70%;right:1%;font-size:2.5rem;--delay:-2s">🍳</span>
+    <span class="floatie" style="top:82%;left:12%;font-size:2rem;--delay:-4s">🌿</span>
 
-      <header class="header">
-        <div class="brand">
-          <h1 class="brand__name">Cookie Kitchen</h1>
-        </div>
-        <nav class="nav" aria-label="Legal">
-          <a href="terms.html" class="nav__link">Terms &amp; Conditions</a>
-          <span class="nav__sep" aria-hidden="true">›</span>
-          <a href="privacy.html" class="nav__link">Privacy Policy</a>
-        </nav>
-      </header>
+    <header class="header">
+      <div class="brand">
+        <h1 class="brand__name">Cookie Kitchen</h1>
+      </div>
+      <nav class="nav" aria-label="Navigation">
+        <a href="#how-it-works" class="nav__link">How It Works</a>
+        <span class="nav__sep" aria-hidden="true">›</span>
+        <a href="#features" class="nav__link">Features</a>
+      </nav>
+    </header>
 
-      <main class="hero">
-        <div class="hero__text">
-
-          <h2 class="hero__headline">
-            Stop <span class="squiggle">wondering</span><br />what to cook.
-          </h2>
-
-          <p class="hero__sub">
-            It's 7pm. You're tired. <br> You open the fridge and draw a blank 😕.<br>
-            Cookie Kitchen helps you figure out what to cook.<br>
-            With the ingredients you have. Nothing wasted.
-          </p>
-
-          <div class="hero__form">
-            <form class="waitlist-form" action="#" method="post" novalidate>
-              <input
-                type="email"
-                class="waitlist-input"
-                placeholder="your@email.com"
-                aria-label="Email address"
-                required
-              />
-              <button type="submit" class="waitlist-btn">
-                <span>I want in</span>
-                <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
-              </button>
-            </form>
-
-          </div>
-
+    <main class="hero">
+      <div class="hero__text">
+        <div class="hero__badge">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          <span>New Fitness AI</span>
         </div>
 
-        <figure class="hero__figure">
-          <div class="hero__viewfinder" aria-hidden="true">
-            <span class="hero__corner hero__corner--tl"></span>
-            <span class="hero__corner hero__corner--tr"></span>
-            <span class="hero__corner hero__corner--bl"></span>
-            <span class="hero__corner hero__corner--br"></span>
-            <div class="hero__scan-line"></div>
-          </div>
-          <img
-            src="assets/mascot.png"
-            alt="Cookie Kitchen — smarter meals from your kitchen, every day"
-            class="hero__mascot"
-            width="900"
-            height="540"
-          />
-        </figure>
-      </main>
+        <h2 class="hero__headline">
+          Hit your gym.<br>
+          Start from your <span class="squiggle">kitchen</span>
+        </h2>
 
-      <div class="glow" aria-hidden="true"></div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         STATS
-    ═══════════════════════════════════════ -->
-    <section class="hook">
-      <div class="container">
-        <div class="hook__stats">
-          <div class="hook__stat">
-            <span class="hook__stat-num">30%</span>
-            <span class="hook__stat-label">of groceries are bought and never used</span>
-          </div>
-          <div class="hook__divider" aria-hidden="true"></div>
-          <div class="hook__stat">
-            <span class="hook__stat-num">1 hr</span>
-            <span class="hook__stat-label">lost every week just deciding what to cook</span>
-          </div>
-          <div class="hook__divider" aria-hidden="true"></div>
-          <div class="hook__stat">
-            <span class="hook__stat-num">0</span>
-            <span class="hook__stat-label">wasted ingredients <br> that's the goal we're building towards</span>
-          </div>
-        </div>
-        <p class="hook__body">
-          Your fridge is full. Your brain is empty. Cookie Kitchen bridges that gap by
-          turning what you already have into meals you'll actually want to cook.
+        <p class="hero__sub">
+          Meet the intelligent nutrition companion that turns your current groceries into goal-crushing meals. No rigid
+          meal prep. No weighing every gram.
         </p>
-      </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════
-         HOW IT WORKS
-    ═══════════════════════════════════════ -->
-    <section class="how" id="how-it-works">
-      <div class="container">
-        <h2 class="section-title">Simpler than you think</h2>
-
-        <div class="steps">
-
-          <div class="step">
-            <div class="step__icon">🏠</div>
-            <h3 class="step__title">Tell us your kitchen</h3>
-            <p class="step__body">
-              Share what you've got. That's all we need to get started <br>
-              No complicated setup, no long forms.
-            </p>
-          </div>
-
-          <div class="step__divider" aria-hidden="true"></div>
-
-          <div class="step">
-            <div class="step__icon">🧠</div>
-            <h3 class="step__title">We do the thinking</h3>
-            <p class="step__body">
-              Cookie Kitchen figures out what to cook and when <br>So nothing
-              goes to waste and nothing gets forgotten. 
-            </p>
-          </div>
-
-          <div class="step__divider" aria-hidden="true"></div>
-
-          <div class="step">
-            <div class="step__icon">🍳</div>
-            <h3 class="step__title">Just cook</h3>
-            <p class="step__body">
-              Breakfast, lunch, and dinner.
-              Personalised to your taste, built around what you have.
-            </p>
-          </div>
+        <div class="hero__form">
+          <form class="waitlist-form" action="#" method="post" novalidate>
+            <input type="email" class="waitlist-input" placeholder="your@email.com" aria-label="Email address"
+              required />
+            <button type="submit" class="waitlist-btn">
+              <span>Get Early Access</span>
+              <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--color-text-muted);">✨ No manual tracking
+            required</p>
 
         </div>
-      </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════
+      </div>
+
+      <figure class="hero__figure">
+        <img src="assets/mascot.png"
+          alt="Smartphone showing Cookie Kitchen scanning protein powder and fitness staples">
+      </figure>
+    </main>
+
+    <div class="glow" aria-hidden="true"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+         PROBLEM SECTION
+    ═══════════════════════════════════════ -->
+  <section class="hook">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom: 3.5rem;">Why hitting your nutrition goals is harder than the
+        workout</h2>
+      <div class="hook__stats">
+        <div class="hook__stat">
+          <span class="hook__stat-num">😫</span>
+          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Meal
+            Prep Fatigue</strong>
+          <span class="hook__stat-label">Eating the same dry chicken and rice out of Tupperware every damn day.</span>
+        </div>
+        <div class="hook__divider" aria-hidden="true"></div>
+        <div class="hook__stat">
+          <span class="hook__stat-num">🗑️</span>
+          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Wasted
+            Groceries</strong>
+          <span class="hook__stat-label">Buying bulk health food with good intentions, only to let it expire.</span>
+        </div>
+        <div class="hook__divider" aria-hidden="true"></div>
+        <div class="hook__stat">
+          <span class="hook__stat-num">⏱️</span>
+          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Tedious
+            Tracking</strong>
+          <span class="hook__stat-label">Quitting because weighing and logging every gram of food is exhausting.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         SOLUTION & HOW IT WORKS
+    ═══════════════════════════════════════ -->
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">Now your kitchen builds the gains with you</h2>
+      <p class="section-sub">A natural evolution of your nutrition. It works with your ingredients, adapts to your
+        goals, and removes all effort.</p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step__icon">📸</div>
+          <h3 class="step__title">Scan your pantry</h3>
+          <p class="step__body">
+            Snap a photo of your fridge or pantry. Our AI identifies your protein sources and carbs instantly.
+          </p>
+        </div>
+
+        <div class="step__divider" aria-hidden="true"></div>
+
+        <div class="step">
+          <div class="step__icon">🥘</div>
+          <h3 class="step__title">Get tailored macro meals</h3>
+          <p class="step__body">
+            Receive flexible, high-protein suggestions based strictly on what's available right now.
+          </p>
+        </div>
+
+        <div class="step__divider" aria-hidden="true"></div>
+
+        <div class="step">
+          <div class="step__icon">🤳</div>
+          <h3 class="step__title">Track with photos</h3>
+          <p class="step__body">
+            Just take a picture of your post-workout meal to log your macros. No searching required.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
          FEATURES
     ═══════════════════════════════════════ -->
-    <section class="features" id="features">
-      <div class="container">
-        <h2 class="section-title">Your pantry. Finally working for you.</h2>
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Your pantry. Finally working for you.</h2>
 
-        <div class="features__bento">
+      <div class="features__bento">
 
-          <!-- Card 1 -->
-          <div class="feature-card">
-            <div class="feature-card__watermark" aria-hidden="true">🏠</div>
-            <span class="feature-card__tag">Smart</span>
-            <h3 class="feature-card__title">Knows your kitchen</h3>
-            <p class="feature-card__body">
-              The more Cookie Kitchen learns about what you have, the better
-              it gets at making sure nothing sits forgotten and nothing goes to waste.
-            </p>
-            <div class="feature-card__arrow" aria-hidden="true">↗</div>
-          </div>
-
-          <!-- Card 2 — featured -->
-          <div class="feature-card feature-card--accent">
-            <div class="feature-card__watermark" aria-hidden="true">♻️</div>
-            <span class="feature-card__tag">Zero waste</span>
-            <h3 class="feature-card__title">Nothing wasted</h3>
-            <p class="feature-card__body">
-              Every suggestion is built around using what you already have at the
-              right time. Good for your wallet. Good for the planet.
-            </p>
-            <div class="feature-card__arrow" aria-hidden="true">↗</div>
-          </div>
-
-          <!-- Card 3 — full width -->
-          <div class="feature-card feature-card--wide">
-            <div class="feature-card__watermark" aria-hidden="true">🗓️</div>
-            <div class="feature-card__wide-inner">
-              <div class="feature-card__wide-text">
-                <span class="feature-card__tag">Daily</span>
-                <h3 class="feature-card__title">All three meals</h3>
-                <p class="feature-card__body">
-                  Breakfast, lunch, and dinner <br> suggested every morning,
-                  personalised to your taste from a deep library of recipes.
-                </p>
-              </div>
-              <div class="feature-card__wide-visual">
-                <div class="meal-pill">🌅 Breakfast</div>
-                <div class="meal-pill">☀️ Lunch</div>
-                <div class="meal-pill">🌙 Dinner</div>
-              </div>
-            </div>
-            <div class="feature-card__arrow" aria-hidden="true">↗</div>
-          </div>
-
+        <!-- Card 1 -->
+        <div class="feature-card">
+          <div class="feature-card__watermark" aria-hidden="true">📊</div>
+          <span class="feature-card__tag">Macro Vision</span>
+          <h3 class="feature-card__title">Know your macros instantly</h3>
+          <p class="feature-card__body">
+            Our AI vision logs your ingredients from a single photo. Stop guessing if you have enough protein hiding in
+            the fridge.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════
-         RECIPE SHOWCASE
-    ═══════════════════════════════════════ -->
-    <section class="recipes" id="recipes">
-      <div class="container">
-        <h2 class="section-title">Recipes built around what you have</h2>
-
-        <div class="recipes__scroll">
-
-          <article class="recipe-card">
-            <div class="recipe-card__img-wrap">
-              <img
-                src="assets/recipe-tapioca.jpg"
-                alt="Kerala Style Tapioca Stew"
-                class="recipe-card__img"
-                loading="lazy"
-              />
-            </div>
-            <div class="recipe-card__body">
-              <span class="recipe-card__tag">Lunch pick</span>
-              <h3 class="recipe-card__title">Kerala Tapioca Stew</h3>
-              <div class="recipe-card__meta">
-                <span>⏱ 35 min</span>
-                <span>· Lunch</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <div class="recipe-card__img-wrap">
-              <img
-                src="assets/recipe-pasta.jpg"
-                alt="One-Pan Garlic Pasta"
-                class="recipe-card__img"
-                loading="lazy"
-              />
-            </div>
-            <div class="recipe-card__body">
-              <span class="recipe-card__tag">Tonight's dinner</span>
-              <h3 class="recipe-card__title">One-Pan Garlic Pasta</h3>
-              <div class="recipe-card__meta">
-                <span>⏱ 20 min</span>
-                <span>· Dinner</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <div class="recipe-card__img-wrap">
-              <img
-                src="assets/recipe-curry.jpg"
-                alt="Mango Chicken Curry"
-                class="recipe-card__img"
-                loading="lazy"
-              />
-            </div>
-            <div class="recipe-card__body">
-              <span class="recipe-card__tag">Weekend dinner</span>
-              <h3 class="recipe-card__title">Mango Chicken Curry</h3>
-              <div class="recipe-card__meta">
-                <span>⏱ 45 min</span>
-                <span>· Dinner</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <div class="recipe-card__img-wrap">
-              <img
-                src="assets/recipe-oats.jpg"
-                alt="Overnight Oats Bowl"
-                class="recipe-card__img"
-                loading="lazy"
-              />
-            </div>
-            <div class="recipe-card__body">
-              <span class="recipe-card__tag">Quick breakfast pick</span>
-              <h3 class="recipe-card__title">Overnight Oats Bowl</h3>
-              <div class="recipe-card__meta">
-                <span>⏱ 5 min</span>
-                <span>· Breakfast</span>
-              </div>
-            </div>
-          </article>
-
+        <!-- Card 2 — featured -->
+        <div class="feature-card feature-card--accent">
+          <div class="feature-card__watermark" aria-hidden="true">⏳</div>
+          <span class="feature-card__tag">Zero waste</span>
+          <h3 class="feature-card__title">Use your protein before it expires</h3>
+          <p class="feature-card__body">
+            Get timely nudges to use that fresh chicken or spinach before it goes bad. Good for your gains, good for
+            your wallet.
+          </p>
         </div>
-      </div>
-    </section>
 
-
-
-    <!-- ═══════════════════════════════════════
-         WAITLIST CTA
-    ═══════════════════════════════════════ -->
-    <section class="cta">
-      <div class="container">
-        <div class="cta__icon" aria-hidden="true">📸</div>
-        <h2 class="cta__title">
-          Stop guessing.<br />
-          <span class="cta__title-gradient">Start cooking.</span>
-        </h2>
-        <p class="cta__desc">
-          Be among the first to experience a smarter kitchen.<br class="br-desktop" />
-          Early access is limited, get your spot before it's gone.
-        </p>
-
-        <form class="waitlist-form waitlist-form--dark" action="#" method="post" novalidate>
-          <input
-            type="email"
-            class="waitlist-input"
-            placeholder="your@email.com"
-            aria-label="Email address"
-            required
-          />
-          <button type="submit" class="waitlist-btn">
-            <span>Secure my spot</span>
-            <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
-          </button>
-        </form>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
-         FOOTER
-    ═══════════════════════════════════════ -->
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__brand">
-          <span class="footer__logo">Cookie Kitchen</span>
-          <span class="footer__copy">© 2026 Cookie Kitchen. All rights reserved.</span>
+        <!-- Card 3 -->
+        <div class="feature-card">
+          <div class="feature-card__watermark" aria-hidden="true">🛒</div>
+          <span class="feature-card__tag">Smart Lists</span>
+          <h3 class="feature-card__title">Smart supplement lists</h3>
+          <p class="feature-card__body">
+            When staples or whey protein run low, they're automatically added to your smart grocery list. Never run out
+            again.
+          </p>
         </div>
-        <nav class="footer__nav" aria-label="Footer legal">
-          <a id="terms" href="terms.html" class="footer__link">Terms &amp; Conditions</a>
-          <a id="privacy" href="privacy.html" class="footer__link">Privacy Policy</a>
-        </nav>
-      </div>
-    </footer>
 
-    <!-- ═══════════════════════════════════════
-         WAITLIST MODAL
-    ═══════════════════════════════════════ -->
-    <div id="waitlist-modal" class="modal-overlay" aria-hidden="true">
-      <div class="modal">
-        <button id="modal-close" class="modal__close" aria-label="Close modal">×</button>
-        <div class="modal__icon">🎉</div>
-        <h3 class="modal__title">You're on the waitlist!</h3>
-        <p class="modal__desc">Keep an eye on your inbox. We'll be in touch soon.</p>
+        <!-- Card 4 — full width -->
+        <div class="feature-card feature-card--wide">
+          <div class="feature-card__watermark" aria-hidden="true">💪</div>
+          <div class="feature-card__wide-inner">
+            <div class="feature-card__wide-text">
+              <span class="feature-card__tag">Daily flexibility</span>
+              <h3 class="feature-card__title">Cook for your goals</h3>
+              <p class="feature-card__body">
+                Whether you are bulking, cutting, or maintaining, we suggest recipes entirely based on what your kitchen
+                already holds to meet your daily targets.
+              </p>
+            </div>
+            <div class="feature-card__wide-visual">
+              <div class="meal-pill">🌅 1. Snap plate</div>
+              <div class="meal-pill">☀️ 2. AI tracks macros</div>
+              <div class="meal-pill" style="min-width: 200px;">🌙 3. Zero manual weighing</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+  </section>
 
-    <script src="script.js"></script>
-  </body>
+  <!-- ═══════════════════════════════════════
+         HABIT & PROGRESS SYSTEM
+    ═══════════════════════════════════════ -->
+  <section class="how" style="background: var(--bg-cream);">
+    <div class="container">
+      <h2 class="section-title">The habit engine that keeps you on track</h2>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 3rem; margin-top: 3rem;">
+        <div style="max-width: 600px; text-align: center;">
+          <p style="font-size: 1.1rem; color: var(--color-text-muted); line-height: 1.6;">
+            Meet your <strong>Daily Macro Score</strong>. An adaptive feedback system focused on ensuring you hit your
+            protein and stay within calories dynamically. Our AI adjusts tomorrow's target based on today's reality—no
+            punishing streaks, just progress.
+          </p>
+        </div>
+        <img src="assets/macro_score_ui_1775651969726.png"
+          alt="App showing Daily Macro Score with protein ring on a rustic kitchen counter next to a shaker bottle"
+          style="max-width: 400px; width: 100%; border-radius: var(--radius-lg); box-shadow: 0 16px 32px rgba(123, 30, 0, 0.1);" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         DIFFERENTIATION & SOCIAL PROOF
+    ═══════════════════════════════════════ -->
+  <section class="features" style="background: var(--bg-white);">
+    <div class="container">
+      <h2 class="section-title">Loved by people who hate weighing food</h2>
+      <p class="section-sub">Instead of logging every gram manually, just take a photo. Instead of dry chicken everyday,
+        enjoy flexible meals.</p>
+
+      <div class="features__bento" style="margin-top: 3rem;">
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: center;">
+          <p style="font-size: 1.1rem; font-style: italic; color: var(--color-brand); margin-bottom: 1.5rem;">"The photo
+            tracking is pure magic. I finally hit my 200g of protein daily without spending an hour in MyFitnessPal."
+          </p>
+          <strong style="color: var(--color-text);">— Sarah J.</strong>
+        </div>
+        <div class="feature-card feature-card--accent"
+          style="display: flex; flex-direction: column; justify-content: center;">
+          <p style="font-size: 1.1rem; font-style: italic; color: #fff; margin-bottom: 1.5rem;">"I save so much time on
+            Sunday meal prep. It adapts to what I randomly picked up at the store without blowing my macros."</p>
+          <strong style="color: rgba(255, 255, 255, 0.8);">— Mark R.</strong>
+        </div>
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: center;">
+          <p style="font-size: 1.1rem; font-style: italic; color: var(--color-brand); margin-bottom: 1.5rem;">"It feels
+            like it just knows what I should eat to stay shredded without me having to overthink my groceries."</p>
+          <strong style="color: var(--color-text);">— Elena D.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         FAQ
+    ═══════════════════════════════════════ -->
+  <section class="hook" style="background: var(--bg-peach);">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div
+        style="max-width: 800px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1.5rem; text-align: left;">
+        <div
+          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
+          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Do I still need to weigh my
+            food?</h3>
+          <p style="color: var(--color-text-muted); line-height: 1.6;">No! Just snap a photo of your meal. Our AI
+            accurately estimates volume and macros based on advanced computer vision.</p>
+        </div>
+        <div
+          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
+          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Does it support bulking and
+            cutting?</h3>
+          <p style="color: var(--color-text-muted); line-height: 1.6;">Yes. Set your goal (surplus or deficit) and we
+            provide personalized recipes to meet your exact daily targets.</p>
+        </div>
+        <div
+          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
+          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Can I add my own protein
+            powder?</h3>
+          <p style="color: var(--color-text-muted); line-height: 1.6;">Absolutely. Cookie Kitchen fully integrates your
+            supplements into your pantry so it knows when you're drinking a shake.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         WAITLIST CTA
+    ═══════════════════════════════════════ -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta__icon" aria-hidden="true">📸</div>
+      <h2 class="cta__title">
+        Ready to fuel your<br />
+        <span class="cta__title-gradient">goals smarter?</span>
+      </h2>
+      <p class="cta__desc">
+        Be among the first to experience the easiest way to crush your macros.<br class="br-desktop" />
+        Early access is limited, join the waitlist today.
+      </p>
+
+      <form class="waitlist-form waitlist-form--dark" action="#" method="post" novalidate onsubmit="return false;">
+        <input type="email" class="waitlist-input" placeholder="your@email.com" aria-label="Email address" required />
+        <button type="submit" class="waitlist-btn">
+          <span>Join the waitlist</span>
+          <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">Cookie Kitchen</span>
+        <span class="footer__copy">© 2026 Cookie Kitchen. All rights reserved.</span>
+      </div>
+      <nav class="footer__nav" aria-label="Footer legal">
+        <a id="terms" href="terms.html" class="footer__link">Terms &amp; Conditions</a>
+        <a id="privacy" href="privacy.html" class="footer__link">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+         WAITLIST MODAL
+    ═══════════════════════════════════════ -->
+  <div id="waitlist-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal">
+      <button id="modal-close" class="modal__close" aria-label="Close modal">×</button>
+      <div class="modal__icon">🎉</div>
+      <h3 class="modal__title">You're on the waitlist!</h3>
+      <p class="modal__desc">Keep an eye on your inbox. We'll be in touch soon.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>

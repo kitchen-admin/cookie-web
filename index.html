@@ -5,10 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Cookie Kitchen - Hit your macros effortlessly with what's already in your kitchen. Your intelligent fitness nutrition companion. Join the waitlist." />
+    content="Cookie Kitchen — Your intelligent health companion. Personalized meal plans, smart pantry management, and activity tracking built around your real life. Join the waitlist." />
   <title>Cookie Kitchen</title>
   <link rel="icon" type="image/png" href="assets/logo.png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -21,41 +20,36 @@
 
   <!-- ═══════════════════════════════════════
          HERO
-    ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <div class="page">
-
-    <span class="floatie" style="top:18%;left:3%;font-size:3rem;--delay:-1s">🥑</span>
-    <span class="floatie" style="top:62%;left:2%;font-size:1.4rem;--delay:-3.5s">💪</span>
-    <span class="floatie" style="top:25%;right:3%;font-size:2rem;--delay:-5s">🥩</span>
-    <span class="floatie" style="top:70%;right:1%;font-size:2.5rem;--delay:-2s">🍳</span>
-    <span class="floatie" style="top:82%;left:12%;font-size:2rem;--delay:-4s">🌿</span>
+    <div class="orb orb--1" aria-hidden="true"></div>
+    <div class="orb orb--2" aria-hidden="true"></div>
+    <div class="orb orb--3" aria-hidden="true"></div>
 
     <header class="header">
       <div class="brand">
         <h1 class="brand__name">Cookie Kitchen</h1>
       </div>
       <nav class="nav" aria-label="Navigation">
-        <a href="#how-it-works" class="nav__link">How It Works</a>
+        <a href="#journey" class="nav__link">How It Works</a>
         <span class="nav__sep" aria-hidden="true">›</span>
-        <a href="#features" class="nav__link">Features</a>
+        <a href="#pillars" class="nav__link">Features</a>
+        <span class="nav__sep" aria-hidden="true">›</span>
+        <a href="#waitlist" class="nav__link nav__link--highlight">Join Waitlist</a>
       </nav>
     </header>
 
     <main class="hero">
       <div class="hero__text">
-        <div class="hero__badge">
-          <span class="hero__badge-dot" aria-hidden="true"></span>
-          <span>New Fitness AI</span>
-        </div>
-
         <h2 class="hero__headline">
-          Hit your gym.<br>
-          Start from your <span class="squiggle">kitchen</span>
+          Your goals.<br>
+          A smarter path<br>
+          to <span class="squiggle"><span class="hero__keyword" id="hero-keyword">losing weight</span></span>
         </h2>
 
         <p class="hero__sub">
-          Meet the intelligent nutrition companion that turns your current groceries into goal-crushing meals. No rigid
-          meal prep. No weighing every gram.
+          Cookie Kitchen is a new kind of health companion — one that adapts to your lifestyle, understands your kitchen,
+          and builds a plan you'll actually follow. No rigid diets. No obsessive logging.
         </p>
 
         <div class="hero__form">
@@ -67,91 +61,170 @@
               <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
             </button>
           </form>
-          <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--color-text-muted);">✨ No manual tracking
-            required</p>
-
         </div>
-
       </div>
 
       <figure class="hero__figure">
         <img src="assets/mascot.png"
-          alt="Smartphone showing Cookie Kitchen scanning protein powder and fitness staples">
+          alt="Cookie Kitchen — your intelligent health companion" />
+        <div class="hero__scan" aria-hidden="true">
+          <div class="hero__scan-line"></div>
+          <div class="hero__scan-grid"></div>
+          <div class="hero__scan-corners">
+            <span class="hero__scan-corner hero__scan-corner--tl"></span>
+            <span class="hero__scan-corner hero__scan-corner--tr"></span>
+            <span class="hero__scan-corner hero__scan-corner--bl"></span>
+            <span class="hero__scan-corner hero__scan-corner--br"></span>
+          </div>
+        </div>
       </figure>
     </main>
+
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span class="hero__scroll-text">Discover what's possible</span>
+      <span class="hero__scroll-arrow">↓</span>
+    </div>
 
     <div class="glow" aria-hidden="true"></div>
   </div>
 
   <!-- ═══════════════════════════════════════
-         PROBLEM SECTION
-    ═══════════════════════════════════════ -->
-  <section class="hook">
+         MARQUEE TICKER
+  ═══════════════════════════════════════ -->
+  <div class="ticker" role="marquee" aria-label="Features overview">
+    <div class="ticker__track">
+      <span class="ticker__item">Set your goal</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Personalised meal plans</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Zero manual tracking</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Smart pantry management</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Activity & progress tracking</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Grocery lists, auto-generated</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Healthy habits, for real</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Set your goal</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Personalised meal plans</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Zero manual tracking</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Smart pantry management</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Activity & progress tracking</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Grocery lists, auto-generated</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+      <span class="ticker__item">Healthy habits, for real</span>
+      <span class="ticker__sep" aria-hidden="true">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+         STATS
+  ═══════════════════════════════════════ -->
+  <section class="stats">
     <div class="container">
-      <h2 class="section-title" style="margin-bottom: 3.5rem;">Why hitting your nutrition goals is harder than the
-        workout</h2>
-      <div class="hook__stats">
-        <div class="hook__stat">
-          <span class="hook__stat-num">😫</span>
-          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Meal
-            Prep Fatigue</strong>
-          <span class="hook__stat-label">Eating the same dry chicken and rice out of Tupperware every damn day.</span>
+      <div class="stats__grid">
+        <div class="stat-item reveal">
+          <div class="stat-item__number">
+            <span class="stat-num" data-target="94">0</span><span class="stat-unit">%</span>
+          </div>
+          <p class="stat-item__label">of users quit health tracking apps within the first month</p>
         </div>
-        <div class="hook__divider" aria-hidden="true"></div>
-        <div class="hook__stat">
-          <span class="hook__stat-num">🗑️</span>
-          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Wasted
-            Groceries</strong>
-          <span class="hook__stat-label">Buying bulk health food with good intentions, only to let it expire.</span>
+        <div class="stat-item__divider" aria-hidden="true"></div>
+        <div class="stat-item reveal" style="--reveal-delay: 0.1s">
+          <div class="stat-item__number">
+            <span class="stat-prefix">$</span><span class="stat-num" data-target="1400">0</span>
+          </div>
+          <p class="stat-item__label">wasted on unused groceries per household every year</p>
         </div>
-        <div class="hook__divider" aria-hidden="true"></div>
-        <div class="hook__stat">
-          <span class="hook__stat-num">⏱️</span>
-          <strong style="color: var(--color-brand); font-size: 1.1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Tedious
-            Tracking</strong>
-          <span class="hook__stat-label">Quitting because weighing and logging every gram of food is exhausting.</span>
+        <div class="stat-item__divider" aria-hidden="true"></div>
+        <div class="stat-item reveal" style="--reveal-delay: 0.2s">
+          <div class="stat-item__number">
+            <span class="stat-num" data-target="80">0</span><span class="stat-unit">%</span>
+          </div>
+          <p class="stat-item__label">of health goals are abandoned within the first six weeks</p>
+        </div>
+      </div>
+      <p class="stats__footer reveal">Cookie Kitchen was built to flip all three of these.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         THE PROMISE
+  ═══════════════════════════════════════ -->
+  <section class="promise">
+    <div class="container">
+      <div class="promise__inner reveal">
+        <span class="section-eyebrow">Meet Cookie Kitchen</span>
+        <h2 class="promise__headline">The health companion<br>that actually <em>gets</em> you.</h2>
+        <p class="promise__body">
+          Most apps track what you do. Cookie Kitchen understands who you are.
+          Tell us your goal — lose weight, build strength, eat better, or simply explore new food.
+          We learn your lifestyle, your preferences, your kitchen — and build a plan that's genuinely yours.
+          One that evolves as you do. No rigid diets. No starting over.
+        </p>
+        <div class="promise__goals">
+          <span class="promise__goal">🎯 Lose weight</span>
+          <span class="promise__goal">💪 Build strength</span>
+          <span class="promise__goal">🥗 Eat healthier</span>
+          <span class="promise__goal">🏃 Stay fit</span>
+          <span class="promise__goal">✨ Just explore</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-         SOLUTION & HOW IT WORKS
-    ═══════════════════════════════════════ -->
-  <section class="how" id="how-it-works">
+         JOURNEY — HOW IT WORKS
+  ═══════════════════════════════════════ -->
+  <section class="journey" id="journey">
     <div class="container">
-      <h2 class="section-title">Now your kitchen builds the gains with you</h2>
-      <p class="section-sub">A natural evolution of your nutrition. It works with your ingredients, adapts to your
-        goals, and removes all effort.</p>
+      <div class="journey__header reveal">
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title">Your journey, step by step</h2>
+        <p class="section-sub">From your first goal to your last milestone — we're with you every step of the way.</p>
+      </div>
 
-      <div class="steps">
+      <div class="journey__steps">
 
-        <div class="step">
-          <div class="step__icon">📸</div>
-          <h3 class="step__title">Scan your pantry</h3>
-          <p class="step__body">
-            Snap a photo of your fridge or pantry. Our AI identifies your protein sources and carbs instantly.
-          </p>
+        <div class="journey-step reveal">
+          <div class="journey-step__num">01</div>
+          <div class="journey-step__icon">🎯</div>
+          <h3 class="journey-step__title">Set your goal</h3>
+          <p class="journey-step__body">Tell us what you want — lose weight, gain muscle, eat cleaner, or just discover new meals. No goal is too big or too small.</p>
         </div>
 
-        <div class="step__divider" aria-hidden="true"></div>
+        <div class="journey-step__connector" aria-hidden="true"></div>
 
-        <div class="step">
-          <div class="step__icon">🥘</div>
-          <h3 class="step__title">Get tailored macro meals</h3>
-          <p class="step__body">
-            Receive flexible, high-protein suggestions based strictly on what's available right now.
-          </p>
+        <div class="journey-step reveal" style="--reveal-delay: 0.1s">
+          <div class="journey-step__num">02</div>
+          <div class="journey-step__icon">🧬</div>
+          <h3 class="journey-step__title">Tell us about you</h3>
+          <p class="journey-step__body">We learn your lifestyle — diet type, allergies, activity level, daily habits — so every recommendation is uniquely yours.</p>
         </div>
 
-        <div class="step__divider" aria-hidden="true"></div>
+        <div class="journey-step__connector" aria-hidden="true"></div>
 
-        <div class="step">
-          <div class="step__icon">🤳</div>
-          <h3 class="step__title">Track with photos</h3>
-          <p class="step__body">
-            Just take a picture of your post-workout meal to log your macros. No searching required.
-          </p>
+        <div class="journey-step reveal" style="--reveal-delay: 0.2s">
+          <div class="journey-step__num">03</div>
+          <div class="journey-step__icon">🧠</div>
+          <h3 class="journey-step__title">We build your plan</h3>
+          <p class="journey-step__body">A personalised meal plan, activity guide, and smart grocery list — all calibrated to your goal. Adjusted as life changes, not set in stone.</p>
+        </div>
+
+        <div class="journey-step__connector" aria-hidden="true"></div>
+
+        <div class="journey-step reveal" style="--reveal-delay: 0.3s">
+          <div class="journey-step__num">04</div>
+          <div class="journey-step__icon">📈</div>
+          <h3 class="journey-step__title">Track and evolve</h3>
+          <p class="journey-step__body">Your progress updates in real time. The plan adapts when you need it to. You see exactly where you are versus where you want to be.</p>
         </div>
 
       </div>
@@ -159,64 +232,116 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         FEATURES
-    ═══════════════════════════════════════ -->
-  <section class="features" id="features">
+         PILLARS — FEATURE TEASERS
+  ═══════════════════════════════════════ -->
+  <section class="pillars" id="pillars">
     <div class="container">
-      <h2 class="section-title">Your pantry. Finally working for you.</h2>
+      <div class="pillars__header reveal">
+        <span class="section-eyebrow">What's inside</span>
+        <h2 class="section-title">Four pillars of your transformation</h2>
+        <p class="section-sub">Designed around how people actually live — not how they wish they did.</p>
+      </div>
 
-      <div class="features__bento">
+      <div class="pillars__grid">
 
-        <!-- Card 1 -->
-        <div class="feature-card">
-          <div class="feature-card__watermark" aria-hidden="true">📊</div>
-          <span class="feature-card__tag">Macro Vision</span>
-          <h3 class="feature-card__title">Know your macros instantly</h3>
-          <p class="feature-card__body">
-            Our AI vision logs your ingredients from a single photo. Stop guessing if you have enough protein hiding in
-            the fridge.
-          </p>
+        <div class="pillar-card reveal">
+          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
+          <div class="pillar-card__icon">🎯</div>
+          <span class="pillar-card__tag">Goal Intelligence</span>
+          <h3 class="pillar-card__title">A plan built around your reality</h3>
+          <p class="pillar-card__body">Whether you want to lose 5 kg or run your first 5k, we map a realistic, achievable timeline — and honestly tell you when a goal needs adjusting.</p>
+          <div class="pillar-card__badge">Launching soon</div>
         </div>
 
-        <!-- Card 2 — featured -->
-        <div class="feature-card feature-card--accent">
-          <div class="feature-card__watermark" aria-hidden="true">⏳</div>
-          <span class="feature-card__tag">Zero waste</span>
-          <h3 class="feature-card__title">Use your protein before it expires</h3>
-          <p class="feature-card__body">
-            Get timely nudges to use that fresh chicken or spinach before it goes bad. Good for your gains, good for
-            your wallet.
-          </p>
+        <div class="pillar-card pillar-card--accent reveal" style="--reveal-delay: 0.1s">
+          <div class="pillar-card__icon">🍽️</div>
+          <span class="pillar-card__tag">Kitchen Wisdom</span>
+          <h3 class="pillar-card__title">Your kitchen, always on your side</h3>
+          <p class="pillar-card__body">We see what you have. We know what you need. Meals are crafted from your actual ingredients — with smart restocking before you even notice you're running low.</p>
+          <div class="pillar-card__badge">Launching soon</div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="feature-card">
-          <div class="feature-card__watermark" aria-hidden="true">🛒</div>
-          <span class="feature-card__tag">Smart Lists</span>
-          <h3 class="feature-card__title">Smart supplement lists</h3>
-          <p class="feature-card__body">
-            When staples or whey protein run low, they're automatically added to your smart grocery list. Never run out
-            again.
-          </p>
+        <div class="pillar-card reveal" style="--reveal-delay: 0.2s">
+          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
+          <div class="pillar-card__icon">⚡</div>
+          <span class="pillar-card__tag">Lifestyle Integration</span>
+          <h3 class="pillar-card__title">Fits your life, not the other way around</h3>
+          <p class="pillar-card__body">Active or sedentary, vegan or omnivore — your plan starts where you are and builds from there. Timely reminders arrive exactly when they make sense for your day.</p>
+          <div class="pillar-card__badge">Launching soon</div>
         </div>
 
-        <!-- Card 4 — full width -->
-        <div class="feature-card feature-card--wide">
-          <div class="feature-card__watermark" aria-hidden="true">💪</div>
-          <div class="feature-card__wide-inner">
-            <div class="feature-card__wide-text">
-              <span class="feature-card__tag">Daily flexibility</span>
-              <h3 class="feature-card__title">Cook for your goals</h3>
-              <p class="feature-card__body">
-                Whether you are bulking, cutting, or maintaining, we suggest recipes entirely based on what your kitchen
-                already holds to meet your daily targets.
-              </p>
-            </div>
-            <div class="feature-card__wide-visual">
-              <div class="meal-pill">🌅 1. Snap plate</div>
-              <div class="meal-pill">☀️ 2. AI tracks macros</div>
-              <div class="meal-pill" style="min-width: 200px;">🌙 3. Zero manual weighing</div>
-            </div>
+        <div class="pillar-card reveal" style="--reveal-delay: 0.3s">
+          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
+          <div class="pillar-card__icon">📊</div>
+          <span class="pillar-card__tag">Progress Engine</span>
+          <h3 class="pillar-card__title">Track progress, not perfection</h3>
+          <p class="pillar-card__body">See expected vs actual — meals, activity, nutrition. Ate out? No problem. The system adapts without punishment. Progress is always moving forward.</p>
+          <div class="pillar-card__badge">Launching soon</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+         FAQ
+  ═══════════════════════════════════════ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq__header reveal">
+        <span class="section-eyebrow">Got questions?</span>
+        <h2 class="section-title">Frequently asked</h2>
+      </div>
+
+      <div class="faq__list">
+
+        <div class="faq-item reveal">
+          <button class="faq-item__q" aria-expanded="false">
+            <span>Do I need to count calories manually?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__a" role="region">
+            <p>No. Cookie Kitchen handles all nutrition tracking behind the scenes. You focus on cooking and enjoying food — we take care of the numbers.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-item__q" aria-expanded="false">
+            <span>Can I use it if I'm vegetarian, vegan, or have allergies?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__a" role="region">
+            <p>Absolutely. During setup you share your dietary preferences and any allergies. Every plan, every meal, every recommendation is filtered accordingly — always.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-item__q" aria-expanded="false">
+            <span>What if I eat out or order delivery?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__a" role="region">
+            <p>Life happens. Log it and we account for it — no streak resets, no guilt trips. The plan adapts and keeps you moving forward regardless.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-item__q" aria-expanded="false">
+            <span>Does it support both weight loss and muscle gain?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__a" role="region">
+            <p>Yes. Set your goal — cut, bulk, recomp, or maintain — and we build a meal and activity plan calibrated precisely to that outcome, with realistic timelines.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-item__q" aria-expanded="false">
+            <span>When is the app launching?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__a" role="region">
+            <p>We're rolling out to early access members first. Join the waitlist to secure your spot and be the first to know when we go live — spots are limited.</p>
           </div>
         </div>
 
@@ -225,105 +350,19 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         HABIT & PROGRESS SYSTEM
-    ═══════════════════════════════════════ -->
-  <section class="how" style="background: var(--bg-cream);">
-    <div class="container">
-      <h2 class="section-title">The habit engine that keeps you on track</h2>
-
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 3rem; margin-top: 3rem;">
-        <div style="max-width: 600px; text-align: center;">
-          <p style="font-size: 1.1rem; color: var(--color-text-muted); line-height: 1.6;">
-            Meet your <strong>Daily Macro Score</strong>. An adaptive feedback system focused on ensuring you hit your
-            protein and stay within calories dynamically. Our AI adjusts tomorrow's target based on today's reality—no
-            punishing streaks, just progress.
-          </p>
-        </div>
-        <img src="assets/macro_score_ui_1775651969726.png"
-          alt="App showing Daily Macro Score with protein ring on a rustic kitchen counter next to a shaker bottle"
-          style="max-width: 400px; width: 100%; border-radius: var(--radius-lg); box-shadow: 0 16px 32px rgba(123, 30, 0, 0.1);" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-         DIFFERENTIATION & SOCIAL PROOF
-    ═══════════════════════════════════════ -->
-  <section class="features" style="background: var(--bg-white);">
-    <div class="container">
-      <h2 class="section-title">Loved by people who hate weighing food</h2>
-      <p class="section-sub">Instead of logging every gram manually, just take a photo. Instead of dry chicken everyday,
-        enjoy flexible meals.</p>
-
-      <div class="features__bento" style="margin-top: 3rem;">
-        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: center;">
-          <p style="font-size: 1.1rem; font-style: italic; color: var(--color-brand); margin-bottom: 1.5rem;">"The photo
-            tracking is pure magic. I finally hit my 200g of protein daily without spending an hour in MyFitnessPal."
-          </p>
-          <strong style="color: var(--color-text);">— Sarah J.</strong>
-        </div>
-        <div class="feature-card feature-card--accent"
-          style="display: flex; flex-direction: column; justify-content: center;">
-          <p style="font-size: 1.1rem; font-style: italic; color: #fff; margin-bottom: 1.5rem;">"I save so much time on
-            Sunday meal prep. It adapts to what I randomly picked up at the store without blowing my macros."</p>
-          <strong style="color: rgba(255, 255, 255, 0.8);">— Mark R.</strong>
-        </div>
-        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: center;">
-          <p style="font-size: 1.1rem; font-style: italic; color: var(--color-brand); margin-bottom: 1.5rem;">"It feels
-            like it just knows what I should eat to stay shredded without me having to overthink my groceries."</p>
-          <strong style="color: var(--color-text);">— Elena D.</strong>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-         FAQ
-    ═══════════════════════════════════════ -->
-  <section class="hook" style="background: var(--bg-peach);">
-    <div class="container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-
-      <div
-        style="max-width: 800px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1.5rem; text-align: left;">
-        <div
-          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
-          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Do I still need to weigh my
-            food?</h3>
-          <p style="color: var(--color-text-muted); line-height: 1.6;">No! Just snap a photo of your meal. Our AI
-            accurately estimates volume and macros based on advanced computer vision.</p>
-        </div>
-        <div
-          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
-          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Does it support bulking and
-            cutting?</h3>
-          <p style="color: var(--color-text-muted); line-height: 1.6;">Yes. Set your goal (surplus or deficit) and we
-            provide personalized recipes to meet your exact daily targets.</p>
-        </div>
-        <div
-          style="background: var(--bg-white); padding: 2rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(123, 30, 0, 0.05);">
-          <h3 style="color: var(--color-brand); font-size: 1.25rem; margin-bottom: 0.5rem;">Can I add my own protein
-            powder?</h3>
-          <p style="color: var(--color-text-muted); line-height: 1.6;">Absolutely. Cookie Kitchen fully integrates your
-            supplements into your pantry so it knows when you're drinking a shake.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
          WAITLIST CTA
-    ═══════════════════════════════════════ -->
-  <section class="cta">
+  ═══════════════════════════════════════ -->
+  <section class="cta" id="waitlist">
+    <div class="cta__orb" aria-hidden="true"></div>
     <div class="container">
-      <div class="cta__icon" aria-hidden="true">📸</div>
+      <div class="cta__icon" aria-hidden="true">🚀</div>
       <h2 class="cta__title">
-        Ready to fuel your<br />
-        <span class="cta__title-gradient">goals smarter?</span>
+        Your goals deserve a<br />
+        <span class="cta__title-gradient">smarter companion.</span>
       </h2>
       <p class="cta__desc">
-        Be among the first to experience the easiest way to crush your macros.<br class="br-desktop" />
-        Early access is limited, join the waitlist today.
+        Be among the first to experience Cookie Kitchen.<br class="br-desktop" />
+        Early access is limited — don't lose your spot.
       </p>
 
       <form class="waitlist-form waitlist-form--dark" action="#" method="post" novalidate onsubmit="return false;">
@@ -339,7 +378,7 @@
 
   <!-- ═══════════════════════════════════════
          FOOTER
-    ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
@@ -355,7 +394,7 @@
 
   <!-- ═══════════════════════════════════════
          WAITLIST MODAL
-    ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <div id="waitlist-modal" class="modal-overlay" aria-hidden="true">
     <div class="modal">
       <button id="modal-close" class="modal__close" aria-label="Close modal">×</button>

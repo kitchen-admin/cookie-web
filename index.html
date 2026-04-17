@@ -18,78 +18,92 @@
 
 <body>
 
+  <!-- ── Global noise grain overlay ─────────── -->
+  <div class="noise" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════
-         HERO
+       FIXED NAV
   ═══════════════════════════════════════ -->
-  <div class="page">
+  <header class="site-nav" id="site-nav">
+    <div class="site-nav__inner">
+      <a href="#" class="site-nav__logo">Cookie Kitchen</a>
+      <nav class="site-nav__pills" aria-label="Primary navigation">
+        <a href="#journey" class="site-nav__link">How it works</a>
+        <a href="#pillars" class="site-nav__link">Features</a>
+        <a href="#faq"     class="site-nav__link">FAQ</a>
+      </nav>
+      <a href="#waitlist" class="site-nav__cta">Join waitlist</a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero-v2" aria-label="Hero">
+
     <div class="orb orb--1" aria-hidden="true"></div>
     <div class="orb orb--2" aria-hidden="true"></div>
     <div class="orb orb--3" aria-hidden="true"></div>
+    <div class="glow"       aria-hidden="true"></div>
 
-    <header class="header">
-      <div class="brand">
-        <h1 class="brand__name">Cookie Kitchen</h1>
-      </div>
-      <nav class="nav" aria-label="Navigation">
-        <a href="#journey" class="nav__link">How It Works</a>
-        <span class="nav__sep" aria-hidden="true">›</span>
-        <a href="#pillars" class="nav__link">Features</a>
-        <span class="nav__sep" aria-hidden="true">›</span>
-        <a href="#waitlist" class="nav__link nav__link--highlight">Join Waitlist</a>
-      </nav>
-    </header>
+    <!-- Editorial staggered headline -->
+    <div class="hero-v2__hed-wrap">
+      <h1 class="hero-v2__hed">
+        <span class="hero-v2__line hero-v2__line--xl">Your</span>
+        <span class="hero-v2__line hero-v2__line--xl hero-v2__line--push">goals.</span>
+        <span class="hero-v2__line hero-v2__line--sub">
+          A smarter path to
+          <span class="squiggle"><span class="hero__keyword" id="hero-keyword">losing weight</span></span>
+        </span>
+      </h1>
+    </div>
 
-    <main class="hero">
-      <div class="hero__text">
-        <h2 class="hero__headline">
-          Your goals.<br>
-          A smarter path<br>
-          to <span class="squiggle"><span class="hero__keyword" id="hero-keyword">losing weight</span></span>
-        </h2>
-
-        <p class="hero__sub">
-          Cookie Kitchen is a new kind of health companion — one that adapts to your lifestyle, understands your kitchen,
-          and builds a plan you'll actually follow. No rigid diets. No obsessive logging.
-        </p>
-
-        <div class="hero__form">
-          <form class="waitlist-form" action="#" method="post" novalidate>
-            <input type="email" class="waitlist-input" placeholder="your@email.com" aria-label="Email address"
-              required />
-            <button type="submit" class="waitlist-btn">
-              <span>Get Early Access</span>
-              <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
-            </button>
-          </form>
+    <!-- Floating mascot (absolutely positioned) -->
+    <figure class="hero-v2__figure" aria-hidden="true">
+      <img src="assets/mascot.png" alt="" />
+      <div class="hero__scan">
+        <div class="hero__scan-line"></div>
+        <div class="hero__scan-grid"></div>
+        <div class="hero__scan-corners">
+          <span class="hero__scan-corner hero__scan-corner--tl"></span>
+          <span class="hero__scan-corner hero__scan-corner--tr"></span>
+          <span class="hero__scan-corner hero__scan-corner--bl"></span>
+          <span class="hero__scan-corner hero__scan-corner--br"></span>
         </div>
       </div>
+    </figure>
 
-      <figure class="hero__figure">
-        <img src="assets/mascot.png"
-          alt="Cookie Kitchen — your intelligent health companion" />
-        <div class="hero__scan" aria-hidden="true">
-          <div class="hero__scan-line"></div>
-          <div class="hero__scan-grid"></div>
-          <div class="hero__scan-corners">
-            <span class="hero__scan-corner hero__scan-corner--tl"></span>
-            <span class="hero__scan-corner hero__scan-corner--tr"></span>
-            <span class="hero__scan-corner hero__scan-corner--bl"></span>
-            <span class="hero__scan-corner hero__scan-corner--br"></span>
-          </div>
-        </div>
-      </figure>
-    </main>
+    <!-- Dual-column hero footer: meta | form -->
+    <div class="hero-v2__foot">
+      <div class="hero-v2__meta">
+        <span class="meta-pill">Health &amp; Nutrition</span>
+        <span class="meta-pill">India · 2026</span>
+        <span class="meta-pill">AI-Powered</span>
+      </div>
+      <div class="hero-v2__form-col">
+        <p class="hero-v2__sub">Cookie Kitchen adapts to your lifestyle, understands your kitchen,
+          and builds a plan you'll actually follow. No rigid diets. No obsessive logging.</p>
+        <form class="waitlist-form" action="#" method="post" novalidate>
+          <input type="email" class="waitlist-input" placeholder="your@email.com"
+            aria-label="Email address" required />
+          <button type="submit" class="waitlist-btn">
+            <span>Get Early Access</span>
+            <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
 
-    <div class="hero__scroll-cue" aria-hidden="true">
+    <!-- Scroll cue -->
+    <div class="hero-v2__scroll-cue" aria-hidden="true">
       <span class="hero__scroll-text">Discover what's possible</span>
       <span class="hero__scroll-arrow">↓</span>
     </div>
 
-    <div class="glow" aria-hidden="true"></div>
-  </div>
+  </section>
 
   <!-- ═══════════════════════════════════════
-         MARQUEE TICKER
+       MARQUEE TICKER
   ═══════════════════════════════════════ -->
   <div class="ticker" role="marquee" aria-label="Features overview">
     <div class="ticker__track">
@@ -101,7 +115,7 @@
       <span class="ticker__sep" aria-hidden="true">✦</span>
       <span class="ticker__item">Smart pantry management</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
-      <span class="ticker__item">Activity & progress tracking</span>
+      <span class="ticker__item">Activity &amp; progress tracking</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
       <span class="ticker__item">Grocery lists, auto-generated</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
@@ -115,7 +129,7 @@
       <span class="ticker__sep" aria-hidden="true">✦</span>
       <span class="ticker__item">Smart pantry management</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
-      <span class="ticker__item">Activity & progress tracking</span>
+      <span class="ticker__item">Activity &amp; progress tracking</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
       <span class="ticker__item">Grocery lists, auto-generated</span>
       <span class="ticker__sep" aria-hidden="true">✦</span>
@@ -125,7 +139,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════
-         STATS
+       STATS
   ═══════════════════════════════════════ -->
   <section class="stats">
     <div class="container">
@@ -137,14 +151,14 @@
           <p class="stat-item__label">of users quit health tracking apps within the first month</p>
         </div>
         <div class="stat-item__divider" aria-hidden="true"></div>
-        <div class="stat-item reveal" style="--reveal-delay: 0.1s">
+        <div class="stat-item reveal" style="--reveal-delay: 0.15s">
           <div class="stat-item__number">
             <span class="stat-prefix">₹</span><span class="stat-num" data-target="130000">0</span>
           </div>
           <p class="stat-item__label">wasted on unused groceries per household every year</p>
         </div>
         <div class="stat-item__divider" aria-hidden="true"></div>
-        <div class="stat-item reveal" style="--reveal-delay: 0.2s">
+        <div class="stat-item reveal" style="--reveal-delay: 0.3s">
           <div class="stat-item__number">
             <span class="stat-num" data-target="80">0</span><span class="stat-unit">%</span>
           </div>
@@ -156,7 +170,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         THE PROMISE
+       THE PROMISE
   ═══════════════════════════════════════ -->
   <section class="promise">
     <div class="container">
@@ -181,7 +195,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         JOURNEY — HOW IT WORKS
+       JOURNEY — HOW IT WORKS
   ═══════════════════════════════════════ -->
   <section class="journey" id="journey">
     <div class="container">
@@ -232,61 +246,90 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         PILLARS — FEATURE TEASERS
+       FEATURES GRID  (replaces Pillars)
   ═══════════════════════════════════════ -->
-  <section class="pillars" id="pillars">
+  <section class="features" id="pillars">
     <div class="container">
-      <div class="pillars__header reveal">
-        <span class="section-eyebrow">What's inside</span>
-        <h2 class="section-title">Four pillars of your transformation</h2>
-        <p class="section-sub">Designed around how people actually live — not how they wish they did.</p>
+
+      <!-- Editorial heading row -->
+      <div class="features__head reveal">
+        <div class="features__head-left">
+          <span class="section-eyebrow">What's inside</span>
+          <h2 class="features__title">Four pillars of<br>your transformation</h2>
+        </div>
+        <div class="features__head-right">
+          <p class="features__desc">Designed around how people actually live — not how they wish they did.</p>
+          <a href="#waitlist" class="features__pill-cta">Explore all features →</a>
+        </div>
       </div>
 
-      <div class="pillars__grid">
+      <!-- 3-col editorial grid -->
+      <div class="features__grid">
 
-        <div class="pillar-card reveal">
-          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
-          <div class="pillar-card__icon">🎯</div>
-          <span class="pillar-card__tag">Goal Intelligence</span>
-          <h3 class="pillar-card__title">A plan built around your reality</h3>
-          <p class="pillar-card__body">Whether you want to lose 5 kg or run your first 5k, we map a realistic, achievable timeline — and honestly tell you when a goal needs adjusting.</p>
-          <div class="pillar-card__badge">Launching soon</div>
-        </div>
+        <!-- Card 1 — tall, spans 2 rows -->
+        <article class="feat-card feat-card--tall reveal">
+          <div class="feat-card__media feat-card__media--amber">
+            <span class="feat-card__emoji">🎯</span>
+            <div class="feat-card__overlay">
+              <a href="#waitlist" class="feat-card__cta">Explore →</a>
+            </div>
+          </div>
+          <footer class="feat-card__foot">
+            <span class="feat-card__tag">Goal Intelligence</span>
+            <h3 class="feat-card__title">A plan built around your reality</h3>
+          </footer>
+        </article>
 
-        <div class="pillar-card pillar-card--accent reveal" style="--reveal-delay: 0.1s">
-          <div class="pillar-card__icon">🍽️</div>
-          <span class="pillar-card__tag">Kitchen Wisdom</span>
-          <h3 class="pillar-card__title">Your kitchen, always on your side</h3>
-          <p class="pillar-card__body">We see what you have. We know what you need. Meals are crafted from your actual ingredients — with smart restocking before you even notice you're running low.</p>
-          <div class="pillar-card__badge">Launching soon</div>
-        </div>
+        <!-- Card 2 — normal -->
+        <article class="feat-card reveal" style="--reveal-delay: 0.1s">
+          <div class="feat-card__media feat-card__media--dark">
+            <span class="feat-card__emoji">🍽️</span>
+            <div class="feat-card__overlay">
+              <a href="#waitlist" class="feat-card__cta">Explore →</a>
+            </div>
+          </div>
+          <footer class="feat-card__foot">
+            <span class="feat-card__tag">Kitchen Wisdom</span>
+            <h3 class="feat-card__title">Your kitchen, always on your side</h3>
+          </footer>
+        </article>
 
-        <div class="pillar-card reveal" style="--reveal-delay: 0.2s">
-          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
-          <div class="pillar-card__icon">⚡</div>
-          <span class="pillar-card__tag">Lifestyle Integration</span>
-          <h3 class="pillar-card__title">Fits your life, not the other way around</h3>
-          <p class="pillar-card__body">Active or sedentary, vegan or omnivore — your plan starts where you are and builds from there. Timely reminders arrive exactly when they make sense for your day.</p>
-          <div class="pillar-card__badge">Launching soon</div>
-        </div>
+        <!-- Card 3 — normal -->
+        <article class="feat-card reveal" style="--reveal-delay: 0.2s">
+          <div class="feat-card__media feat-card__media--green">
+            <span class="feat-card__emoji">⚡</span>
+            <div class="feat-card__overlay">
+              <a href="#waitlist" class="feat-card__cta">Explore →</a>
+            </div>
+          </div>
+          <footer class="feat-card__foot">
+            <span class="feat-card__tag">Lifestyle Integration</span>
+            <h3 class="feat-card__title">Fits your life, not the other way around</h3>
+          </footer>
+        </article>
 
-        <div class="pillar-card reveal" style="--reveal-delay: 0.3s">
-          <div class="pillar-card__bg-glow" aria-hidden="true"></div>
-          <div class="pillar-card__icon">📊</div>
-          <span class="pillar-card__tag">Progress Engine</span>
-          <h3 class="pillar-card__title">Track progress, not perfection</h3>
-          <p class="pillar-card__body">See expected vs actual — meals, activity, nutrition. Ate out? No problem. The system adapts without punishment. Progress is always moving forward.</p>
-          <div class="pillar-card__badge">Launching soon</div>
-        </div>
+        <!-- Card 4 — wide, spans 2 cols -->
+        <article class="feat-card feat-card--wide reveal" style="--reveal-delay: 0.15s">
+          <div class="feat-card__media feat-card__media--cream">
+            <span class="feat-card__emoji">📊</span>
+            <div class="feat-card__overlay">
+              <a href="#waitlist" class="feat-card__cta">Explore →</a>
+            </div>
+          </div>
+          <footer class="feat-card__foot">
+            <span class="feat-card__tag">Progress Engine</span>
+            <h3 class="feat-card__title">Track progress, not perfection</h3>
+          </footer>
+        </article>
 
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-         FAQ
+       FAQ
   ═══════════════════════════════════════ -->
-  <section class="faq">
+  <section class="faq" id="faq">
     <div class="container">
       <div class="faq__header reveal">
         <span class="section-eyebrow">Got questions?</span>
@@ -350,7 +393,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-         WAITLIST CTA
+       WAITLIST CTA
   ═══════════════════════════════════════ -->
   <section class="cta" id="waitlist">
     <div class="cta__orb" aria-hidden="true"></div>
@@ -364,7 +407,6 @@
         Be among the first to experience Cookie Kitchen.<br class="br-desktop" />
         Early access is limited — don't lose your spot.
       </p>
-
       <form class="waitlist-form waitlist-form--dark" action="#" method="post" novalidate onsubmit="return false;">
         <input type="email" class="waitlist-input" placeholder="your@email.com" aria-label="Email address" required />
         <button type="submit" class="waitlist-btn">
@@ -372,28 +414,57 @@
           <span class="waitlist-btn__arrow" aria-hidden="true">→</span>
         </button>
       </form>
-
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-         FOOTER
+       FOOTER
   ═══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <span class="footer__logo">Cookie Kitchen</span>
-        <span class="footer__copy">© 2026 Cookie Kitchen. All rights reserved.</span>
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+
+      <!-- Left: brand + newsletter -->
+      <div class="site-footer__left">
+        <p class="site-footer__brand">Cookie Kitchen</p>
+        <p class="site-footer__tagline">Building a healthier India,<br>one kitchen at a time.</p>
+        <form class="footer-form waitlist-form waitlist-form--dark" action="#" method="post" novalidate>
+          <label class="footer-form__label" for="footer-email">Stay in the loop</label>
+          <div class="footer-form__row">
+            <input id="footer-email" type="email" class="waitlist-input footer-form__input"
+              placeholder="your@email.com" aria-label="Email for updates" required />
+            <button type="submit" class="waitlist-btn footer-form__btn">→</button>
+          </div>
+        </form>
       </div>
-      <nav class="footer__nav" aria-label="Footer legal">
-        <a id="terms" href="terms.html" class="footer__link">Terms &amp; Conditions</a>
-        <a id="privacy" href="privacy.html" class="footer__link">Privacy Policy</a>
+
+      <!-- Right: links -->
+      <nav class="site-footer__links" aria-label="Footer navigation">
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-head">Product</h4>
+          <a href="#journey" class="site-footer__link">How it works</a>
+          <a href="#pillars" class="site-footer__link">Features</a>
+          <a href="#faq"     class="site-footer__link">FAQ</a>
+          <a href="#waitlist" class="site-footer__link">Join waitlist</a>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-head">Legal</h4>
+          <a href="terms.html"   class="site-footer__link">Terms &amp; Conditions</a>
+          <a href="privacy.html" class="site-footer__link">Privacy Policy</a>
+        </div>
       </nav>
+
+    </div>
+
+    <!-- Bottom strip -->
+    <div class="site-footer__bottom">
+      <div class="container">
+        <span class="site-footer__copy">© 2026 Cookie Kitchen. All rights reserved.</span>
+      </div>
     </div>
   </footer>
 
   <!-- ═══════════════════════════════════════
-         WAITLIST MODAL
+       WAITLIST MODAL
   ═══════════════════════════════════════ -->
   <div id="waitlist-modal" class="modal-overlay" aria-hidden="true">
     <div class="modal">

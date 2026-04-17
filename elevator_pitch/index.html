@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Kitchen — Elevator Pitch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0A0A0A;
+            --white: #FFFFFF;
+            --gray: #888;
+            --accent: #E8722A;
+        }
+
+        html,
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--black);
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
+            cursor: pointer;
+        }
+
+        /* ===== SLIDES ===== */
+        .deck {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .s {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .s.on {
+            opacity: 1;
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        /* Light / Dark */
+        .s--w {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .s--b {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* ===== TYPOGRAPHY — THE HERO ===== */
+        .t {
+            font-weight: 900;
+            line-height: 1.0;
+            letter-spacing: -0.04em;
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        /* Massive — hero headlines */
+        .t--xl {
+            font-size: clamp(48px, 7vw, 110px);
+        }
+
+        /* Large */
+        .t--lg {
+            font-size: clamp(40px, 5.5vw, 82px);
+        }
+
+        /* Medium */
+        .t--md {
+            font-size: clamp(32px, 4vw, 60px);
+        }
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .sub {
+            font-size: clamp(14px, 1.3vw, 18px);
+            font-weight: 400;
+            color: var(--gray);
+            margin-top: 24px;
+            letter-spacing: -0.01em;
+            text-align: center;
+        }
+
+        .s--b .sub {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Tag */
+        .tag {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* ===== FLOW BAR (slide 5) ===== */
+        .flow-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-top: 56px;
+            justify-content: center;
+        }
+
+        .flow-word {
+            font-size: clamp(18px, 2.2vw, 30px);
+            font-weight: 800;
+            color: var(--black);
+            letter-spacing: -0.02em;
+        }
+
+        .flow-word.accent-word {
+            color: var(--accent);
+        }
+
+        .flow-sep {
+            width: 40px;
+            height: 2px;
+            background: #D0D0D0;
+            margin: 0 16px;
+        }
+
+        /* ===== COMPETITORS LINE (slide 3) ===== */
+        .comp-line {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .comp-chip {
+            font-size: clamp(14px, 1.4vw, 18px);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.25);
+            position: relative;
+        }
+
+        .comp-chip::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== BOTTOM DOTS NAV ===== */
+        .dots {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .dot.on {
+            background: var(--accent);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Light slide dot adjustment */
+        .dots.dots--light .dot {
+            background: rgba(0, 0, 0, 0.12);
+        }
+
+        .dots.dots--light .dot.on {
+            background: var(--accent);
+        }
+
+        /* Slide counter */
+        .counter {
+            position: fixed;
+            bottom: 32px;
+            right: 40px;
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.15);
+            z-index: 100;
+            letter-spacing: 0.05em;
+        }
+
+        .counter.counter--light {
+            color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Auto-play indicator */
+        .auto-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 100;
+        }
+
+        .auto-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0;
+            transition: none;
+        }
+
+        .auto-fill.running {
+            transition: width linear;
+        }
+
+        /* Play/pause button */
+        .play-btn {
+            position: fixed;
+            bottom: 28px;
+            left: 40px;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.15s;
+        }
+
+        .play-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .play-btn.btn--light {
+            border-color: rgba(0, 0, 0, 0.12);
+            color: rgba(0, 0, 0, 0.3);
+        }
+
+        .play-btn.btn--light:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ===== ENTRANCE ANIMATION ===== */
+        .s .anim {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .s.on .anim {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .s.on .anim:nth-child(1) {
+            transition-delay: 0.08s;
+        }
+
+        .s.on .anim:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .s.on .anim:nth-child(3) {
+            transition-delay: 0.35s;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .s {
+                padding: 40px 24px;
+            }
+
+            .comp-line {
+                gap: 20px;
+            }
+
+            .flow-sep {
+                width: 20px;
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Auto-play bar -->
+    <div class="auto-bar">
+        <div class="auto-fill" id="autoFill"></div>
+    </div>
+
+    <div class="deck" id="deck">
+
+        <!-- 01 — HOOK -->
+        <div class="s s--b on" id="s0">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <div class="tag">Cookie Kitchen</div>
+                    <h1 class="t t--xl">What if your kitchen<br>could <span class="accent">think?</span></h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- 02 — PROBLEM -->
+        <div class="s s--w" id="s1">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <h2 class="t t--lg">200+ food decisions<br>a month.<br><span class="accent">Same 5 meals.</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- 03 — MARKET REALITY -->
+        <div class="s s--b" id="s2">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <h2 class="t t--lg">YouTube inspires.<br>Swiggy delivers.<br><span class="accent">Nobody
+                            decides.</span></h2>
+                </div>
+                <div class="comp-line anim">
+                    <span class="comp-chip">YouTube</span>
+                    <span class="comp-chip">Swiggy</span>
+                    <span class="comp-chip">Recipe Apps</span>
+                    <span class="comp-chip">Meal Planners</span>
+                    <span class="comp-chip">Habit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 04 — SOLUTION -->
+        <div class="s s--w" id="s3">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <div class="tag">Cookie Kitchen</div>
+                    <h2 class="t t--xl">We decide what<br><span class="accent">you cook.</span></h2>
+                </div>
+                <p class="sub anim">Not a recipe app. A cooking decision engine.</p>
+            </div>
+        </div>
+
+        <!-- 05 — DIFFERENTIATION -->
+        <div class="s s--w" id="s4">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <h2 class="t t--md">A closed loop that<br>gets <span class="accent">smarter daily.</span></h2>
+                </div>
+                <div class="flow-bar anim">
+                    <span class="flow-word">Scan</span>
+                    <span class="flow-sep"></span>
+                    <span class="flow-word accent-word">Decide</span>
+                    <span class="flow-sep"></span>
+                    <span class="flow-word">Cook</span>
+                    <span class="flow-sep"></span>
+                    <span class="flow-word">Track</span>
+                    <span class="flow-sep"></span>
+                    <span class="flow-word">Repeat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 06 — WHY IT WINS -->
+        <div class="s s--b" id="s5">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <h2 class="t t--lg">Every meal makes<br>it <span class="accent">smarter.</span></h2>
+                </div>
+                <p class="sub anim">Data moat · Habit loop · Personalization flywheel</p>
+            </div>
+        </div>
+
+        <!-- 07 — VISION -->
+        <div class="s s--b" id="s6">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="anim">
+                    <h2 class="t t--xl">The <span class="accent">decision layer</span><br>for home cooking.</h2>
+                </div>
+                <p class="sub anim" style="margin-top:40px;">Cookie Kitchen · hello@cookie.kitchen</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation dots -->
+    <div class="dots" id="dots"></div>
+    <span class="counter" id="counter">1 / 7</span>
+    <button class="play-btn" id="playBtn" title="Auto-play (5s per slide)">▶</button>
+
+    <script>
+        const slides = document.querySelectorAll('.s');
+        const total = slides.length;
+        let cur = 0, animating = false;
+        let autoTimer = null, autoPlaying = false;
+        const INTERVAL = 5000; // 5s per slide
+
+        const dots = document.getElementById('dots');
+        const counter = document.getElementById('counter');
+        const playBtn = document.getElementById('playBtn');
+        const autoFill = document.getElementById('autoFill');
+
+        // Build dots
+        for (let i = 0; i < total; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' on' : '');
+            d.addEventListener('click', (e) => { e.stopPropagation(); go(i); });
+            dots.appendChild(d);
+        }
+
+        function go(i) {
+            if (animating || i === cur || i < 0 || i >= total) return;
+            animating = true;
+            slides[cur].classList.remove('on');
+            slides[i].classList.add('on');
+            cur = i;
+            updateUI();
+            if (autoPlaying) resetAutoBar();
+            setTimeout(() => { animating = false; }, 650);
+        }
+
+        function updateUI() {
+            counter.textContent = (cur + 1) + ' / ' + total;
+            const allDots = dots.querySelectorAll('.dot');
+            allDots.forEach((d, idx) => d.classList.toggle('on', idx === cur));
+
+            // Light/dark adaptive UI
+            const isLight = slides[cur].classList.contains('s--w');
+            dots.classList.toggle('dots--light', isLight);
+            counter.classList.toggle('counter--light', isLight);
+            playBtn.classList.toggle('btn--light', isLight);
+        }
+
+        // Auto-play
+        function startAuto() {
+            autoPlaying = true;
+            playBtn.textContent = '⏸';
+            resetAutoBar();
+        }
+
+        function stopAuto() {
+            autoPlaying = false;
+            playBtn.textContent = '▶';
+            clearTimeout(autoTimer);
+            autoFill.classList.remove('running');
+            autoFill.style.width = '0';
+        }
+
+        function resetAutoBar() {
+            clearTimeout(autoTimer);
+            autoFill.classList.remove('running');
+            autoFill.style.width = '0';
+            // Force reflow
+            autoFill.offsetHeight;
+            autoFill.classList.add('running');
+            autoFill.style.transitionDuration = INTERVAL + 'ms';
+            autoFill.style.width = '100%';
+
+            autoTimer = setTimeout(() => {
+                if (cur < total - 1) {
+                    go(cur + 1);
+                } else {
+                    go(0); // Loop
+                }
+            }, INTERVAL);
+        }
+
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            autoPlaying ? stopAuto() : startAuto();
+        });
+
+        // Click nav
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.dots') || e.target.closest('.play-btn')) return;
+            e.clientX > window.innerWidth * 0.5 ? go(cur + 1) : go(cur - 1);
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(cur + 1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+            if (e.key === 'p' || e.key === 'P') { autoPlaying ? stopAuto() : startAuto(); }
+        });
+
+        // Touch
+        let tx = 0;
+        document.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; });
+        document.addEventListener('touchend', (e) => {
+            const d = tx - e.changedTouches[0].clientX;
+            if (Math.abs(d) > 50) d > 0 ? go(cur + 1) : go(cur - 1);
+        });
+
+        updateUI();
+    </script>
+
+</body>
+
+</html>

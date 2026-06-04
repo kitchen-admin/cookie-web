@@ -1,0 +1,40 @@
+---
+description: Git commit and push identity for cookie-w (kitchen-admin)
+alwaysApply: true
+---
+
+# Kitchen Admin Git (cookie-w)
+
+For this repository only:
+
+## Commit author (required)
+
+Never commit as `thisis-gjk` or personal GJK identities. Always use the **kitchen-admin** identity:
+
+- **Name:** `kitchen-admin`
+- **Email:** `dev@cookie.kitchen`
+
+Set locally before committing if needed:
+
+```bash
+git config user.name "kitchen-admin"
+git config user.email "dev@cookie.kitchen"
+```
+
+## Push (required)
+
+- **Remote:** `origin` → `git@github-kitchen-admin:kitchen-admin/cookie-w.git`
+- **SSH:** Host `github-kitchen-admin` with `~/.ssh/id_kitchen-admin` (not `id_gj` / gjkookie keys)
+- **Branch:** `main` unless the user specifies otherwise
+- Do **not** force-push to `main`
+
+## Redeploy without code changes
+
+When the user asks to retrigger Vercel (or after fixing a wrong commit author), push an empty commit:
+
+```bash
+git commit --allow-empty -m "chore: trigger deployment"
+git push origin main
+```
+
+Use the kitchen-admin author above for that commit.

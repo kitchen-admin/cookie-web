@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
+import { ViewportBottomBlur } from "@/components/viewport-bottom-blur";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -29,12 +30,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bricolage.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background">
+      <body className="m-0 flex min-h-full flex-col bg-background p-0">
         <Providers>
           <Navbar />
           {children}
+          <ViewportBottomBlur />
         </Providers>
       </body>
     </html>

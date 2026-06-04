@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "motion/react";
+
 import { Section } from "@/components/sections/section";
-import { BlurFade } from "@/components/ui/blur-fade";
+import { featuresSectionContentClassName } from "@/config/layout";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { MagicCard } from "@/components/ui/magic-card";
 
@@ -35,7 +37,7 @@ const FEATURES = [
 
 function FeatureIllustration({ variant }: { variant: "pantry" | "lunch" | "expires" }) {
   return (
-    <div className="relative size-[280px] overflow-hidden rounded-[40px]">
+    <div className="relative size-[240px] overflow-hidden rounded-[40px]">
       <div className="absolute inset-0 bg-(--primitive-brand-50) blur-sm" />
       {variant === "pantry" ? (
         <div className="relative size-full">
@@ -50,46 +52,78 @@ function FeatureIllustration({ variant }: { variant: "pantry" | "lunch" | "expir
   );
 }
 
+/** Gentle scroll reveal: each card slides in from the left, staggered left → right. */
+function FeatureCardReveal({
+  index,
+  children,
+}: {
+  index: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      transition={{
+        duration: 0.75,
+        delay: index * 0.14,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      className="shrink-0"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export function Features() {
   return (
     <Section
       id="features"
-      className="mx-auto flex w-full max-w-[1200px] flex-col gap-14 px-6 py-14 md:px-[120px] md:py-14"
+      reveal={false}
+      className="bg-(--primitive-base-white) py-14"
+      contentClassName={featuresSectionContentClassName}
     >
-      <BlurFade inView>
-        <h2 className="type-display-2xl-bold tracking-figma-tighter text-(--text-primary-black)">
+      <div className="relative flex min-h-[520px] w-full flex-col">
+        <h2 className="type-display-2xl-bold self-start text-left tracking-figma-tighter text-(--text-primary-black)">
           The health companion
           <br />
           that actually{" "}
-          <AuroraText colors={BRAND_AURORA_COLORS} className="type-display-2xl-bold">
+          <AuroraText
+            colors={BRAND_AURORA_COLORS}
+            className="type-display-2xl-bold"
+          >
             gets
           </AuroraText>{" "}
           you.
         </h2>
-      </BlurFade>
 
-      <div className="grid justify-items-center gap-10 md:grid-cols-3 md:gap-20">
-        {FEATURES.map((feature, index) => (
-          <BlurFade key={feature.title} delay={0.1 + index * 0.1} inView>
-            <MagicCard
-              className="flex w-full max-w-[280px] flex-col gap-4 rounded-[40px] border-0 bg-transparent p-0"
-              gradientFrom="var(--primitive-brand-300)"
-              gradientTo="var(--primitive-brand-500)"
-              gradientColor="var(--primitive-brand-100)"
-              gradientOpacity={0.4}
-            >
-              <FeatureIllustration variant={feature.variant} />
-              <div className="flex flex-col gap-0.5 text-center md:text-left">
-                <h3 className="type-body-lg-semibold text-(--text-primary-black)">
-                  {feature.title}
-                </h3>
-                <p className="type-body-sm-regular text-(--text-tertiary-black)">
-                  {feature.description}
-                </p>
-              </div>
-            </MagicCard>
-          </BlurFade>
-        ))}
+        <div className="mt-auto flex w-full justify-end overflow-visible pt-10">
+          <div className="flex max-w-full flex-row flex-nowrap items-end justify-end gap-4 overflow-x-auto overflow-y-visible pb-1 md:gap-10">
+            {FEATURES.map((feature, index) => (
+              <FeatureCardReveal key={feature.title} index={index}>
+                <MagicCard
+                  className="flex w-[240px] flex-col gap-4 rounded-[40px] border-0 bg-transparent p-0"
+                  gradientFrom="var(--primitive-brand-300)"
+                  gradientTo="var(--primitive-brand-500)"
+                  gradientColor="var(--primitive-brand-100)"
+                  gradientOpacity={0.4}
+                >
+                  <FeatureIllustration variant={feature.variant} />
+                  <div className="flex flex-col gap-0.5 text-left">
+                    <h3 className="type-body-lg-semibold text-(--text-primary-black)">
+                      {feature.title}
+                    </h3>
+                    <p className="type-body-sm-regular text-(--text-tertiary-black)">
+                      {feature.description}
+                    </p>
+                  </div>
+                </MagicCard>
+              </FeatureCardReveal>
+            ))}
+          </div>
+        </div>
       </div>
     </Section>
   );

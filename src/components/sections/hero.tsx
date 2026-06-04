@@ -1,14 +1,15 @@
 "use client";
 
-import { BlurFade } from "@/components/ui/blur-fade";
+import { motion } from "motion/react";
+
 import { AuroraText } from "@/components/ui/aurora-text";
 import { DotPattern } from "@/components/ui/dot-pattern";
-
-import { SiteImage } from "@/components/ui/site-image";
-import { siteImages } from "@/config/site-images";
-import { FloatingCard } from "@/components/sections/floating-card";
+import { useHeroLoadSequence } from "@/components/hero-load-sequence-provider";
+import { FridgeScanStage } from "@/components/sections/fridge-scan-stage";
 import { Section } from "@/components/sections/section";
 import { WaitlistForm } from "@/components/sections/waitlist-form";
+import { HERO_CONTENT_REVEAL_MS } from "@/config/hero-load-sequence";
+import { heroContentPaddingTopClassName } from "@/config/layout";
 
 const BRAND_AURORA_COLORS = [
   "var(--primitive-brand-300)",
@@ -18,11 +19,14 @@ const BRAND_AURORA_COLORS = [
 ];
 
 export function Hero() {
+  const { showHeroContent, showFridge, startScan } = useHeroLoadSequence();
+
   return (
     <Section
-      id="hero"
+      id="how-it-works"
       reveal={false}
-      className="relative overflow-hidden rounded-b-[48px] bg-(--primitive-brand-25) px-6 pb-16 pt-8 md:px-12"
+      className="relative mt-0 flex min-h-dvh flex-col overflow-x-hidden overflow-y-visible rounded-b-[48px] bg-linear-to-b from-(--primitive-brand-25) to-(--primitive-brand-100) pb-12 pt-0 scroll-mt-0"
+      contentClassName="flex min-h-full flex-1 flex-col"
     >
       <DotPattern
         className="opacity-30 text-(--primitive-brand-200)"
@@ -31,63 +35,43 @@ export function Hero() {
         cr={1}
       />
 
-      <div className="relative mx-auto flex max-w-[808px] flex-col items-center gap-[72px]">
-        <BlurFade delay={0.1} inView className="flex w-full max-w-[640px] flex-col items-center gap-6 text-center">
+      <div
+        className={`relative flex w-full flex-1 flex-col items-center justify-start gap-8 text-center ${heroContentPaddingTopClassName}`}
+      >
+        <motion.div
+          initial={false}
+          animate={{
+            opacity: showHeroContent ? 1 : 0,
+            y: showHeroContent ? 0 : 12,
+            filter: showHeroContent ? "blur(0px)" : "blur(6px)",
+          }}
+          transition={{
+            duration: HERO_CONTENT_REVEAL_MS / 1000,
+            ease: "easeOut",
+          }}
+          className="flex w-full flex-col items-center gap-6 pt-0"
+          aria-hidden={!showHeroContent}
+        >
           <div className="flex flex-col gap-2">
             <h1 className="type-display-xl-bold tracking-figma-tighter text-(--text-primary-black)">
-              What if your kitchen knew{" "}
+              What if your kitchen knew
+              <br />
               <AuroraText colors={BRAND_AURORA_COLORS} className="type-display-xl-bold">
                 what to cook?
               </AuroraText>
             </h1>
             <p className="type-body-lg-regular text-(--text-primary-black)">
-              Cookie turns the ingredients you already have into meals you
-              actually love to eat.
+              Cookie turns the ingredients you already have
+              <br />
+              into meals you actually love to eat.
             </p>
           </div>
           <WaitlistForm />
-        </BlurFade>
+        </motion.div>
 
-        <BlurFade delay={0.35} inView className="relative h-[369px] w-full max-w-[808px]">
-          <SiteImage
-            src={siteImages.fridge}
-            alt="Open refrigerator filled with fresh ingredients"
-            width={360}
-            height={360}
-            priority
-            className="absolute left-1/2 top-0 size-[360px] -translate-x-1/2 translate-y-2 rounded-3xl"
-            placeholderClassName="rounded-3xl"
-          />
-
-          <FloatingCard
-            name="Broccoli"
-            days={4}
-            imageUrl={siteImages.broccoli}
-            delay={0.5}
-            positionClassName="left-[7%] top-[27%] max-md:left-0 max-md:top-[20%]"
-          />
-          <FloatingCard
-            name="Mushroom"
-            days={4}
-            imageUrl={siteImages.mushroom}
-            delay={0.65}
-            positionClassName="left-0 top-[56%] max-md:hidden"
-          />
-          <FloatingCard
-            name="Carrots"
-            days={2}
-            imageUrl={siteImages.carrot}
-            delay={0.55}
-            positionClassName="right-[0%] top-[3%] max-md:right-0 max-md:top-[8%]"
-          />
-          <FloatingCard
-            name="Mixed berry"
-            days={2}
-            imageUrl={siteImages.berry}
-            delay={0.7}
-            positionClassName="right-[0%] top-[54%] max-md:right-0 max-md:top-[48%]"
-          />
-        </BlurFade>
+        <div className="relative flex min-h-0 w-full flex-1 overflow-visible">
+          <FridgeScanStage showFridge={showFridge} startScan={startScan} />
+        </div>
       </div>
     </Section>
   );

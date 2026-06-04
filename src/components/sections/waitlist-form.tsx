@@ -55,7 +55,10 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-[320px] flex-col gap-2">
+    <form
+      onSubmit={onSubmit}
+      className="mx-auto flex w-full max-w-[320px] flex-col gap-2"
+    >
       <div className="flex items-center rounded-[40px] border-2 border-(--primitive-black-8) p-1">
         <Input
           type="email"

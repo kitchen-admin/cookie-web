@@ -20,8 +20,8 @@
   --text-accent-secondary: var(--primitive-accent-500);
   --text-accent-tertiary: var(--primitive-accent-300);
 
-  /* shadcn / app semantics (light) */
-  --background: var(--primitive-brand-25);
+  /* shadcn / app semantics (light) — page canvas; sections set their own fills */
+  --background: var(--primitive-base-white);
   --foreground: var(--text-primary-black);
   --card: var(--primitive-base-white);
   --card-foreground: var(--text-primary-black);

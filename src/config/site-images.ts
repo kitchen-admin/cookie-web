@@ -10,13 +10,29 @@
  */
 
 export const siteImages = {
-  /** Hero: open fridge (360×360) */
+  /** Navbar: logo + wordmark (display at 40px height) */
+  logoLight:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/media-kit/logo_light_2.png",
+  /** Hero cooking beat: Cookie mascot (after scan). */
+  logoMascot:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/media-kit/logo-light-image.png",
+  /** Hero: open fridge (400×400) */
   fridge: "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/fridge.png",
   /** Floating cards: ingredient thumbnails (40×40) */
-  carrot: "",
-  berry: "",
-  broccoli: "",
-  mushroom: "",
+  carrot:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/ingredients/carrot.png",
+  berry:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/ingredients/mixed-berries.png",
+  broccoli:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/ingredients/brocoli.png",
+  mushroom:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/ingredients/mushroom.png",
+  /** Hero recipe: Thai basil tofu/paneer with jasmine rice */
+  heroRecipeThaiBasil:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/recipes/lunch_3.png",
+  /** Hero recipe: Paneer steak with pepper sauce & garlic beans */
+  heroRecipePaneerSteak:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/recipes/lunch_5.png",
   /** Feature section illustrations (optional, 280×280 areas) */
   featurePantry: "",
   featureLunch: "",

@@ -1,0 +1,118 @@
+/**
+ * Typography semantics — reference primitives only (no raw px/rem here).
+ * Maps Figma Display / Body / Label tokens and HTML role defaults.
+ */
+
+:root {
+  /* ── Size aliases (Figma font size tokens) ── */
+  --type-size-display-3xl: var(--type-primitive-size-display-3xl);
+  --type-size-display-2xl: var(--type-primitive-size-display-2xl);
+  --type-size-display-xl: var(--type-primitive-size-display-xl);
+  --type-size-display-lg: var(--type-primitive-size-display-lg);
+  --type-size-display-md: var(--type-primitive-size-display-md);
+  --type-size-display-sm: var(--type-primitive-size-display-sm);
+  --type-size-display-xs: var(--type-primitive-size-display-xs);
+  --type-size-body-xl: var(--type-primitive-size-body-xl);
+  --type-size-body-lg: var(--type-primitive-size-body-lg);
+  --type-size-body-md: var(--type-primitive-size-body-md);
+  --type-size-body-sm: var(--type-primitive-size-body-sm);
+  --type-size-label-md: var(--type-primitive-size-label-md);
+  --type-size-label-sm: var(--type-primitive-size-label-sm);
+
+  /* ── Line height aliases ── */
+  --type-leading-display-3xl: var(--type-primitive-leading-display-3xl);
+  --type-leading-display-2xl: var(--type-primitive-leading-display-2xl);
+  --type-leading-display-xl: var(--type-primitive-leading-display-xl);
+  --type-leading-display-lg: var(--type-primitive-leading-display-lg);
+  --type-leading-display-md: var(--type-primitive-leading-display-md);
+  --type-leading-display-sm: var(--type-primitive-leading-display-sm);
+  --type-leading-display-xs: var(--type-primitive-leading-display-xs);
+  --type-leading-body-xl: var(--type-primitive-leading-body-xl);
+  --type-leading-body-lg: var(--type-primitive-leading-body-lg);
+  --type-leading-body-md: var(--type-primitive-leading-body-md);
+  --type-leading-body-sm: var(--type-primitive-leading-body-sm);
+  --type-leading-label-md: var(--type-primitive-leading-label-md);
+  --type-leading-label-sm: var(--type-primitive-leading-label-sm);
+
+  /* ── Tracking per category (Figma) ── */
+  --type-tracking-display-3xl: var(--type-primitive-tracking-tighter);
+  --type-tracking-display-2xl: var(--type-primitive-tracking-tighter);
+  --type-tracking-display-xl: var(--type-primitive-tracking-tighter);
+  --type-tracking-display-lg: var(--type-primitive-tracking-tighter);
+  --type-tracking-display-md: var(--type-primitive-tracking-tighter);
+  --type-tracking-display-sm: var(--type-primitive-tracking-tight);
+  --type-tracking-display-xs: var(--type-primitive-tracking-tight);
+  --type-tracking-body-xl: var(--type-primitive-tracking-tight);
+  --type-tracking-body-lg: var(--type-primitive-tracking-tight);
+  --type-tracking-body-md: var(--type-primitive-tracking-tight);
+  --type-tracking-body-sm: var(--type-primitive-tracking-tight);
+  --type-tracking-label-md: var(--type-primitive-tracking-tight);
+  --type-tracking-label-sm: var(--type-primitive-tracking-tight);
+
+  /* ── Weight aliases ── */
+  --type-weight-regular: var(--type-primitive-weight-regular);
+  --type-weight-medium: var(--type-primitive-weight-medium);
+  --type-weight-semibold: var(--type-primitive-weight-semibold);
+  --type-weight-bold: var(--type-primitive-weight-bold);
+
+  /* ── HTML / UI role semantics (SEO-friendly defaults) ── */
+  --type-h1-size: var(--type-size-display-xl);
+  --type-h1-leading: var(--type-leading-display-xl);
+  --type-h1-tracking: var(--type-tracking-display-xl);
+  --type-h1-weight: var(--type-weight-semibold);
+
+  --type-h2-size: var(--type-size-display-lg);
+  --type-h2-leading: var(--type-leading-display-lg);
+  --type-h2-tracking: var(--type-tracking-display-lg);
+  --type-h2-weight: var(--type-weight-semibold);
+
+  --type-h3-size: var(--type-size-display-md);
+  --type-h3-leading: var(--type-leading-display-md);
+  --type-h3-tracking: var(--type-tracking-display-md);
+  --type-h3-weight: var(--type-weight-semibold);
+
+  --type-h4-size: var(--type-size-display-sm);
+  --type-h4-leading: var(--type-leading-display-sm);
+  --type-h4-tracking: var(--type-tracking-display-sm);
+  --type-h4-weight: var(--type-weight-semibold);
+
+  --type-h5-size: var(--type-size-body-xl);
+  --type-h5-leading: var(--type-leading-body-xl);
+  --type-h5-tracking: var(--type-tracking-body-xl);
+  --type-h5-weight: var(--type-weight-semibold);
+
+  --type-h6-size: var(--type-size-body-lg);
+  --type-h6-leading: var(--type-leading-body-lg);
+  --type-h6-tracking: var(--type-tracking-body-lg);
+  --type-h6-weight: var(--type-weight-semibold);
+
+  --type-body-size: var(--type-size-body-md);
+  --type-body-leading: var(--type-leading-body-md);
+  --type-body-tracking: var(--type-tracking-body-md);
+  --type-body-weight: var(--type-weight-regular);
+
+  --type-lead-size: var(--type-size-body-lg);
+  --type-lead-leading: var(--type-leading-body-lg);
+  --type-lead-tracking: var(--type-tracking-body-lg);
+  --type-lead-weight: var(--type-weight-regular);
+
+  --type-nav-size: var(--type-size-body-sm);
+  --type-nav-leading: var(--type-leading-body-sm);
+  --type-nav-tracking: var(--type-tracking-body-sm);
+  --type-nav-weight: var(--type-weight-medium);
+
+  --type-eyebrow-size: var(--type-size-label-md);
+  --type-eyebrow-leading: var(--type-leading-label-md);
+  --type-eyebrow-tracking: var(--type-tracking-label-md);
+  --type-eyebrow-weight: var(--type-weight-semibold);
+
+  --type-caption-size: var(--type-size-label-sm);
+  --type-caption-leading: var(--type-leading-label-sm);
+  --type-caption-tracking: var(--type-tracking-label-sm);
+  --type-caption-weight: var(--type-weight-regular);
+
+  --type-button-size: var(--type-size-body-sm);
+  --type-button-leading: var(--type-leading-body-sm);
+  --type-button-tracking: var(--type-tracking-body-sm);
+  --type-button-weight: var(--type-weight-semibold);
+}

@@ -1,0 +1,48 @@
+/**
+ * Typography primitives from Figma (Cookie App → Typography frame).
+ * Only layer that stores raw size, line-height, letter-spacing, and weight values.
+ */
+
+:root {
+  /* Font weights */
+  --type-primitive-weight-regular: 400;
+  --type-primitive-weight-medium: 500;
+  --type-primitive-weight-semibold: 600;
+  --type-primitive-weight-bold: 700;
+
+  /* Letter spacing */
+  --type-primitive-tracking-tighter: -0.09375rem; /* -1.5px */
+  --type-primitive-tracking-tight: -0.03125rem; /* -0.5px */
+
+  /* Display — font size / line height */
+  --type-primitive-size-display-3xl: 3.5rem; /* 56px */
+  --type-primitive-leading-display-3xl: 4rem; /* 64px */
+  --type-primitive-size-display-2xl: 3rem; /* 48px */
+  --type-primitive-leading-display-2xl: 3.5rem; /* 56px */
+  --type-primitive-size-display-xl: 2.5rem; /* 40px */
+  --type-primitive-leading-display-xl: 3rem; /* 48px */
+  --type-primitive-size-display-lg: 2.25rem; /* 36px */
+  --type-primitive-leading-display-lg: 2.75rem; /* 44px */
+  --type-primitive-size-display-md: 2rem; /* 32px */
+  --type-primitive-leading-display-md: 2.5rem; /* 40px */
+  --type-primitive-size-display-sm: 1.75rem; /* 28px */
+  --type-primitive-leading-display-sm: 2.25rem; /* 36px */
+  --type-primitive-size-display-xs: 1.5rem; /* 24px */
+  --type-primitive-leading-display-xs: 2rem; /* 32px */
+
+  /* Body */
+  --type-primitive-size-body-xl: 1.25rem; /* 20px */
+  --type-primitive-leading-body-xl: 1.875rem; /* 30px */
+  --type-primitive-size-body-lg: 1.125rem; /* 18px */
+  --type-primitive-leading-body-lg: 1.75rem; /* 28px */
+  --type-primitive-size-body-md: 1rem; /* 16px */
+  --type-primitive-leading-body-md: 1.5rem; /* 24px */
+  --type-primitive-size-body-sm: 0.875rem; /* 14px */
+  --type-primitive-leading-body-sm: 1.25rem; /* 20px */
+
+  /* Label */
+  --type-primitive-size-label-md: 0.75rem; /* 12px */
+  --type-primitive-leading-label-md: 1rem; /* 16px */
+  --type-primitive-size-label-sm: 0.625rem; /* 10px */
+  --type-primitive-leading-label-sm: 0.875rem; /* 14px */
+}

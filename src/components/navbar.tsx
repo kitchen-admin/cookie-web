@@ -1,18 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { Download } from "lucide-react";
 import { motion } from "motion/react";
 
-import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
-
-// Simple list of links shown in the top bar.
-const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Menu", href: "#menu" },
-  { label: "Contact", href: "#contact" },
-];
+import { NAV_SECTIONS } from "@/config/sections";
 
 export function Navbar() {
   return (
@@ -20,45 +12,49 @@ export function Navbar() {
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md"
+      className="sticky top-4 z-50 px-4"
     >
-      <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        {/* Brand name with Magic UI shiny text effect */}
-        <Link href="/" className="flex items-center gap-2">
-          <AnimatedShinyText className="text-lg font-semibold text-foreground">
-            Cookie Kitchen
-          </AnimatedShinyText>
+      <nav className="mx-auto flex h-[60px] max-w-[800px] items-center justify-between rounded-full border border-(--primitive-black-8) bg-(--primitive-brand-25)/80 px-3 shadow-lg backdrop-blur-md">
+        <Link href="/" className="flex items-center gap-3 pl-2">
+          <span
+            className="size-[26px] shrink-0 rounded-full bg-(--primitive-brand-500)"
+            aria-hidden
+          />
+          <span className="type-body-md-bold text-(--text-primary-black)">
+            Cookie
+          </span>
         </Link>
 
-        {/* Main navigation links */}
-        <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link, index) => (
+        <ul className="hidden items-center gap-4 sm:flex">
+          {NAV_SECTIONS.map((section, index) => (
             <motion.li
-              key={link.label}
+              key={section.id}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
             >
               <Link
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                href={`#${section.id}`}
+                className="type-body-sm-regular rounded-full px-4 py-2 text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4)"
               >
-                {link.label}
+                {section.navLabel}
               </Link>
             </motion.li>
           ))}
+          <motion.li
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.4 }}
+          >
+            <Link
+              href="#download"
+              className="type-body-sm-bold flex items-center gap-2 rounded-full bg-(--primitive-black-90) px-4 py-2 text-(--primitive-base-white) transition-opacity hover:opacity-90"
+            >
+              <Download className="size-[18px]" aria-hidden />
+              Download App
+            </Link>
+          </motion.li>
         </ul>
-
-        {/* Call-to-action button with Magic UI shimmer effect */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.4 }}
-        >
-          <ShimmerButton className="px-4 py-2 text-sm shadow-md">
-            Order Now
-          </ShimmerButton>
-        </motion.div>
       </nav>
     </motion.header>
   );

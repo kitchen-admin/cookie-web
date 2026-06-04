@@ -1,0 +1,98 @@
+/**
+ * Primitive color tokens from Figma (Cookie App → Colors frame).
+ * This is the only layer that stores raw hex values.
+ */
+
+:root {
+  /* Base */
+  --primitive-base-black: #000000;
+  --primitive-base-white: #ffffff;
+
+  /* Black alpha scale */
+  --primitive-black-4: #0000000a;
+  --primitive-black-8: #00000014;
+  --primitive-black-12: #0000001f;
+  --primitive-black-16: #00000029;
+  --primitive-black-20: #00000033;
+  --primitive-black-24: #0000003d;
+  --primitive-black-32: #00000052;
+  --primitive-black-36: #0000005c;
+  --primitive-black-40: #00000066;
+  --primitive-black-50: #00000080;
+  --primitive-black-60: #00000099;
+  --primitive-black-70: #000000b2;
+  --primitive-black-80: #000000cc;
+  --primitive-black-90: #000000e5;
+
+  /* White alpha scale */
+  --primitive-white-4: #ffffff0a;
+  --primitive-white-8: #ffffff14;
+  --primitive-white-12: #ffffff1f;
+  --primitive-white-16: #ffffff29;
+  --primitive-white-20: #ffffff33;
+  --primitive-white-24: #ffffff3d;
+  --primitive-white-32: #ffffff52;
+  --primitive-white-36: #ffffff5c;
+  --primitive-white-40: #ffffff66;
+  --primitive-white-50: #ffffff80;
+  --primitive-white-60: #ffffff99;
+  --primitive-white-70: #ffffffb2;
+  --primitive-white-80: #ffffffcc;
+  --primitive-white-90: #ffffffe5;
+
+  /* Brand (warm orange) */
+  --primitive-brand-25: #fff9f5;
+  --primitive-brand-50: #fff4ed;
+  --primitive-brand-100: #ffe6d5;
+  --primitive-brand-200: #ffd6ae;
+  --primitive-brand-300: #ff9c66;
+  --primitive-brand-400: #ff692e;
+  --primitive-brand-500: #ff4405;
+  --primitive-brand-600: #e62e05;
+  --primitive-brand-700: #bc1b06;
+  --primitive-brand-800: #97180c;
+  --primitive-brand-900: #771a0d;
+  --primitive-brand-950: #57130a;
+
+  /* Accent (blue) */
+  --primitive-accent-25: #f5f8ff;
+  --primitive-accent-50: #eef4ff;
+  --primitive-accent-100: #e0eaff;
+  --primitive-accent-200: #c7d7fe;
+  --primitive-accent-300: #a4bcfd;
+  --primitive-accent-400: #8098f9;
+  --primitive-accent-500: #6172f3;
+  --primitive-accent-600: #444ce7;
+  --primitive-accent-700: #3538cd;
+  --primitive-accent-800: #2d31a6;
+  --primitive-accent-900: #2d3282;
+  --primitive-accent-950: #1f235b;
+
+  /* Danger */
+  --primitive-danger-25: #fffbfa;
+  --primitive-danger-50: #fef3f2;
+  --primitive-danger-100: #fee4e2;
+  --primitive-danger-200: #fecdca;
+  --primitive-danger-300: #fda29b;
+  --primitive-danger-400: #f97066;
+  --primitive-danger-500: #f04438;
+  --primitive-danger-600: #d92d20;
+  --primitive-danger-700: #b42318;
+  --primitive-danger-800: #912018;
+  --primitive-danger-900: #7a271a;
+  --primitive-danger-950: #55160c;
+
+  /* Success */
+  --primitive-success-25: #f6fef9;
+  --primitive-success-50: #ecfdf3;
+  --primitive-success-100: #dcfae6;
+  --primitive-success-200: #abefc6;
+  --primitive-success-300: #75e0a7;
+  --primitive-success-400: #47cd89;
+  --primitive-success-500: #17b26a;
+  --primitive-success-600: #079455;
+  --primitive-success-700: #067647;
+  --primitive-success-800: #085d3a;
+  --primitive-success-900: #074d31;
+  --primitive-success-950: #053321;
+}

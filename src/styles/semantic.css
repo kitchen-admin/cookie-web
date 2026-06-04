@@ -1,0 +1,92 @@
+/**
+ * Semantic color tokens — reference primitives only (no raw hex).
+ * Matches Figma "Semantic Color" + shadcn/ui theme slots.
+ */
+
+:root {
+  /* Figma text semantics */
+  --text-primary-black: var(--primitive-black-90);
+  --text-secondary-black: var(--primitive-black-70);
+  --text-tertiary-black: var(--primitive-black-50);
+  --text-primary-white: var(--primitive-white-90);
+  --text-secondary-white: var(--primitive-white-70);
+  --text-tertiary-white: var(--primitive-white-50);
+  /* Primary brand color (Figma brand/700) */
+  --brand-primary: var(--primitive-brand-700);
+  --text-brand-primary: var(--brand-primary);
+  --text-brand-secondary: var(--primitive-brand-500);
+  --text-brand-tertiary: var(--primitive-brand-300);
+  --text-accent-primary: var(--primitive-accent-700);
+  --text-accent-secondary: var(--primitive-accent-500);
+  --text-accent-tertiary: var(--primitive-accent-300);
+
+  /* shadcn / app semantics (light) */
+  --background: var(--primitive-brand-25);
+  --foreground: var(--text-primary-black);
+  --card: var(--primitive-base-white);
+  --card-foreground: var(--text-primary-black);
+  --popover: var(--primitive-base-white);
+  --popover-foreground: var(--text-primary-black);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--primitive-base-white);
+  --secondary: var(--primitive-brand-50);
+  --secondary-foreground: var(--primitive-brand-800);
+  --muted: var(--primitive-brand-50);
+  --muted-foreground: var(--text-secondary-black);
+  --accent: var(--primitive-accent-50);
+  --accent-foreground: var(--text-accent-primary);
+  --destructive: var(--primitive-danger-600);
+  --border: var(--primitive-black-8);
+  --input: var(--primitive-black-12);
+  --ring: var(--primitive-brand-300);
+  --chart-1: var(--brand-primary);
+  --chart-2: var(--primitive-accent-500);
+  --chart-3: var(--primitive-success-500);
+  --chart-4: var(--primitive-brand-300);
+  --chart-5: var(--primitive-danger-400);
+  --sidebar: var(--primitive-brand-50);
+  --sidebar-foreground: var(--text-primary-black);
+  --sidebar-primary: var(--brand-primary);
+  --sidebar-primary-foreground: var(--primitive-base-white);
+  --sidebar-accent: var(--primitive-brand-100);
+  --sidebar-accent-foreground: var(--primitive-brand-800);
+  --sidebar-border: var(--primitive-black-8);
+  --sidebar-ring: var(--primitive-brand-300);
+}
+
+.dark {
+  --brand-primary: var(--primitive-brand-700);
+
+  /* shadcn / app semantics (dark) */
+  --background: var(--primitive-brand-950);
+  --foreground: var(--text-primary-white);
+  --card: var(--primitive-brand-900);
+  --card-foreground: var(--text-primary-white);
+  --popover: var(--primitive-brand-900);
+  --popover-foreground: var(--text-primary-white);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--primitive-base-white);
+  --secondary: var(--primitive-brand-900);
+  --secondary-foreground: var(--text-primary-white);
+  --muted: var(--primitive-brand-900);
+  --muted-foreground: var(--text-secondary-white);
+  --accent: var(--primitive-accent-950);
+  --accent-foreground: var(--text-accent-tertiary);
+  --destructive: var(--primitive-danger-500);
+  --border: var(--primitive-white-12);
+  --input: var(--primitive-white-16);
+  --ring: var(--primitive-brand-400);
+  --chart-1: var(--brand-primary);
+  --chart-2: var(--primitive-accent-400);
+  --chart-3: var(--primitive-success-400);
+  --chart-4: var(--primitive-brand-300);
+  --chart-5: var(--primitive-danger-400);
+  --sidebar: var(--primitive-brand-900);
+  --sidebar-foreground: var(--text-primary-white);
+  --sidebar-primary: var(--brand-primary);
+  --sidebar-primary-foreground: var(--primitive-base-white);
+  --sidebar-accent: var(--primitive-brand-800);
+  --sidebar-accent-foreground: var(--text-primary-white);
+  --sidebar-border: var(--primitive-white-12);
+  --sidebar-ring: var(--primitive-brand-400);
+}

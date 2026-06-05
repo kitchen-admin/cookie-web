@@ -14,7 +14,11 @@ async function handleJoin(email: string): Promise<void> {
   console.log("[waitlist] joined:", email);
 }
 
-export function WaitlistForm() {
+type WaitlistFormProps = {
+  className?: string;
+};
+
+export function WaitlistForm({ className }: WaitlistFormProps) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -48,7 +52,7 @@ export function WaitlistForm() {
 
   if (success) {
     return (
-      <p className="type-body-md-medium text-center text-text-brand-primary">
+      <p className="type-body-md-medium text-left text-text-brand-primary">
         You&apos;re on the list! We&apos;ll be in touch soon.
       </p>
     );
@@ -57,7 +61,7 @@ export function WaitlistForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="mx-auto flex w-full max-w-[320px] flex-col gap-2"
+      className={cn("flex w-full max-w-[320px] flex-col gap-2", className)}
     >
       <div className="flex items-center rounded-[40px] border-2 border-(--primitive-black-8) p-1">
         <Input
@@ -85,7 +89,7 @@ export function WaitlistForm() {
         </ShimmerButton>
       </div>
       {error ? (
-        <p className="type-body-sm-regular text-center text-destructive" role="alert">
+        <p className="type-body-sm-regular text-left text-destructive" role="alert">
           {error}
         </p>
       ) : null}

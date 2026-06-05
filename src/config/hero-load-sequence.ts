@@ -24,6 +24,6 @@ export const HERO_RECIPE_CARD_STAGGER_MS = 90;
 /** Recipe card fade + rise duration (seconds). */
 export const HERO_RECIPE_CARD_REVEAL_S = 0.5;
 
-/** After cards finish: delay before suggestion logo, then before message. */
-export const HERO_RECIPE_SUGGESTION_LOGO_DELAY_MS = 120;
+/** Recipe finale: logo → message → cards. Delays between each step. */
 export const HERO_RECIPE_SUGGESTION_MESSAGE_DELAY_MS = 180;
+export const HERO_RECIPE_SUGGESTION_CARDS_DELAY_MS = 120;

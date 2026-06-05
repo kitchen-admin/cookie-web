@@ -7,7 +7,15 @@ import {
   HeroCookingBeat,
   HeroRecipeRow,
 } from "@/components/sections/hero-cooking-presentation";
-import { heroBubbleMergeFocalClassName } from "@/config/layout";
+import {
+  heroBubbleMergeFocalClassName,
+  heroInteractionBoxClassName,
+  heroInteractionPhaseFillClassName,
+  heroStageFridgeBandClassName,
+  heroStageFridgeClassName,
+  heroStageFridgeViewportClassName,
+  heroStageScanFrameClassName,
+} from "@/config/layout";
 import {
   FloatingCard,
   type FloatingCardProps,
@@ -183,8 +191,12 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
   const fridgeOnScreen = showFridge && !fridgeShrunk;
 
   return (
-    <div className="relative mx-auto h-full min-h-[410px] w-full">
-      <div className="relative min-h-[410px] w-full">
+    <div className={heroInteractionBoxClassName}>
+      {/* Scan → cook — lives inside the same 560×400 box as the recipe finale. */}
+      {!showRecipes ? (
+      <div className={heroInteractionPhaseFillClassName}>
+      <div className={heroStageFridgeBandClassName}>
+      <div className={heroStageFridgeViewportClassName}>
       {/* Fridge image — shrinks to zero after scan */}
       {(showFridge || fridgeShrunk) && (
         <motion.div
@@ -192,7 +204,7 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
           animate={{
             opacity: fridgeOnScreen ? 1 : 0,
             scale: fridgeOnScreen ? 1 : 0,
-            y: fridgeOnScreen ? 8 : 0,
+            y: 0,
           }}
           transition={{
             duration: fridgeShrunk
@@ -200,7 +212,7 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
               : HERO_IMAGE_REVEAL_MS / 1000,
             ease: "easeInOut",
           }}
-          className="absolute left-1/2 top-0 z-0 h-[400px] w-[400px] origin-center -translate-x-1/2"
+          className={heroStageFridgeClassName}
           aria-hidden={!fridgeOnScreen}
         >
           <SiteImage
@@ -209,15 +221,16 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
             width={400}
             height={400}
             priority
-            className="h-full w-full rounded-3xl object-contain"
-            placeholderClassName="h-full w-full rounded-3xl"
+            className="max-h-full w-auto max-w-full rounded-3xl object-contain"
+            style={{ width: "auto", height: "auto", maxHeight: "100%" }}
+            placeholderClassName="size-full rounded-3xl"
           />
         </motion.div>
       )}
 
-      {/* Scan bar */}
+      {/* Scan bar — sweeps the centered fridge viewport */}
       {startScan && showScanBar ? (
-        <div className="pointer-events-none absolute left-1/2 top-2 z-[5] size-[400px] -translate-x-1/2 overflow-hidden rounded-3xl">
+        <div className={heroStageScanFrameClassName}>
           <motion.div
             initial={{ top: SCAN_TOP, opacity: 1 }}
             animate={barControls}
@@ -229,6 +242,7 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
           </motion.div>
         </div>
       ) : null}
+      </div>
 
       {/* Ingredient bubbles */}
       {startScan && showBubbles
@@ -254,8 +268,10 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
         </div>
       ) : null}
       </div>
+      </div>
+      ) : null}
 
-      <HeroRecipeRow active={showRecipes} />
+      <HeroRecipeRow active={showRecipes} fillBox />
     </div>
   );
 }

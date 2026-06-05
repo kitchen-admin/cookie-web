@@ -56,6 +56,7 @@ export function Navbar() {
               height={40}
               priority
               className="h-10 w-auto object-contain"
+              style={{ width: "auto", height: "2.5rem" }}
             />
           </Link>
 

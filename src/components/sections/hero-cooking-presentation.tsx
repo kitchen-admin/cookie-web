@@ -11,29 +11,29 @@ import {
 } from "@/config/hero-recipes";
 import {
   HERO_RECIPE_CARD_REVEAL_S,
-  HERO_RECIPE_CARD_STAGGER_MS,
-  HERO_RECIPE_SUGGESTION_LOGO_DELAY_MS,
+  HERO_RECIPE_SUGGESTION_CARDS_DELAY_MS,
   HERO_RECIPE_SUGGESTION_MESSAGE_DELAY_MS,
 } from "@/config/hero-load-sequence";
 import {
-  heroRecipeBottomOffsetClassName,
+  HERO_RECIPE_CARD_GAP_PX,
+  HERO_RECIPE_ROW_WIDTH_PX,
+} from "@/config/hero-recipe-card-layout";
+import {
+  HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
+  heroInteractionRecipeVCenterClassName,
   heroRecipeSuggestionAboveCardsClassName,
-  heroRecipeSuggestionLogoOffsetClassName,
+  heroRecipeSuggestionLogoGapClassName,
 } from "@/config/layout";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
 
 const REVEAL_EASE = "easeInOut" as const;
 
-/** Ms until both recipe card entrances finish. */
-function recipeCardsDoneMs() {
-  return (
-    (HERO_RECIPES.length - 1) * HERO_RECIPE_CARD_STAGGER_MS +
-    HERO_RECIPE_CARD_REVEAL_S * 1000
-  );
-}
+/** Width of logo + message + cards block when right-aligned in the 560px box. */
+const HERO_RECIPE_FINALE_GROUP_WIDTH_PX =
+  HERO_RECIPE_ROW_WIDTH_PX + HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX;
 
-/** 1 = cards, 2 = suggestion logo, 3 = suggestion message */
+/** 1 = logo, 2 = message, 3 = recipe cards */
 type RecipeFinaleStep = 0 | 1 | 2 | 3;
 
 /** Logo + “Cookie is cooking” — center stage during cooking beat. */
@@ -100,7 +100,7 @@ function HeroRecipeSuggestionLogo() {
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: HERO_RECIPE_CARD_REVEAL_S, ease: REVEAL_EASE }}
-      className={heroRecipeSuggestionLogoOffsetClassName}
+      className="size-10 shrink-0"
     >
       <Image
         src={siteImages.logoMascot}
@@ -121,73 +121,109 @@ function HeroRecipeSuggestionMessage({ visible = true }: { visible?: boolean }) 
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: HERO_RECIPE_CARD_REVEAL_S, ease: REVEAL_EASE }}
-      className="type-body-md-regular text-(--text-primary-black)"
+      className="type-body-md-regular min-w-0 flex-1 text-(--text-primary-black)"
     >
       {HERO_RECIPE_SUGGESTION_MESSAGE}
     </motion.p>
   );
 }
 
-function HeroRecipeSuggestionBar({ step }: { step: RecipeFinaleStep }) {
-  if (step < 2) return null;
+function HeroRecipeSuggestionBar({
+  step,
+  fillBox = false,
+}: {
+  step: RecipeFinaleStep;
+  fillBox?: boolean;
+}) {
+  if (step < 1) return null;
 
   return (
-    <div className="relative flex min-h-10 w-full max-w-[min(100vw-2rem,36rem)] items-center overflow-visible text-left">
+    <div
+      className={cn(
+        "flex min-h-10 items-center text-left",
+        fillBox ? "w-full" : "w-max max-w-full",
+        heroRecipeSuggestionLogoGapClassName
+      )}
+    >
       <HeroRecipeSuggestionLogo />
-      {step >= 3 ? <HeroRecipeSuggestionMessage visible /> : null}
+      {step >= 2 ? <HeroRecipeSuggestionMessage visible /> : null}
     </div>
   );
 }
 
 /**
- * After cooking beat ends: 1) recipe cards 2) small Cookie logo 3) message.
+ * After cooking beat ends: 1) Cookie logo 2) message 3) recipe cards.
  * Mounts only when `active`; steps advance on timers (cleanup never hides steps).
  */
-export function HeroRecipeRow({ active }: { active: boolean }) {
+export function HeroRecipeRow({
+  active,
+  fillBox = false,
+}: {
+  active: boolean;
+  /** Fill the 560×400 interaction viewport. */
+  fillBox?: boolean;
+}) {
   if (!active) return null;
-  return <HeroRecipeRowSequence />;
+  return <HeroRecipeRowSequence fillBox={fillBox} />;
 }
 
-function HeroRecipeRowSequence() {
+function HeroRecipeRowSequence({ fillBox }: { fillBox: boolean }) {
   const [step, setStep] = useState<RecipeFinaleStep>(1);
   const mountIdRef = useRef(0);
 
   useEffect(() => {
     const mountId = ++mountIdRef.current;
-    const logoAt =
-      recipeCardsDoneMs() + HERO_RECIPE_SUGGESTION_LOGO_DELAY_MS;
-    const messageAt =
-      logoAt + HERO_RECIPE_SUGGESTION_MESSAGE_DELAY_MS;
+    const messageAt = HERO_RECIPE_SUGGESTION_MESSAGE_DELAY_MS;
+    const cardsAt = messageAt + HERO_RECIPE_SUGGESTION_CARDS_DELAY_MS;
 
-    const logoTimer = window.setTimeout(() => {
-      if (mountIdRef.current === mountId) setStep(2);
-    }, logoAt);
     const messageTimer = window.setTimeout(() => {
-      if (mountIdRef.current === mountId) setStep(3);
+      if (mountIdRef.current === mountId) setStep(2);
     }, messageAt);
+    const cardsTimer = window.setTimeout(() => {
+      if (mountIdRef.current === mountId) setStep(3);
+    }, cardsAt);
 
     return () => {
-      window.clearTimeout(logoTimer);
       window.clearTimeout(messageTimer);
+      window.clearTimeout(cardsTimer);
     };
   }, []);
 
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-x-0 z-20 flex justify-center overflow-visible px-4",
-        heroRecipeBottomOffsetClassName
+        "pointer-events-none z-20 overflow-hidden",
+        fillBox
+          ? heroInteractionRecipeVCenterClassName
+          : "relative flex w-max max-w-full justify-end overflow-visible"
       )}
     >
       <div
         className={cn(
-          "pointer-events-auto mx-auto flex w-max max-w-full flex-col items-start overflow-visible",
+          "pointer-events-auto flex flex-col items-start overflow-hidden",
+          fillBox
+            ? "ml-auto h-auto shrink-0"
+            : "w-max max-w-full overflow-visible",
           heroRecipeSuggestionAboveCardsClassName
         )}
+        style={
+          fillBox
+            ? { width: HERO_RECIPE_FINALE_GROUP_WIDTH_PX }
+            : undefined
+        }
       >
-        <HeroRecipeSuggestionBar step={step} />
-        <div className="flex flex-nowrap items-start justify-start gap-[29px] overflow-x-auto overflow-y-visible max-md:snap-x max-md:snap-mandatory md:flex-wrap md:justify-center">
-          {step >= 1
+        <HeroRecipeSuggestionBar step={step} fillBox={fillBox} />
+        <div
+          className={cn(
+            "flex flex-nowrap items-start justify-start max-md:snap-x max-md:snap-mandatory md:flex-wrap",
+            fillBox ? "overflow-hidden" : "overflow-x-auto overflow-y-visible"
+          )}
+          style={{
+            gap: HERO_RECIPE_CARD_GAP_PX,
+            marginInlineStart: HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
+          }}
+        >
+          {step >= 3
             ? HERO_RECIPES.map((recipe, index) => (
                 <HeroRecipeCard
                   key={recipe.title}

@@ -12,6 +12,7 @@ type SiteImageProps = {
   /** Shown when src is empty (placeholder mode). */
   placeholderClassName?: string;
   priority?: boolean;
+  style?: React.CSSProperties;
 };
 
 /**
@@ -25,6 +26,7 @@ export function SiteImage({
   className,
   placeholderClassName,
   priority = false,
+  style,
 }: SiteImageProps) {
   if (!hasSiteImage(src)) {
     return (
@@ -50,6 +52,7 @@ export function SiteImage({
       height={height}
       priority={priority}
       className={cn("object-cover", className)}
+      style={style}
     />
   );
 }

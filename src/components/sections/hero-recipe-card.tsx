@@ -11,6 +11,25 @@ import { motion } from "motion/react";
 
 import type { HeroRecipe, HeroRecipeDiet } from "@/config/hero-recipes";
 import {
+  HERO_RECIPE_CARD_DIET_BADGE_PX,
+  HERO_RECIPE_CARD_DIET_BADGE_RADIUS_PX,
+  HERO_RECIPE_CARD_DIET_DOT_PX,
+  HERO_RECIPE_CARD_FOOTER_BORDER_PX,
+  HERO_RECIPE_CARD_FOOTER_PADDING_BOTTOM_PX,
+  HERO_RECIPE_CARD_FOOTER_PADDING_TOP_PX,
+  HERO_RECIPE_CARD_FOOTER_PADDING_X_PX,
+  HERO_RECIPE_CARD_HEART_ICON_PX,
+  HERO_RECIPE_CARD_IMAGE_HEIGHT_PX,
+  HERO_RECIPE_CARD_IMAGE_OVERLAP_PX,
+  HERO_RECIPE_CARD_IMAGE_PADDING_PX,
+  HERO_RECIPE_CARD_META_GAP_PX,
+  HERO_RECIPE_CARD_META_ICON_PX,
+  HERO_RECIPE_CARD_META_PADDING_X_PX,
+  HERO_RECIPE_CARD_RADIUS_PX,
+  HERO_RECIPE_CARD_SAVE_BUTTON_PX,
+  HERO_RECIPE_CARD_WIDTH_PX,
+} from "@/config/hero-recipe-card-layout";
+import {
   HERO_RECIPE_CARD_REVEAL_S,
   HERO_RECIPE_CARD_STAGGER_MS,
 } from "@/config/hero-load-sequence";
@@ -33,24 +52,40 @@ function DietBadge({
   className?: string;
 }) {
   const isVeg = diet === "veg";
+  const badgeBorderPx = Math.max(1, Math.round(1.5 * 0.8));
 
   return (
     <div
-      className={cn(
-        "flex size-5 shrink-0 items-center justify-center rounded-[6px] border-[1.5px] bg-(--primitive-base-white)",
-        isVeg
-          ? "border-(--primitive-success-600)"
-          : "border-(--primitive-danger-600)",
-        className
-      )}
+      className={cn("flex shrink-0 items-center justify-center bg-(--primitive-base-white)", className)}
+      style={{
+        width: HERO_RECIPE_CARD_DIET_BADGE_PX,
+        height: HERO_RECIPE_CARD_DIET_BADGE_PX,
+        borderRadius: HERO_RECIPE_CARD_DIET_BADGE_RADIUS_PX,
+        borderWidth: badgeBorderPx,
+        borderStyle: "solid",
+        borderColor: isVeg
+          ? "var(--primitive-success-600)"
+          : "var(--primitive-danger-600)",
+      }}
       aria-hidden
     >
       {isVeg ? (
-        <span className="size-2 rounded-full bg-(--primitive-success-600)" />
+        <span
+          className="rounded-full bg-(--primitive-success-600)"
+          style={{
+            width: HERO_RECIPE_CARD_DIET_DOT_PX,
+            height: HERO_RECIPE_CARD_DIET_DOT_PX,
+          }}
+        />
       ) : (
         <span
-          className="size-0 border-x-[4px] border-b-[7px] border-x-transparent border-b-(--primitive-danger-600)"
-          style={{ marginTop: 1 }}
+          className="size-0 border-x-transparent border-b-(--primitive-danger-600)"
+          style={{
+            borderLeftWidth: Math.round(4 * 0.8),
+            borderRightWidth: Math.round(4 * 0.8),
+            borderBottomWidth: Math.round(7 * 0.8),
+            marginTop: 1,
+          }}
         />
       )}
     </div>
@@ -65,23 +100,27 @@ function MetaPill({
   label: string;
 }) {
   return (
-    <div className="flex shrink-0 items-center gap-1 rounded-full bg-(--primitive-black-20) px-2 py-0.5 backdrop-blur-[20px]">
+    <div
+      className="flex shrink-0 items-center gap-1 rounded-full bg-(--primitive-black-20) py-0.5 backdrop-blur-[20px]"
+      style={{ paddingInline: HERO_RECIPE_CARD_META_PADDING_X_PX }}
+    >
       <Icon
-        className="size-4 shrink-0 text-(--primitive-white-90)"
+        className="shrink-0 text-(--primitive-white-90)"
+        style={{
+          width: HERO_RECIPE_CARD_META_ICON_PX,
+          height: HERO_RECIPE_CARD_META_ICON_PX,
+        }}
         strokeWidth={2}
         aria-hidden
       />
-      <span className="type-body-sm-medium whitespace-nowrap text-(--text-primary-white)">
+      <span className="type-label-sm-medium whitespace-nowrap text-(--text-primary-white)">
         {label}
       </span>
     </div>
   );
 }
 
-/**
- * Recipe card from Figma (Cookie App · node 843:9961): 280px wide, 200px image,
- * glass meta pills, overlapping title footer.
- */
+/** Scaled recipe card for the hero finale (Figma 843:9961 at 80%). */
 export function HeroRecipeCard({
   recipe,
   visible,
@@ -103,21 +142,33 @@ export function HeroRecipeCard({
         ease: "easeInOut",
       }}
       className={cn(
-        "flex w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl bg-(--primitive-base-white)",
+        "flex shrink-0 flex-col overflow-hidden bg-(--primitive-base-white)",
         !visible && "pointer-events-none",
         className
       )}
+      style={{
+        width: HERO_RECIPE_CARD_WIDTH_PX,
+        borderRadius: HERO_RECIPE_CARD_RADIUS_PX,
+      }}
       aria-hidden={!visible}
     >
       {/* Image + overlay meta */}
-      <div className="relative -mb-5 flex h-[200px] shrink-0 flex-col gap-2 overflow-hidden rounded-2xl p-3">
+      <div
+        className="relative flex shrink-0 flex-col gap-2 overflow-hidden"
+        style={{
+          height: HERO_RECIPE_CARD_IMAGE_HEIGHT_PX,
+          marginBottom: -HERO_RECIPE_CARD_IMAGE_OVERLAP_PX,
+          padding: HERO_RECIPE_CARD_IMAGE_PADDING_PX,
+          borderRadius: HERO_RECIPE_CARD_RADIUS_PX,
+        }}
+      >
         <SiteImage
           src={recipe.imageUrl}
           alt=""
-          width={280}
-          height={200}
+          width={HERO_RECIPE_CARD_WIDTH_PX}
+          height={HERO_RECIPE_CARD_IMAGE_HEIGHT_PX}
           className="absolute inset-0 size-full object-cover"
-          placeholderClassName="absolute inset-0 size-full rounded-2xl"
+          placeholderClassName="absolute inset-0 size-full rounded-[13px]"
         />
 
         <div className="relative z-10 flex h-full flex-col justify-between">
@@ -128,17 +179,28 @@ export function HeroRecipeCard({
             />
             <button
               type="button"
-              className="flex size-6 shrink-0 items-center justify-center rounded-full backdrop-blur-[2px]"
+              className="flex shrink-0 items-center justify-center rounded-full backdrop-blur-[2px]"
+              style={{
+                width: HERO_RECIPE_CARD_SAVE_BUTTON_PX,
+                height: HERO_RECIPE_CARD_SAVE_BUTTON_PX,
+              }}
               aria-label="Save recipe"
             >
               <Heart
-                className="size-6 text-(--primitive-white-90)"
+                className="text-(--primitive-white-90)"
+                style={{
+                  width: HERO_RECIPE_CARD_HEART_ICON_PX,
+                  height: HERO_RECIPE_CARD_HEART_ICON_PX,
+                }}
                 strokeWidth={1.75}
               />
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div
+            className="flex flex-wrap items-center"
+            style={{ gap: HERO_RECIPE_CARD_META_GAP_PX }}
+          >
             <DietBadge diet={recipe.diet} />
             <MetaPill icon={Users} label={`x${recipe.servings}`} />
             <MetaPill icon={ChefHat} label={recipe.difficulty} />
@@ -148,8 +210,19 @@ export function HeroRecipeCard({
       </div>
 
       {/* Title footer — overlaps image per Figma */}
-      <div className="relative z-10 flex items-center rounded-b-2xl border-2 border-t-0 border-(--primitive-black-8) px-4 pb-3 pt-8">
-        <h3 className="type-body-md-medium min-w-0 flex-1 text-left text-(--text-primary-black)">
+      <div
+        className="relative z-10 flex items-center border-t-0 border-(--primitive-black-8)"
+        style={{
+          borderBottomLeftRadius: HERO_RECIPE_CARD_RADIUS_PX,
+          borderBottomRightRadius: HERO_RECIPE_CARD_RADIUS_PX,
+          borderWidth: HERO_RECIPE_CARD_FOOTER_BORDER_PX,
+          borderStyle: "solid",
+          paddingInline: HERO_RECIPE_CARD_FOOTER_PADDING_X_PX,
+          paddingBottom: HERO_RECIPE_CARD_FOOTER_PADDING_BOTTOM_PX,
+          paddingTop: HERO_RECIPE_CARD_FOOTER_PADDING_TOP_PX,
+        }}
+      >
+        <h3 className="type-body-sm-medium min-w-0 flex-1 text-left text-(--text-primary-black)">
           {recipe.title}
         </h3>
       </div>

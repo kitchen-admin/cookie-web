@@ -82,9 +82,8 @@ export function FloatingCard({
           "flex max-w-[200px] items-center gap-[8px] rounded-2xl p-2",
           side === "left" && "rounded-br-none",
           side === "right" && "rounded-bl-none",
-          "bg-(--primitive-black-4)"
+          "bg-(--primitive-base-white)"
         )}
-        style={{ backgroundColor: "var(--primitive-black-4)" }}
       >
         <SiteImage
           src={imageUrl}

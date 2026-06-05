@@ -14,6 +14,14 @@ export const featuresSectionContentClassName = "max-w-[1280px]";
 /** Wider hero column for side-by-side copy + interaction layout. */
 export const heroSectionContentClassName = "max-w-[1280px]";
 
+/** Hero background image intrinsic size (hero_bg.png). */
+export const HERO_BG_WIDTH_PX = 1080;
+export const HERO_BG_HEIGHT_PX = 600;
+
+/** Hero foreground image intrinsic size (hero_fg.png). */
+export const HERO_FG_WIDTH_PX = 2880;
+export const HERO_FG_HEIGHT_PX = 1200;
+
 /** Gap between hero left copy and right interaction column. */
 export const HERO_SIDE_BY_SIDE_GAP_PX = 40;
 
@@ -35,10 +43,10 @@ export const NAV_BUTTON_GAP_PX = 16;
 export const navButtonGapClassName = "gap-[16px]";
 
 /** Gap between nav bottom edge and where hero content begins. */
-export const HERO_GAP_BELOW_NAV_PX = 56;
+export const HERO_GAP_BELOW_NAV_PX = 172;
 
-/** Hero content padding-top: 24 + 60 + 56 = 140px (nav float + nav height + gap). */
-export const heroContentPaddingTopClassName = "pt-[140px]";
+/** Hero content padding-top: 24 + 60 + 172 = 256px (nav float + nav height + gap). */
+export const heroContentPaddingTopClassName = "pt-[256px]";
 
 /** Recipe cards sit this far above the hero section bottom edge. */
 export const HERO_RECIPE_BOTTOM_OFFSET_PX = 56;

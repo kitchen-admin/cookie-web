@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 interface SectionProps {
   id: SectionId;
   className?: string;
+  /** Full-bleed layer behind the content column (e.g. hero background image). */
+  background?: React.ReactNode;
+  /** Full-bleed layer above background, below content (e.g. hero counter foreground). */
+  foreground?: React.ReactNode;
   /** Extra classes on the inner 800px content column (e.g. flex layout for full-height hero). */
   contentClassName?: string;
   children: React.ReactNode;
@@ -22,13 +26,25 @@ interface SectionProps {
 export function Section({
   id,
   className,
+  background,
+  foreground,
   contentClassName,
   children,
   reveal = true,
 }: SectionProps) {
+  const hasOverlayLayers = background || foreground;
+
   return (
     <section id={id} className={cn("scroll-mt-24", className)}>
-      <div className={cn(sectionContentClassName, contentClassName)}>
+      {background}
+      {foreground}
+      <div
+        className={cn(
+          sectionContentClassName,
+          hasOverlayLayers && "relative z-10",
+          contentClassName
+        )}
+      >
         {reveal ? <BlurFade inView>{children}</BlurFade> : children}
       </div>
     </section>

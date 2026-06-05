@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cookie — Know what to cook",
   description:
-    "Cookie turns the ingredients you already have into meals you actually love to eat.",
+    "Cookie turns ingredients you have into recipes you actually love to eat.",
 };
 
 export default function RootLayout({

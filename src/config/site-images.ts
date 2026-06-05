@@ -10,6 +10,15 @@
  */
 
 export const siteImages = {
+  /** Hero section background (kitchen wall illustration, 1080×600). */
+  heroBg:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/website/hero/hero_bg.png",
+  /**
+   * Hero section foreground (counter + ingredients, 2880×1200).
+   * Bump `v` when the Blob file is replaced (cache bust for Next.js + CDN).
+   */
+  heroFg:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/website/hero/hero_fg.png?v=2",
   /** Navbar: logo + wordmark (display at 40px height) */
   logoLight:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/media-kit/logo_light_2.png",

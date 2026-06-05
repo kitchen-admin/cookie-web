@@ -52,7 +52,7 @@ export function WaitlistForm({ className }: WaitlistFormProps) {
 
   if (success) {
     return (
-      <p className="type-body-md-medium text-left text-text-brand-primary">
+      <p className="type-body-md-medium text-center text-text-brand-primary">
         You&apos;re on the list! We&apos;ll be in touch soon.
       </p>
     );
@@ -89,7 +89,7 @@ export function WaitlistForm({ className }: WaitlistFormProps) {
         </ShimmerButton>
       </div>
       {error ? (
-        <p className="type-body-sm-regular text-left text-destructive" role="alert">
+        <p className="type-body-sm-regular text-center text-destructive" role="alert">
           {error}
         </p>
       ) : null}

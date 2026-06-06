@@ -28,4 +28,13 @@ export const SECTIONS: SectionMeta[] = [
   { id: "faq", navLabel: "FAQ", showInNav: false },
 ];
 
-export const NAV_SECTIONS = SECTIONS.filter((section) => section.showInNav);
+/** Navbar link order (independent of page scroll order). */
+const NAV_SECTION_ORDER: SectionId[] = ["how-it-works", "problem"];
+
+export const NAV_SECTIONS = NAV_SECTION_ORDER.map((id) => {
+  const section = SECTIONS.find((entry) => entry.id === id);
+  if (!section?.showInNav) {
+    throw new Error(`Missing nav section for id: ${id}`);
+  }
+  return section;
+});

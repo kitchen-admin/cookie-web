@@ -6,7 +6,11 @@ import { motion } from "motion/react";
 
 import { Section } from "@/components/sections/section";
 import { FAQ_DEFAULT_OPEN_INDEX, FAQ_ITEMS } from "@/config/faq-items";
-import { faqSectionContentClassName, sectionHeaderClassName } from "@/config/layout";
+import {
+  faqSectionContentClassName,
+  sectionHeaderClassName,
+  sectionVerticalPaddingClassName,
+} from "@/config/layout";
 import { cn } from "@/lib/utils";
 
 const PANEL_OPEN_DURATION_S = 0.32;
@@ -68,16 +72,18 @@ function FaqAccordionItem({
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={answerPanelId}
-        className="relative z-2 flex w-full items-center gap-2 rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white) p-4 text-left transition-colors"
+        className="relative z-2 flex w-full items-start gap-2 rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white) p-4 text-left transition-colors"
       >
-        <ChevronRight
-          className={cn(
-            "size-6 shrink-0 text-(--text-primary-black) transition-transform duration-300 ease-out",
-            isOpen && "rotate-90"
-          )}
-          aria-hidden
-        />
-        <span className="type-body-xl-medium text-(--text-primary-black)">
+        {/* Match body-md line-height (24px) so the icon centers on the first line only. */}
+        <span className="flex h-6 shrink-0 items-center" aria-hidden>
+          <ChevronRight
+            className={cn(
+              "size-5 text-(--text-primary-black) transition-transform duration-300 ease-out",
+              isOpen && "rotate-90"
+            )}
+          />
+        </span>
+        <span className="type-body-md-medium text-(--text-primary-black)">
           {question}
         </span>
       </button>
@@ -99,11 +105,11 @@ function FaqAccordionItem({
             animate={isOpen ? "open" : "closed"}
             variants={panelContentVariants}
             className={cn(
-              "relative z-1 rounded-b-2xl bg-(--primitive-brand-100) pl-12 pr-4 pb-3",
+              "relative z-1 rounded-b-2xl bg-(--primitive-brand-100) pl-12 pr-4 pb-3 max-md:pl-6",
               ANSWER_PANEL_TOP_PADDING_CLASS
             )}
           >
-            <p className="type-body-lg-regular text-text-brand-primary">
+            <p className="type-body-md-regular text-text-brand-primary">
               {answer}
             </p>
           </motion.div>
@@ -120,7 +126,10 @@ export function Faq() {
     <Section
       id="faq"
       reveal={false}
-      className="bg-(--primitive-brand-25) py-14 [overflow-anchor:none]"
+      className={cn(
+        "bg-(--primitive-brand-25) [overflow-anchor:none]",
+        sectionVerticalPaddingClassName
+      )}
       contentClassName={cn(faqSectionContentClassName, "px-6")}
     >
       <div className="flex w-full flex-col items-center gap-10">

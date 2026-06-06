@@ -27,7 +27,7 @@ export function Hero() {
     <Section
       id="hero"
       reveal={false}
-      className="relative mt-0 flex min-h-dvh flex-col overflow-x-hidden overflow-y-visible rounded-b-[48px] bg-(--primitive-brand-25) pb-12 pt-0 scroll-mt-0"
+      className="relative mt-0 flex min-h-dvh flex-col overflow-x-hidden overflow-y-visible rounded-b-[48px] bg-(--primitive-brand-25) pb-12 pt-0 scroll-mt-0 max-md:pb-0"
       foreground={
         <div
           className="pointer-events-none absolute bottom-0 left-1/2 z-5 w-screen max-w-none -translate-x-1/2"
@@ -49,7 +49,8 @@ export function Hero() {
       contentClassName={cn(
         "flex min-h-full flex-1 flex-col items-center justify-start pb-12 text-center",
         heroMessageMaxClassName,
-        heroContentPaddingTopClassName
+        heroContentPaddingTopClassName,
+        "max-md:min-h-dvh max-md:items-center max-md:justify-center max-md:pt-0 max-md:pb-0"
       )}
     >
       <motion.div
@@ -64,12 +65,12 @@ export function Hero() {
           ease: "easeOut",
         }}
         className={cn(
-          "relative flex w-full flex-col items-center gap-6",
+          "relative flex w-full flex-col items-center gap-6 text-center max-md:gap-4",
           heroMessageMaxClassName
         )}
         aria-hidden={!showHeroContent}
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex w-full flex-col items-center gap-3 text-center">
           <h1 className="type-display-2xl-medium tracking-figma-tighter text-(--text-primary-black)">
             Home food should feel exciting, not repetitive, stressful, or boring.
           </h1>

@@ -11,6 +11,9 @@ export const sectionContentClassName =
 /** Overrides default max width for wide section inner content. */
 export const wideSectionContentClassName = "max-w-[1280px]";
 
+/** Non-hero sections: 56px vertical padding desktop, 40px on mobile. */
+export const sectionVerticalPaddingClassName = "py-14 max-md:py-10";
+
 /** Problem section: horizontal page padding (Figma 80px at md+). */
 export const problemSectionPaddingClassName = "px-6 md:px-20";
 
@@ -26,9 +29,15 @@ export const howItWorksColumnGapClassName = "gap-10";
 /** How-it-works: top margin on fridge column only at lg+ (80px). */
 export const howItWorksFridgeColumnMarginTopClassName = "lg:mt-20";
 
-/** Recipes section: phone mockup intrinsic size. */
+/** Recipes section: phone mockup intrinsic size (desktop). */
 export const RECIPES_PHONE_WIDTH_PX = 400;
 export const RECIPES_PHONE_HEIGHT_PX = 727;
+
+/** Recipes section: phone mockup width on mobile only (< 768px). */
+export const RECIPES_PHONE_MOBILE_WIDTH_PX = 280;
+
+export const recipesPhoneMobileSizeClassName =
+  "max-md:w-[280px] max-md:max-w-[280px]";
 
 /** Horizontal gap from phone edge to top-row recipe cards. */
 export const RECIPES_CARD_TOP_ROW_GAP_FROM_PHONE_PX = 56;
@@ -43,7 +52,7 @@ export const RECIPES_CARD_ROW_GAP_PX = 40;
  * Recipes section: top padding only — `pb-0` lets the phone mockup bleed to the
  * section bottom without extra whitespace below the device frame.
  */
-export const recipesSectionPaddingClassName = "pt-14 pb-0";
+export const recipesSectionPaddingClassName = "pt-14 pb-0 max-md:pt-10 max-md:pb-0";
 
 /** Phone mockup frame — top + sides only (Figma has no bottom bezel). */
 export const recipesPhoneBorderDesktopClassName =
@@ -120,12 +129,19 @@ export const heroInteractionBoxClassName =
 export const howItWorksInteractionBoxClassName =
   "relative h-[400px] w-[560px] max-w-full shrink-0 overflow-visible";
 
+/** Mobile-only scale on the fridge animation wrapper (text inside compensates via --hiw-mobile-scale). */
+export const HOW_IT_WORKS_MOBILE_STAGE_SCALE = 0.72;
+
 /** Fills the 560×400 viewport edge-to-edge (no inner padding). */
 export const heroInteractionPhaseFillClassName = "absolute inset-0";
 
 /** Recipe finale: vertically centered, group pinned to the right edge of 560×400. */
 export const heroInteractionRecipeVCenterClassName =
   "absolute inset-0 flex w-full items-center justify-end";
+
+/** Recipe finale: vertically centered, group flush to the left edge of 560×400. */
+export const heroInteractionRecipeVStartClassName =
+  "absolute inset-0 flex w-full items-center justify-start";
 
 /** Fridge band — full interaction viewport. */
 export const heroStageFridgeBandClassName = "relative size-full";

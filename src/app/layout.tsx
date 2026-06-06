@@ -31,7 +31,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="m-0 flex min-h-full flex-col bg-background p-0">
         <Providers>

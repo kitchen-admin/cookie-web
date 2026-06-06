@@ -21,6 +21,7 @@ import {
 import {
   HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
   heroInteractionRecipeVCenterClassName,
+  heroInteractionRecipeVStartClassName,
   heroRecipeSuggestionAboveCardsClassName,
   heroRecipeSuggestionLogoGapClassName,
 } from "@/config/layout";
@@ -28,6 +29,13 @@ import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
 
 const REVEAL_EASE = "easeInOut" as const;
+
+/**
+ * Cookie copy in the fridge animation — visually 14px on mobile.
+ * The How it Works wrapper scales to 72%; we pre-size text so it lands at 14px after scale.
+ */
+const MOBILE_COOKIE_MESSAGE_CLASS =
+  "max-md:!text-[calc(0.875rem/var(--hiw-mobile-scale,1))] max-md:!leading-[calc(1.25rem/var(--hiw-mobile-scale,1))]";
 
 /** Width of logo + message + cards block when right-aligned in the 560px box. */
 const HERO_RECIPE_FINALE_GROUP_WIDTH_PX =
@@ -85,7 +93,11 @@ export function HeroCookingBeat({
           y: showCopy ? 0 : 8,
         }}
         transition={{ duration: 0.35, ease: REVEAL_EASE }}
-        className="type-body-lg-medium whitespace-nowrap text-(--text-primary-black)"
+        className={cn(
+          "type-body-lg-medium whitespace-nowrap text-(--text-primary-black)",
+          MOBILE_COOKIE_MESSAGE_CLASS,
+          "max-md:font-medium"
+        )}
         aria-hidden={!showCopy}
       >
         Cookie is cooking
@@ -113,7 +125,13 @@ function HeroRecipeSuggestionLogo() {
   );
 }
 
-function HeroRecipeSuggestionMessage({ visible = true }: { visible?: boolean }) {
+function HeroRecipeSuggestionMessage({
+  visible = true,
+  constrainWidth = false,
+}: {
+  visible?: boolean;
+  constrainWidth?: boolean;
+}) {
   if (!visible) return null;
 
   return (
@@ -121,7 +139,11 @@ function HeroRecipeSuggestionMessage({ visible = true }: { visible?: boolean }) 
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: HERO_RECIPE_CARD_REVEAL_S, ease: REVEAL_EASE }}
-      className="type-body-md-regular min-w-0 flex-1 text-(--text-primary-black)"
+      className={cn(
+        "type-body-md-regular min-w-0 flex-1 text-(--text-primary-black)",
+        MOBILE_COOKIE_MESSAGE_CLASS,
+        constrainWidth && "wrap-break-word"
+      )}
     >
       {HERO_RECIPE_SUGGESTION_MESSAGE}
     </motion.p>
@@ -131,22 +153,29 @@ function HeroRecipeSuggestionMessage({ visible = true }: { visible?: boolean }) 
 function HeroRecipeSuggestionBar({
   step,
   fillBox = false,
+  constrainWidth = false,
 }: {
   step: RecipeFinaleStep;
   fillBox?: boolean;
+  constrainWidth?: boolean;
 }) {
   if (step < 1) return null;
 
   return (
     <div
       className={cn(
-        "flex min-h-10 items-center text-left",
-        fillBox ? "w-full" : "w-max max-w-full",
+        "flex min-h-10 items-start text-left",
+        fillBox || constrainWidth ? "w-full min-w-0 max-w-full" : "w-max max-w-full",
         heroRecipeSuggestionLogoGapClassName
       )}
     >
       <HeroRecipeSuggestionLogo />
-      {step >= 2 ? <HeroRecipeSuggestionMessage visible /> : null}
+      {step >= 2 ? (
+        <HeroRecipeSuggestionMessage
+          visible
+          constrainWidth={constrainWidth}
+        />
+      ) : null}
     </div>
   );
 }
@@ -158,16 +187,25 @@ function HeroRecipeSuggestionBar({
 export function HeroRecipeRow({
   active,
   fillBox = false,
+  finaleAlign = "end",
 }: {
   active: boolean;
   /** Fill the 560×400 interaction viewport. */
   fillBox?: boolean;
+  /** Horizontal alignment of the suggestion + cards group inside the stage. */
+  finaleAlign?: "start" | "end";
 }) {
   if (!active) return null;
-  return <HeroRecipeRowSequence fillBox={fillBox} />;
+  return <HeroRecipeRowSequence fillBox={fillBox} finaleAlign={finaleAlign} />;
 }
 
-function HeroRecipeRowSequence({ fillBox }: { fillBox: boolean }) {
+function HeroRecipeRowSequence({
+  fillBox,
+  finaleAlign,
+}: {
+  fillBox: boolean;
+  finaleAlign: "start" | "end";
+}) {
   const [step, setStep] = useState<RecipeFinaleStep>(1);
   const mountIdRef = useRef(0);
 
@@ -189,12 +227,16 @@ function HeroRecipeRowSequence({ fillBox }: { fillBox: boolean }) {
     };
   }, []);
 
+  const finaleFlushStart = fillBox && finaleAlign === "start";
+
   return (
     <div
       className={cn(
         "pointer-events-none z-20 overflow-hidden",
         fillBox
-          ? heroInteractionRecipeVCenterClassName
+          ? finaleAlign === "start"
+            ? heroInteractionRecipeVStartClassName
+            : heroInteractionRecipeVCenterClassName
           : "relative flex w-max max-w-full justify-end overflow-visible"
       )}
     >
@@ -202,17 +244,24 @@ function HeroRecipeRowSequence({ fillBox }: { fillBox: boolean }) {
         className={cn(
           "pointer-events-auto flex flex-col items-start overflow-hidden",
           fillBox
-            ? "ml-auto h-auto shrink-0"
+            ? cn(
+                "h-auto shrink-0 min-w-0",
+                finaleFlushStart ? "w-full max-w-full" : "ml-auto"
+              )
             : "w-max max-w-full overflow-visible",
           heroRecipeSuggestionAboveCardsClassName
         )}
         style={
-          fillBox
+          fillBox && !finaleFlushStart
             ? { width: HERO_RECIPE_FINALE_GROUP_WIDTH_PX }
             : undefined
         }
       >
-        <HeroRecipeSuggestionBar step={step} fillBox={fillBox} />
+        <HeroRecipeSuggestionBar
+          step={step}
+          fillBox={fillBox}
+          constrainWidth={finaleFlushStart}
+        />
         <div
           className={cn(
             "flex flex-nowrap items-start justify-start max-md:snap-x max-md:snap-mandatory md:flex-wrap",
@@ -220,6 +269,7 @@ function HeroRecipeRowSequence({ fillBox }: { fillBox: boolean }) {
           )}
           style={{
             gap: HERO_RECIPE_CARD_GAP_PX,
+            /* Inline with message copy (past logo + gap) — mobile + desktop. */
             marginInlineStart: HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
           }}
         >

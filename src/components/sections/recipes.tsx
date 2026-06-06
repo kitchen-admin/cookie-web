@@ -7,12 +7,11 @@ import { Section } from "@/components/sections/section";
 import { SiteImage } from "@/components/ui/site-image";
 import { RECIPES_SHOWCASE } from "@/config/hero-recipes";
 import {
-  RECIPES_CARD_ROW_GAP_PX,
-  RECIPES_CARD_TOP_ROW_GAP_FROM_PHONE_PX,
   RECIPES_PHONE_HEIGHT_PX,
   RECIPES_PHONE_WIDTH_PX,
   recipesPhoneBorderDesktopClassName,
   recipesPhoneBorderMobileClassName,
+  recipesPhoneMobileSizeClassName,
   recipesSectionPaddingClassName,
   sectionHeaderClassName,
   wideSectionContentClassName,
@@ -32,7 +31,7 @@ export function Recipes() {
       )}
       contentClassName={cn(wideSectionContentClassName, "px-6")}
     >
-      <div className="flex w-full flex-col items-center gap-14">
+      <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
         <div className="flex flex-col items-center gap-3 text-center">
           <h2 className={sectionHeaderClassName}>
             Full fridge. Zero ideas. We get it.
@@ -86,16 +85,17 @@ export function Recipes() {
               width={RECIPES_PHONE_WIDTH_PX}
               height={RECIPES_PHONE_HEIGHT_PX}
               className={cn(
-                "w-full max-w-[320px] rounded-t-[40px] object-cover object-top",
+                "aspect-[400/727] w-full max-w-[320px] rounded-t-[40px] object-cover object-top",
+                recipesPhoneMobileSizeClassName,
                 recipesPhoneBorderMobileClassName
               )}
               placeholderClassName="rounded-t-[40px] bg-(--primitive-brand-100)"
             />
             <div
-              className="flex w-full flex-col"
+              className="flex w-full flex-col max-md:hidden"
               style={{
-                marginTop: RECIPES_CARD_TOP_ROW_GAP_FROM_PHONE_PX,
-                gap: RECIPES_CARD_ROW_GAP_PX,
+                marginTop: 24,
+                gap: 16,
               }}
             >
               {[0, 1].map((row) => (

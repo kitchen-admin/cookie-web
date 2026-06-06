@@ -64,28 +64,32 @@ const INGREDIENT_BUBBLES: IngredientBubbleConfig[] = [
     days: 4,
     imageUrl: siteImages.broccoli,
     side: "left",
-    positionClassName: "left-[7%] top-[27%] max-md:left-0 max-md:top-[20%]",
+    positionClassName:
+      "left-[7%] top-[27%] max-md:left-0 max-md:top-[10%]",
   },
   {
     name: "Mushroom",
     days: 4,
     imageUrl: siteImages.mushroom,
     side: "left",
-    positionClassName: "left-0 top-[56%] max-md:hidden",
+    positionClassName:
+      "left-0 top-[56%] max-md:left-0 max-md:top-[56%]",
   },
   {
     name: "Carrots",
     days: 2,
     imageUrl: siteImages.carrot,
     side: "right",
-    positionClassName: "right-[0%] top-[3%] max-md:right-0 max-md:top-[8%]",
+    positionClassName:
+      "right-[0%] top-[3%] max-md:right-0 max-md:top-[6%]",
   },
   {
     name: "Mixed berry",
     days: 2,
     imageUrl: siteImages.berry,
     side: "right",
-    positionClassName: "right-[0%] top-[54%] max-md:right-0 max-md:top-[48%]",
+    positionClassName:
+      "right-[0%] top-[54%] max-md:right-0 max-md:top-[52%]",
   },
 ];
 
@@ -96,6 +100,8 @@ type FridgeScanStageProps = {
   stopAfterScan?: boolean;
   /** Override the 560×400 stage shell (e.g. overflow-visible in How it Works). */
   boxClassName?: string;
+  /** Recipe finale alignment inside the stage (how-it-works: flush left). */
+  finaleAlign?: "start" | "end";
 };
 
 function bubbleLayoutPhase(
@@ -121,6 +127,7 @@ export function FridgeScanStage({
   startScan,
   stopAfterScan = false,
   boxClassName = heroInteractionBoxClassName,
+  finaleAlign = "end",
 }: FridgeScanStageProps) {
   const barControls = useAnimation();
   const scanStartedRef = useRef(false);
@@ -287,7 +294,11 @@ export function FridgeScanStage({
       </div>
       ) : null}
 
-      <HeroRecipeRow active={showRecipes} fillBox />
+      <HeroRecipeRow
+        active={showRecipes}
+        fillBox
+        finaleAlign={finaleAlign}
+      />
     </div>
   );
 }

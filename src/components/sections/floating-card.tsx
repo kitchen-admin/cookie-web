@@ -80,6 +80,7 @@ export function FloatingCard({
         }
         className={cn(
           "flex max-w-[200px] items-center gap-[8px] rounded-2xl p-2",
+          "max-md:max-w-[9.5rem] max-md:gap-1.5 max-md:p-1.5",
           side === "left" && "rounded-br-none",
           side === "right" && "rounded-bl-none",
           "bg-(--primitive-base-white)"
@@ -93,9 +94,12 @@ export function FloatingCard({
           className="size-10 shrink-0 rounded-full"
           placeholderClassName="rounded-full"
         />
-        <p className="type-body-sm-regular text-left text-(--text-primary-black)">
-          <span className="type-body-sm-semibold">{name}</span> will be{" "}
-          <span className="type-body-sm-medium text-text-brand-primary">
+        <p className="type-body-sm-regular max-md:type-label-md-regular text-left text-(--text-primary-black)">
+          <span className="type-body-sm-semibold max-md:type-label-md-medium">
+            {name}
+          </span>{" "}
+          will be{" "}
+          <span className="type-body-sm-medium max-md:type-label-md-medium text-text-brand-primary">
             going bad in{" "}
             <NumberTicker
               value={days}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Download, Menu, X } from "lucide-react";
@@ -15,7 +15,34 @@ import { NAV_SECTIONS } from "@/config/sections";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
 
-function NavLinks({
+const NAV_LINK_CLASS =
+  "type-body-sm-medium shrink-0 rounded-full border-2 border-(--primitive-black-4) px-4 py-2 text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4)";
+
+function handleHashNavClick(
+  event: MouseEvent<HTMLAnchorElement>,
+  href: string,
+  onNavigate?: () => void
+) {
+  if (!href.startsWith("#") || href.length < 2) return;
+
+  const target = document.getElementById(href.slice(1));
+  if (!target) return;
+
+  event.preventDefault();
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  target.scrollIntoView({
+    behavior: prefersReducedMotion ? "auto" : "smooth",
+    block: "start",
+  });
+  window.history.pushState(null, "", href);
+  onNavigate?.();
+}
+
+function NavSectionLinks({
   className,
   onNavigate,
 }: {
@@ -28,20 +55,60 @@ function NavLinks({
         <Link
           key={section.id}
           href={`#${section.id}`}
-          onClick={onNavigate}
-          className="type-body-sm-regular shrink-0 rounded-full px-4 py-2 text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4)"
+          onClick={(event) =>
+            handleHashNavClick(event, `#${section.id}`, onNavigate)
+          }
+          className={NAV_LINK_CLASS}
         >
           {section.navLabel}
         </Link>
       ))}
-      <Link
-        href="#download"
-        onClick={onNavigate}
-        className="type-body-sm-bold flex shrink-0 items-center gap-2 rounded-full bg-(--primitive-black-90) px-4 py-2 text-(--primitive-base-white) transition-opacity hover:opacity-90"
-      >
-        <Download className="size-[18px]" aria-hidden />
-        Download App
-      </Link>
+    </div>
+  );
+}
+
+function DownloadAppLink({
+  className,
+  onNavigate,
+}: {
+  className?: string;
+  onNavigate?: () => void;
+}) {
+  return (
+    <Link
+      href="#download"
+      onClick={(event) => handleHashNavClick(event, "#download", onNavigate)}
+      className={cn(
+        "type-body-sm-bold flex shrink-0 items-center gap-2 rounded-full bg-(--primitive-black-90) px-4 py-2 text-(--primitive-base-white) transition-opacity hover:opacity-90",
+        className
+      )}
+    >
+      <Download className="size-[18px]" aria-hidden />
+      Download App
+    </Link>
+  );
+}
+
+/** Desktop + mobile menu: How it works → About Us → Download App (right-aligned). */
+function NavActions({
+  className,
+  onNavigate,
+  showDownload = true,
+}: {
+  className?: string;
+  onNavigate?: () => void;
+  showDownload?: boolean;
+}) {
+  return (
+    <div className={cn("flex items-center", className)}>
+      <NavSectionLinks
+        className={cn("flex items-center", navButtonGapClassName)}
+        onNavigate={onNavigate}
+      />
+      {/* Extra space before the solid CTA so gaps look even to the eye. */}
+      {showDownload ? (
+        <DownloadAppLink className="ms-5" onNavigate={onNavigate} />
+      ) : null}
     </div>
   );
 }
@@ -96,24 +163,26 @@ export function Navbar() {
             />
           </Link>
 
-          <NavLinks
-            className={cn("hidden items-center sm:flex", navButtonGapClassName)}
-          />
+          <NavActions className="hidden sm:flex" />
 
-          <button
-            type="button"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4) sm:hidden"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-nav-menu"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMobileOpen((open) => !open)}
-          >
-            {mobileOpen ? (
-              <X className="size-5" aria-hidden />
-            ) : (
-              <Menu className="size-5" aria-hidden />
-            )}
-          </button>
+          {/* Mobile: Download in the bar; section links open from the hamburger menu. */}
+          <div className="flex items-center gap-2 sm:hidden">
+            <DownloadAppLink className="px-3 py-2" />
+            <button
+              type="button"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4)"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMobileOpen((open) => !open)}
+            >
+              {mobileOpen ? (
+                <X className="size-5" aria-hidden />
+              ) : (
+                <Menu className="size-5" aria-hidden />
+              )}
+            </button>
+          </div>
         </motion.div>
       </motion.nav>
 
@@ -122,7 +191,7 @@ export function Navbar() {
           id="mobile-nav-menu"
           className="mx-auto mt-2 w-full max-w-[800px] rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white)/95 p-3 shadow-lg backdrop-blur-md sm:hidden"
         >
-          <NavLinks
+          <NavSectionLinks
             className="flex flex-col gap-1"
             onNavigate={closeMobileMenu}
           />

@@ -381,4 +381,28 @@
     letter-spacing: var(--type-button-tracking);
     font-weight: var(--type-button-weight);
   }
+
+  /* Landing page headings — mobile-only scale (desktop >= 768px unchanged). */
+  @media (width < 48rem) {
+    .type-display-2xl-regular,
+    .type-display-2xl-medium,
+    .type-display-2xl-semibold,
+    .type-display-2xl-bold {
+      font-size: 2rem; /* 32px */
+      line-height: 2.375rem; /* 38px */
+    }
+
+    .type-section-header-medium {
+      font-size: 1.75rem; /* 28px */
+      line-height: 2.125rem; /* 34px */
+    }
+
+    .type-display-xs-regular,
+    .type-display-xs-medium,
+    .type-display-xs-semibold,
+    .type-display-xs-bold {
+      font-size: 1.25rem; /* 20px */
+      line-height: 1.75rem; /* 28px */
+    }
+  }
 }

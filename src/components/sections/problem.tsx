@@ -7,6 +7,7 @@ import {
   problemCardGridGapClassName,
   problemSectionPaddingClassName,
   sectionHeaderClassName,
+  sectionVerticalPaddingClassName,
   wideSectionContentClassName,
 } from "@/config/layout";
 import { PROBLEM_CARDS } from "@/config/problem-cards";
@@ -17,13 +18,13 @@ export function Problem() {
     <Section
       id="problem"
       reveal={false}
-      className="bg-(--primitive-base-white) py-14"
+      className={cn("bg-(--primitive-base-white)", sectionVerticalPaddingClassName)}
       contentClassName={cn(
         wideSectionContentClassName,
         problemSectionPaddingClassName
       )}
     >
-      <div className="flex w-full flex-col items-center gap-14">
+      <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
         <h2 className={cn(sectionHeaderClassName, "max-w-[1113px] text-center")}>
           The problem is not food.{" "}
           <span className="text-text-brand-primary">It is deciding.</span>
@@ -32,7 +33,8 @@ export function Problem() {
         <div
           className={cn(
             "grid w-full grid-cols-1 md:grid-cols-3",
-            problemCardGridGapClassName
+            problemCardGridGapClassName,
+            "max-md:gap-10"
           )}
         >
           {PROBLEM_CARDS.map((card) => (
@@ -45,8 +47,8 @@ export function Problem() {
                 alt=""
                 width={373}
                 height={PROBLEM_CARD_IMAGE_HEIGHT_PX}
-                className="w-full rounded-[40px] object-cover"
-                placeholderClassName="w-full rounded-[40px] bg-(--primitive-brand-50) blur-sm"
+                className="w-full rounded-[40px] object-cover max-md:h-[260px]!"
+                placeholderClassName="w-full rounded-[40px] bg-(--primitive-brand-50) blur-sm max-md:h-[260px]!"
                 style={{ height: PROBLEM_CARD_IMAGE_HEIGHT_PX }}
               />
               <div className="flex flex-col gap-0.5">

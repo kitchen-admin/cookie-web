@@ -3,9 +3,10 @@
 import { useState, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Download, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 
+import { DownloadAppLink } from "@/components/download-app-link";
 import {
   NAVBAR_CONTENT_FADE_S,
   NAVBAR_PILL_EXPAND_S,
@@ -67,29 +68,7 @@ function NavSectionLinks({
   );
 }
 
-function DownloadAppLink({
-  className,
-  onNavigate,
-}: {
-  className?: string;
-  onNavigate?: () => void;
-}) {
-  return (
-    <Link
-      href="#download"
-      onClick={(event) => handleHashNavClick(event, "#download", onNavigate)}
-      className={cn(
-        "type-body-sm-bold flex shrink-0 items-center gap-2 rounded-full bg-(--primitive-black-90) px-4 py-2 text-(--primitive-base-white) transition-opacity hover:opacity-90",
-        className
-      )}
-    >
-      <Download className="size-[18px]" aria-hidden />
-      Download App
-    </Link>
-  );
-}
-
-/** Desktop + mobile menu: How it works → About Us → Download App (right-aligned). */
+/** Desktop bar + mobile menu: How it works → About Us → Download App. */
 function NavActions({
   className,
   onNavigate,
@@ -137,7 +116,7 @@ export function Navbar() {
         }}
         onAnimationComplete={() => setShowContent(true)}
         className={cn(
-          "mx-auto flex h-[60px] w-full max-w-[800px] items-center overflow-hidden rounded-full bg-(--primitive-base-white)/80 px-3 shadow-lg backdrop-blur-md",
+          "mx-auto flex h-[60px] w-full max-w-[800px] min-w-0 items-center overflow-hidden rounded-full bg-(--primitive-base-white)/80 px-2 shadow-lg backdrop-blur-md sm:px-3",
           showContent ? "justify-between" : "justify-center"
         )}
       >
@@ -146,43 +125,39 @@ export function Navbar() {
           animate={{ opacity: showContent ? 1 : 0 }}
           transition={{ duration: NAVBAR_CONTENT_FADE_S, ease: "easeOut" }}
           className={cn(
-            "flex w-full items-center justify-between",
+            "flex w-full min-w-0 items-center justify-between gap-2",
             !showContent && "pointer-events-none"
           )}
           aria-hidden={!showContent}
         >
-          <Link href="/" className="flex shrink-0 items-center">
+          <Link href="/" className="flex min-w-0 shrink items-center">
             <Image
               src={siteImages.logoLight}
               alt="Cookie"
               width={200}
               height={40}
               priority
-              className="h-10 w-auto object-contain"
-              style={{ width: "auto", height: "2.5rem" }}
+              className="h-8 w-auto max-w-[7.5rem] object-contain object-left sm:h-10 sm:max-w-none"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
           <NavActions className="hidden sm:flex" />
 
-          {/* Mobile: Download in the bar; section links open from the hamburger menu. */}
-          <div className="flex items-center gap-2 sm:hidden">
-            <DownloadAppLink className="px-3 py-2" />
-            <button
-              type="button"
-              className="flex size-10 shrink-0 items-center justify-center rounded-full text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4)"
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav-menu"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              onClick={() => setMobileOpen((open) => !open)}
-            >
-              {mobileOpen ? (
-                <X className="size-5" aria-hidden />
-              ) : (
-                <Menu className="size-5" aria-hidden />
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="flex size-10 shrink-0 items-center justify-center rounded-full text-(--text-primary-black) transition-colors hover:bg-(--primitive-black-4) sm:hidden"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            {mobileOpen ? (
+              <X className="size-5" aria-hidden />
+            ) : (
+              <Menu className="size-5" aria-hidden />
+            )}
+          </button>
         </motion.div>
       </motion.nav>
 
@@ -191,10 +166,16 @@ export function Navbar() {
           id="mobile-nav-menu"
           className="mx-auto mt-2 w-full max-w-[800px] rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white)/95 p-3 shadow-lg backdrop-blur-md sm:hidden"
         >
-          <NavSectionLinks
-            className="flex flex-col gap-1"
-            onNavigate={closeMobileMenu}
-          />
+          <div className="flex flex-col gap-1">
+            <NavSectionLinks
+              className="flex flex-col gap-1"
+              onNavigate={closeMobileMenu}
+            />
+            <DownloadAppLink
+              className="justify-center"
+              onNavigate={closeMobileMenu}
+            />
+          </div>
         </nav>
       ) : null}
     </motion.header>

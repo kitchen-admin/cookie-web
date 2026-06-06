@@ -24,7 +24,7 @@ export function ProgressiveBlur({
   return (
     <div
       className={cn(
-        "gradient-blur pointer-events-none absolute inset-x-0 z-10",
+        "gradient-blur pointer-events-none inset-x-0 isolate [transform:translateZ(0)]",
         className,
         position === "top"
           ? "top-0"
@@ -35,6 +35,12 @@ export function ProgressiveBlur({
       style={resolvedHeight ? { height: resolvedHeight } : undefined}
       aria-hidden
     >
+      {position === "bottom" ? (
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"
+          style={{ zIndex: 0 }}
+        />
+      ) : null}
       <div
         className="absolute inset-0"
         style={{

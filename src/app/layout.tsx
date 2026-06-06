@@ -37,8 +37,8 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
-          <ViewportBottomBlur />
         </Providers>
+        <ViewportBottomBlur />
       </body>
     </html>
   );

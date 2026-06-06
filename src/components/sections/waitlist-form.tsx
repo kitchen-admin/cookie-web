@@ -9,9 +9,19 @@ import { cn } from "@/lib/utils";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 async function handleJoin(email: string): Promise<void> {
-  // TODO: Connect to waitlist API (e.g. Resend, Loops, or your backend).
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  console.log("[waitlist] joined:", email);
+  const response = await fetch("/api/waitlist", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  const data = (await response.json().catch(() => null)) as {
+    error?: string;
+  } | null;
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? "Something went wrong. Please try again.");
+  }
 }
 
 type WaitlistFormProps = {
@@ -43,8 +53,12 @@ export function WaitlistForm({ className }: WaitlistFormProps) {
       await handleJoin(trimmed);
       setSuccess(true);
       setEmail("");
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (joinError) {
+      setError(
+        joinError instanceof Error
+          ? joinError.message
+          : "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }

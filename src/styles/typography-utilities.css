@@ -82,6 +82,14 @@
     font-weight: var(--type-weight-bold);
   }
 
+  /* Section header (40px — below hero, above card titles) */
+  .type-section-header-medium {
+    font-size: var(--type-size-section-header);
+    line-height: var(--type-leading-section-header);
+    letter-spacing: var(--type-tracking-section-header);
+    font-weight: var(--type-weight-medium);
+  }
+
   /* Display lg */
   .type-display-lg-regular {
     font-size: var(--type-size-display-lg);

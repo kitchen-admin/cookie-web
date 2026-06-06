@@ -49,7 +49,8 @@ type HeroStagePhase =
   | "collapsingFridge"
   | "mergingBubbles"
   | "cooking"
-  | "recipes";
+  | "recipes"
+  | "complete";
 
 export type IngredientBubbleConfig = Omit<
   FloatingCardProps,
@@ -91,6 +92,10 @@ const INGREDIENT_BUBBLES: IngredientBubbleConfig[] = [
 type FridgeScanStageProps = {
   showFridge: boolean;
   startScan: boolean;
+  /** When true, animation ends after scan + bubbles (no cooking/recipe finale). */
+  stopAfterScan?: boolean;
+  /** Override the 560×400 stage shell (e.g. overflow-visible in How it Works). */
+  boxClassName?: string;
 };
 
 function bubbleLayoutPhase(
@@ -104,13 +109,19 @@ const BUBBLE_VISIBLE_PHASES: HeroStagePhase[] = [
   "scanning",
   "collapsingFridge",
   "mergingBubbles",
+  "complete",
 ];
 
 /**
  * Hero visual: scan → fridge shrinks away → bubbles merge & hide →
  * Cookie mascot + copy → recipe cards.
  */
-export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps) {
+export function FridgeScanStage({
+  showFridge,
+  startScan,
+  stopAfterScan = false,
+  boxClassName = heroInteractionBoxClassName,
+}: FridgeScanStageProps) {
   const barControls = useAnimation();
   const scanStartedRef = useRef(false);
   const [phase, setPhase] = useState<HeroStagePhase>("idle");
@@ -166,6 +177,11 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
       });
       setShowScanBar(false);
 
+      if (stopAfterScan) {
+        setPhase("complete");
+        return;
+      }
+
       setPhase("collapsingFridge");
       await sleep(FRIDGE_COLLAPSE_MS);
       if (cancelled) return;
@@ -186,12 +202,12 @@ export function FridgeScanStage({ showFridge, startScan }: FridgeScanStageProps)
     return () => {
       cancelled = true;
     };
-  }, [startScan, barControls]);
+  }, [startScan, barControls, stopAfterScan]);
 
   const fridgeOnScreen = showFridge && !fridgeShrunk;
 
   return (
-    <div className={heroInteractionBoxClassName}>
+    <div className={boxClassName}>
       {/* Scan → cook — lives inside the same 560×400 box as the recipe finale. */}
       {!showRecipes ? (
       <div className={heroInteractionPhaseFillClassName}>

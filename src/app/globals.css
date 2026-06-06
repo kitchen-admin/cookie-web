@@ -29,6 +29,8 @@
   --text-display-xl--line-height: var(--type-leading-display-xl);
   --text-display-lg: var(--type-size-display-lg);
   --text-display-lg--line-height: var(--type-leading-display-lg);
+  --text-section-header: var(--type-size-section-header);
+  --text-section-header--line-height: var(--type-leading-section-header);
   --text-display-md: var(--type-size-display-md);
   --text-display-md--line-height: var(--type-leading-display-md);
   --text-display-sm: var(--type-size-display-sm);

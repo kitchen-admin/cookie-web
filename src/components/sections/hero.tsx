@@ -11,6 +11,7 @@ import {
   HERO_FG_HEIGHT_PX,
   HERO_FG_WIDTH_PX,
   heroContentPaddingTopClassName,
+  heroMessageMaxClassName,
 } from "@/config/layout";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
@@ -24,7 +25,7 @@ export function Hero() {
 
   return (
     <Section
-      id="how-it-works"
+      id="hero"
       reveal={false}
       className="relative mt-0 flex min-h-dvh flex-col overflow-x-hidden overflow-y-visible rounded-b-[48px] bg-(--primitive-brand-25) pb-12 pt-0 scroll-mt-0"
       foreground={
@@ -47,6 +48,7 @@ export function Hero() {
       }
       contentClassName={cn(
         "flex min-h-full flex-1 flex-col items-center justify-start pb-12 text-center",
+        heroMessageMaxClassName,
         heroContentPaddingTopClassName
       )}
     >
@@ -61,17 +63,18 @@ export function Hero() {
           duration: HERO_CONTENT_REVEAL_MS / 1000,
           ease: "easeOut",
         }}
-        className="relative flex w-full max-w-[640px] flex-col items-center gap-6"
+        className={cn(
+          "relative flex w-full flex-col items-center gap-6",
+          heroMessageMaxClassName
+        )}
         aria-hidden={!showHeroContent}
       >
-        <div className="flex flex-col gap-2">
-          <h1 className="type-display-xl-bold tracking-figma-tighter text-(--text-primary-black)">
-            What if your kitchen knew{" "}
-            <span className="text-text-brand-primary">what to cook?</span>
+        <div className="flex flex-col gap-3">
+          <h1 className="type-display-2xl-medium tracking-figma-tighter text-(--text-primary-black)">
+            Home food should feel exciting, not repetitive, stressful, or boring.
           </h1>
-          <p className="type-body-lg-regular text-(--text-primary-black)">
-            Cookie turns ingredients you have into recipes you actually love to
-            eat
+          <p className="type-display-xs-medium text-text-brand-primary">
+            What if your kitchen knew what to cook?
           </p>
         </div>
         <WaitlistForm className="mx-auto w-full max-w-md" />

@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cookie — Know what to cook",
   description:
-    "Cookie turns ingredients you have into recipes you actually love to eat.",
+    "Home food should feel exciting, not repetitive, stressful, or boring. What if your kitchen knew what to cook?",
 };
 
 export default function RootLayout({

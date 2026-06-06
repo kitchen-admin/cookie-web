@@ -4,10 +4,10 @@
  */
 
 :root {
-  /* Figma text semantics */
-  --text-primary-black: var(--primitive-black-90);
-  --text-secondary-black: var(--primitive-black-70);
-  --text-tertiary-black: var(--primitive-black-50);
+  /* Figma text semantics → black alpha primitives */
+  --text-primary-black: var(--primitive-black-90); /* black-90 */
+  --text-secondary-black: var(--primitive-black-70); /* black-70 */
+  --text-tertiary-black: var(--primitive-black-50); /* black-50 */
   --text-primary-white: var(--primitive-white-90);
   --text-secondary-white: var(--primitive-white-70);
   --text-tertiary-white: var(--primitive-white-50);

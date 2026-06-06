@@ -23,6 +23,8 @@
   --type-primitive-leading-display-xl: 3.5rem; /* 56px */
   --type-primitive-size-display-lg: 2.25rem; /* 36px */
   --type-primitive-leading-display-lg: 2.75rem; /* 44px */
+  --type-primitive-size-section-header: 2.5rem; /* 40px */
+  --type-primitive-leading-section-header: 3rem; /* 48px */
   --type-primitive-size-display-md: 2rem; /* 32px */
   --type-primitive-leading-display-md: 2.5rem; /* 40px */
   --type-primitive-size-display-sm: 1.75rem; /* 28px */

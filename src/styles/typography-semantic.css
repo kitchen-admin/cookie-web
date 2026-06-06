@@ -9,6 +9,7 @@
   --type-size-display-2xl: var(--type-primitive-size-display-2xl);
   --type-size-display-xl: var(--type-primitive-size-display-xl);
   --type-size-display-lg: var(--type-primitive-size-display-lg);
+  --type-size-section-header: var(--type-primitive-size-section-header);
   --type-size-display-md: var(--type-primitive-size-display-md);
   --type-size-display-sm: var(--type-primitive-size-display-sm);
   --type-size-display-xs: var(--type-primitive-size-display-xs);
@@ -24,6 +25,7 @@
   --type-leading-display-2xl: var(--type-primitive-leading-display-2xl);
   --type-leading-display-xl: var(--type-primitive-leading-display-xl);
   --type-leading-display-lg: var(--type-primitive-leading-display-lg);
+  --type-leading-section-header: var(--type-primitive-leading-section-header);
   --type-leading-display-md: var(--type-primitive-leading-display-md);
   --type-leading-display-sm: var(--type-primitive-leading-display-sm);
   --type-leading-display-xs: var(--type-primitive-leading-display-xs);
@@ -39,6 +41,7 @@
   --type-tracking-display-2xl: var(--type-primitive-tracking-tighter);
   --type-tracking-display-xl: var(--type-primitive-tracking-tighter);
   --type-tracking-display-lg: var(--type-primitive-tracking-tighter);
+  --type-tracking-section-header: var(--type-primitive-tracking-tighter);
   --type-tracking-display-md: var(--type-primitive-tracking-tighter);
   --type-tracking-display-sm: var(--type-primitive-tracking-tight);
   --type-tracking-display-xs: var(--type-primitive-tracking-tight);

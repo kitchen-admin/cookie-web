@@ -40,3 +40,6 @@ export const HERO_RECIPE_CARD_FOOTER_BORDER_PX = s(2);
 /** Two cards + gap (hero stage width when right-aligned). */
 export const HERO_RECIPE_ROW_WIDTH_PX =
   HERO_RECIPE_CARD_WIDTH_PX * 2 + HERO_RECIPE_CARD_GAP_PX;
+
+/** Total card height from Figma (272px at full scale, includes multi-line title). */
+export const HERO_RECIPE_CARD_TOTAL_HEIGHT_PX = s(272);

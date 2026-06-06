@@ -70,11 +70,20 @@ export const faqSectionContentClassName = "max-w-[720px]";
 export const HERO_FG_WIDTH_PX = 2880;
 export const HERO_FG_HEIGHT_PX = 1200;
 
+/** Hero foreground: slight zoom on mobile only (< 768px), anchored at bottom. */
+export const heroFgMobileZoomClassName =
+  "max-md:origin-bottom max-md:scale-[1.5]";
+
 /** Floating nav: offset from viewport top (navbar `top-6`). */
 export const NAV_FLOAT_TOP_PX = 24;
 
 /** Floating nav bar height (navbar `h-[60px]`). */
 export const NAV_HEIGHT_PX = 60;
+
+/** Navbar logo display height (all screen sizes). */
+export const NAV_LOGO_HEIGHT_PX = 36;
+
+export const navLogoHeightClassName = "h-9";
 
 /** Horizontal gap between navbar links (How it Works, About Us, Download App). */
 export const NAV_BUTTON_GAP_PX = 16;
@@ -132,6 +141,17 @@ export const howItWorksInteractionBoxClassName =
 /** Mobile-only scale on the fridge animation wrapper (text inside compensates via --hiw-mobile-scale). */
 export const HOW_IT_WORKS_MOBILE_STAGE_SCALE = 0.72;
 
+/**
+ * Mobile clip: full column width, height = scaled stage.
+ * Inner width uses calc(100%/0.72) so after scale it always fills the clip.
+ */
+export const howItWorksMobileStageClipClassName =
+  "max-md:relative max-md:mx-auto max-md:h-[calc(400px*0.72)] max-md:w-full max-md:max-w-[calc(560px*0.72)] md:contents";
+
+/** Inner stage scaled from top-center; width shrinks on narrow viewports. */
+export const howItWorksMobileStageInnerClassName =
+  "max-md:absolute max-md:top-0 max-md:left-1/2 max-md:h-[400px] max-md:w-[calc(100%/0.72)] max-md:max-w-[560px] max-md:-translate-x-1/2 max-md:origin-top max-md:scale-[0.72] md:static md:h-auto md:w-auto md:translate-x-0 md:scale-100";
+
 /** Fills the 560×400 viewport edge-to-edge (no inner padding). */
 export const heroInteractionPhaseFillClassName = "absolute inset-0";
 
@@ -142,6 +162,10 @@ export const heroInteractionRecipeVCenterClassName =
 /** Recipe finale: vertically centered, group flush to the left edge of 560×400. */
 export const heroInteractionRecipeVStartClassName =
   "absolute inset-0 flex w-full items-center justify-start";
+
+/** Recipe finale: vertically + horizontally centered (how-it-works mobile). */
+export const heroInteractionRecipeCenterClassName =
+  "absolute inset-0 flex w-full items-center justify-center";
 
 /** Fridge band — full interaction viewport. */
 export const heroStageFridgeBandClassName = "relative size-full";

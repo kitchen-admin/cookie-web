@@ -11,6 +11,7 @@ import {
   HERO_FG_HEIGHT_PX,
   HERO_FG_WIDTH_PX,
   heroContentPaddingTopClassName,
+  heroFgMobileZoomClassName,
   heroMessageMaxClassName,
 } from "@/config/layout";
 import { siteImages } from "@/config/site-images";
@@ -41,7 +42,7 @@ export function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className={heroFullWidthImageClassName}
+            className={cn(heroFullWidthImageClassName, heroFgMobileZoomClassName)}
             style={heroFullWidthImageStyle}
           />
         </div>

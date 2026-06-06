@@ -17,6 +17,8 @@ import {
   howItWorksColumnGapClassName,
   howItWorksFridgeColumnMarginTopClassName,
   howItWorksInteractionBoxClassName,
+  howItWorksMobileStageClipClassName,
+  howItWorksMobileStageInnerClassName,
   sectionHeaderClassName,
   sectionVerticalPaddingClassName,
   wideSectionContentClassName,
@@ -72,12 +74,22 @@ function StepBadge({ number }: { number: number }) {
 export function HowItWorks() {
   const isMobile = useMobileMd();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-20% 0px" });
+  const animationRef = useRef<HTMLDivElement>(null);
+  const isSectionInView = useInView(sectionRef, {
+    once: true,
+    margin: "-20% 0px",
+  });
+  /** Mobile: wait until the animation block itself is on screen (not just the heading). */
+  const isAnimationInView = useInView(animationRef, {
+    once: true,
+    amount: 0.45,
+  });
+  const shouldAnimate = isMobile ? isAnimationInView : isSectionInView;
   const [showFridge, setShowFridge] = useState(false);
   const [startScan, setStartScan] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!shouldAnimate) return;
 
     const fridgeTimer = window.setTimeout(() => setShowFridge(true), 200);
     const scanTimer = window.setTimeout(() => setStartScan(true), 700);
@@ -86,7 +98,7 @@ export function HowItWorks() {
       window.clearTimeout(fridgeTimer);
       window.clearTimeout(scanTimer);
     };
-  }, [isInView]);
+  }, [shouldAnimate]);
 
   return (
     <Section
@@ -135,26 +147,31 @@ export function HowItWorks() {
         </div>
 
         <div
+          ref={animationRef}
           className={cn(
-            "relative flex w-full shrink-0 items-center justify-center overflow-visible max-md:justify-start lg:w-auto",
+            "relative flex w-full shrink-0 items-center justify-center overflow-visible lg:w-auto",
+            "max-md:overflow-visible",
             howItWorksFridgeColumnMarginTopClassName
           )}
         >
-          {/* Mobile-only scale + left alignment; desktop/web unchanged. */}
+          {/* Mobile: clip + scale; md+ resets to normal desktop layout. */}
           <div
-            className="max-md:origin-top-left max-md:scale-[0.72] max-md:overflow-visible max-md:-mb-[7.5rem]"
+            className={howItWorksMobileStageClipClassName}
             style={
               {
                 "--hiw-mobile-scale": HOW_IT_WORKS_MOBILE_STAGE_SCALE,
               } as CSSProperties
             }
           >
-            <FridgeScanStage
-              showFridge={showFridge}
-              startScan={startScan}
-              boxClassName={howItWorksInteractionBoxClassName}
-              finaleAlign={isMobile ? "start" : "end"}
-            />
+            <div className={howItWorksMobileStageInnerClassName}>
+              <FridgeScanStage
+                showFridge={showFridge}
+                startScan={startScan}
+                boxClassName={howItWorksInteractionBoxClassName}
+                finaleAlign={isMobile ? "center" : "end"}
+                allowFinaleOverflow={isMobile}
+              />
+            </div>
           </div>
         </div>
       </div>

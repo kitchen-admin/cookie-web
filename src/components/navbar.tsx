@@ -11,7 +11,7 @@ import {
   NAVBAR_CONTENT_FADE_S,
   NAVBAR_PILL_EXPAND_S,
 } from "@/config/hero-load-sequence";
-import { navButtonGapClassName } from "@/config/layout";
+import { navButtonGapClassName, navLogoHeightClassName } from "@/config/layout";
 import { NAV_SECTIONS } from "@/config/sections";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
@@ -134,11 +134,13 @@ export function Navbar() {
             <Image
               src={siteImages.logoLight}
               alt="Cookie"
-              width={200}
-              height={40}
+              width={180}
+              height={36}
               priority
-              className="h-8 w-auto max-w-[7.5rem] object-contain object-left sm:h-10 sm:max-w-none"
-              style={{ width: "auto", height: "auto" }}
+              className={cn(
+                "w-auto object-contain object-left",
+                navLogoHeightClassName
+              )}
             />
           </Link>
 

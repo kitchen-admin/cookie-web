@@ -20,6 +20,7 @@ import {
 } from "@/config/hero-recipe-card-layout";
 import {
   HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
+  heroInteractionRecipeCenterClassName,
   heroInteractionRecipeVCenterClassName,
   heroInteractionRecipeVStartClassName,
   heroRecipeSuggestionAboveCardsClassName,
@@ -188,23 +189,34 @@ export function HeroRecipeRow({
   active,
   fillBox = false,
   finaleAlign = "end",
+  allowOverflow = false,
 }: {
   active: boolean;
   /** Fill the 560×400 interaction viewport. */
   fillBox?: boolean;
   /** Horizontal alignment of the suggestion + cards group inside the stage. */
-  finaleAlign?: "start" | "end";
+  finaleAlign?: "start" | "end" | "center";
+  /** Let finale extend past the stage (how-it-works mobile). */
+  allowOverflow?: boolean;
 }) {
   if (!active) return null;
-  return <HeroRecipeRowSequence fillBox={fillBox} finaleAlign={finaleAlign} />;
+  return (
+    <HeroRecipeRowSequence
+      fillBox={fillBox}
+      finaleAlign={finaleAlign}
+      allowOverflow={allowOverflow}
+    />
+  );
 }
 
 function HeroRecipeRowSequence({
   fillBox,
   finaleAlign,
+  allowOverflow,
 }: {
   fillBox: boolean;
-  finaleAlign: "start" | "end";
+  finaleAlign: "start" | "end" | "center";
+  allowOverflow: boolean;
 }) {
   const [step, setStep] = useState<RecipeFinaleStep>(1);
   const mountIdRef = useRef(0);
@@ -228,31 +240,41 @@ function HeroRecipeRowSequence({
   }, []);
 
   const finaleFlushStart = fillBox && finaleAlign === "start";
+  const finaleCentered = fillBox && finaleAlign === "center";
 
   return (
     <div
       className={cn(
-        "pointer-events-none z-20 overflow-hidden",
+        "pointer-events-none z-20",
+        allowOverflow ? "overflow-visible" : "overflow-hidden",
         fillBox
           ? finaleAlign === "start"
             ? heroInteractionRecipeVStartClassName
-            : heroInteractionRecipeVCenterClassName
+            : finaleAlign === "center"
+              ? heroInteractionRecipeCenterClassName
+              : heroInteractionRecipeVCenterClassName
           : "relative flex w-max max-w-full justify-end overflow-visible"
       )}
     >
       <div
         className={cn(
-          "pointer-events-auto flex flex-col items-start overflow-hidden",
+          "pointer-events-auto flex flex-col",
+          finaleCentered ? "overflow-visible" : "overflow-hidden",
+          finaleCentered
+            ? "w-full max-w-full items-center px-2"
+            : "items-start",
           fillBox
             ? cn(
                 "h-auto shrink-0 min-w-0",
-                finaleFlushStart ? "w-full max-w-full" : "ml-auto"
+                finaleFlushStart || finaleCentered
+                  ? "w-full max-w-full"
+                  : "ml-auto"
               )
             : "w-max max-w-full overflow-visible",
           heroRecipeSuggestionAboveCardsClassName
         )}
         style={
-          fillBox && !finaleFlushStart
+          fillBox && !finaleFlushStart && !finaleCentered
             ? { width: HERO_RECIPE_FINALE_GROUP_WIDTH_PX }
             : undefined
         }
@@ -260,17 +282,21 @@ function HeroRecipeRowSequence({
         <HeroRecipeSuggestionBar
           step={step}
           fillBox={fillBox}
-          constrainWidth={finaleFlushStart}
+          constrainWidth={finaleFlushStart || finaleCentered}
         />
         <div
           className={cn(
-            "flex flex-nowrap items-start justify-start max-md:snap-x max-md:snap-mandatory md:flex-wrap",
+            "flex flex-nowrap items-start max-md:snap-x max-md:snap-mandatory md:flex-wrap",
+            finaleCentered
+              ? "max-md:w-full max-md:justify-center max-md:snap-none"
+              : "justify-start",
             fillBox ? "overflow-hidden" : "overflow-x-auto overflow-y-visible"
           )}
           style={{
             gap: HERO_RECIPE_CARD_GAP_PX,
-            /* Inline with message copy (past logo + gap) — mobile + desktop. */
-            marginInlineStart: HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
+            marginInlineStart: finaleCentered
+              ? 0
+              : HERO_RECIPE_CARDS_MESSAGE_ALIGN_OFFSET_PX,
           }}
         >
           {step >= 3

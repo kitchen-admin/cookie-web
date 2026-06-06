@@ -100,8 +100,10 @@ type FridgeScanStageProps = {
   stopAfterScan?: boolean;
   /** Override the 560×400 stage shell (e.g. overflow-visible in How it Works). */
   boxClassName?: string;
-  /** Recipe finale alignment inside the stage (how-it-works: flush left). */
-  finaleAlign?: "start" | "end";
+  /** Recipe finale alignment inside the stage. */
+  finaleAlign?: "start" | "end" | "center";
+  /** Let recipe finale extend past the stage bounds (how-it-works mobile). */
+  allowFinaleOverflow?: boolean;
 };
 
 function bubbleLayoutPhase(
@@ -128,6 +130,7 @@ export function FridgeScanStage({
   stopAfterScan = false,
   boxClassName = heroInteractionBoxClassName,
   finaleAlign = "end",
+  allowFinaleOverflow = false,
 }: FridgeScanStageProps) {
   const barControls = useAnimation();
   const scanStartedRef = useRef(false);
@@ -298,6 +301,7 @@ export function FridgeScanStage({
         active={showRecipes}
         fillBox
         finaleAlign={finaleAlign}
+        allowOverflow={allowFinaleOverflow}
       />
     </div>
   );

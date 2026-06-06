@@ -3,7 +3,6 @@ import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
-import { ViewportBottomBlur } from "@/components/viewport-bottom-blur";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -38,7 +37,6 @@ export default function RootLayout({
           <Navbar />
           {children}
         </Providers>
-        <ViewportBottomBlur />
       </body>
     </html>
   );

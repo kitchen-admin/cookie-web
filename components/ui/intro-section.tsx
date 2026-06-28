@@ -64,7 +64,7 @@ export function IntroSection() {
   return (
     <section
       ref={sectionRef}
-      className="h-dvh w-full bg-amber-50 flex items-center justify-end px-12 md:px-20"
+      className="h-dvh w-full bg-amber-50 flex items-center justify-center md:justify-end px-6 md:px-12 lg:px-20"
       aria-label="Introduction"
     >
       <div
@@ -80,7 +80,8 @@ export function IntroSection() {
             alt="An open fridge stocked with fresh organic ingredients"
             width={480}
             height={530}
-            className="w-[480px] h-auto object-contain"
+            className="w-[260px] sm:w-[360px] md:w-[480px] object-contain"
+            style={{ height: "auto" }}
             priority={false}
           />
           {visible && <div className="fridge-scan-bar" />}

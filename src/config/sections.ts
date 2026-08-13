@@ -1,17 +1,12 @@
 /**
- * Single source of truth for page sections and navbar links.
- * Add a new section here, wire its component in `landing-sections.tsx`.
+ * Single source of truth for homepage sections and navbar links.
+ * Add a new homepage section here, wire its component in `landing-sections.tsx`.
  */
 
-export type SectionId =
-  | "hero"
-  | "problem"
-  | "how-it-works"
-  | "recipes"
-  | "faq";
+export type SectionId = "hero" | "recipes" | "faq";
 
 export interface SectionMeta {
-  /** Anchor id for URL hash and scroll targets (e.g. #how-it-works). */
+  /** Anchor id for URL hash and scroll targets (e.g. #faq). */
   id: SectionId;
   /** Label shown in the navbar when showInNav is true. */
   navLabel: string;
@@ -20,21 +15,19 @@ export interface SectionMeta {
 }
 
 export const SECTIONS: SectionMeta[] = [
-  { id: "hero", navLabel: "Hero", showInNav: false },
-  /** Figma nav "About Us" — problem / brand story block. */
-  { id: "problem", navLabel: "About Us", showInNav: true },
-  { id: "how-it-works", navLabel: "How it works", showInNav: true },
+  { id: "hero", navLabel: "How it works?", showInNav: true },
   { id: "recipes", navLabel: "Recipes", showInNav: false },
-  { id: "faq", navLabel: "FAQ", showInNav: false },
+  { id: "faq", navLabel: "FAQs", showInNav: true },
 ];
 
-/** Navbar link order (independent of page scroll order). */
-const NAV_SECTION_ORDER: SectionId[] = ["how-it-works", "problem"];
+export type NavHref = {
+  label: string;
+  href: string;
+};
 
-export const NAV_SECTIONS = NAV_SECTION_ORDER.map((id) => {
-  const section = SECTIONS.find((entry) => entry.id === id);
-  if (!section?.showInNav) {
-    throw new Error(`Missing nav section for id: ${id}`);
-  }
-  return section;
-});
+/** Navbar + footer primary links (Figma Launch Website). */
+export const NAV_ITEMS: NavHref[] = [
+  { label: "How it works?", href: "/#hero" },
+  { label: "FAQs", href: "/#faq" },
+  { label: "About us", href: "/about" },
+];

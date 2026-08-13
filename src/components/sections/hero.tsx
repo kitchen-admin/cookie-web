@@ -3,23 +3,20 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 
+import { AppStoreBadges } from "@/components/app-store-badges";
 import { useHeroLoadSequence } from "@/components/hero-load-sequence-provider";
+import { FridgeScanStage } from "@/components/sections/fridge-scan-stage";
 import { Section } from "@/components/sections/section";
-import { WaitlistForm } from "@/components/sections/waitlist-form";
 import { HERO_CONTENT_REVEAL_MS } from "@/config/hero-load-sequence";
 import {
-  HERO_FG_HEIGHT_PX,
-  HERO_FG_WIDTH_PX,
-  heroContentPaddingTopClassName,
-  heroFgMobileZoomClassName,
-  heroMessageMaxClassName,
+  heroCopyPaddingTopClassName,
+  heroDesktopStageClassName,
+  heroFridgeClusterClassName,
+  heroSectionMinHeightClassName,
+  heroStageFridgeViewportClassName,
 } from "@/config/layout";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
-
-/** Shared classes for full-width hero art (no cropping). */
-const heroFullWidthImageClassName = "block h-auto w-full max-w-none";
-const heroFullWidthImageStyle = { width: "100%", height: "auto" } as const;
 
 export function Hero() {
   const { showHeroContent } = useHeroLoadSequence();
@@ -28,30 +25,13 @@ export function Hero() {
     <Section
       id="hero"
       reveal={false}
-      className="relative mt-0 flex min-h-dvh flex-col overflow-x-hidden overflow-y-visible rounded-b-[48px] bg-(--primitive-brand-25) pb-12 pt-0 scroll-mt-0 max-md:pb-0"
-      foreground={
-        <div
-          className="pointer-events-none absolute bottom-0 left-1/2 z-5 w-screen max-w-none -translate-x-1/2"
-          aria-hidden
-        >
-          <Image
-            src={siteImages.heroFg}
-            alt=""
-            width={HERO_FG_WIDTH_PX}
-            height={HERO_FG_HEIGHT_PX}
-            priority
-            unoptimized
-            sizes="100vw"
-            className={cn(heroFullWidthImageClassName, heroFgMobileZoomClassName)}
-            style={heroFullWidthImageStyle}
-          />
-        </div>
-      }
+      className={cn(
+        "relative mt-0 flex flex-col overflow-x-hidden overflow-y-visible bg-linear-to-b from-white to-(--surface-hero-gradient-end) pt-0 scroll-mt-0 max-md:pb-8",
+        heroSectionMinHeightClassName
+      )}
       contentClassName={cn(
-        "flex min-h-full flex-1 flex-col items-center justify-start pb-12 text-center",
-        heroMessageMaxClassName,
-        heroContentPaddingTopClassName,
-        "max-md:min-h-dvh max-md:items-center max-md:justify-center max-md:pt-0 max-md:pb-0"
+        "flex min-h-full flex-1 flex-col px-6 pb-10 md:px-20 lg:max-w-[1280px] lg:pb-14",
+        heroCopyPaddingTopClassName
       )}
     >
       <motion.div
@@ -59,27 +39,64 @@ export function Hero() {
         animate={{
           opacity: showHeroContent ? 1 : 0,
           y: showHeroContent ? 0 : 12,
-          filter: showHeroContent ? "blur(0px)" : "blur(6px)",
         }}
         transition={{
           duration: HERO_CONTENT_REVEAL_MS / 1000,
           ease: "easeOut",
         }}
         className={cn(
-          "relative flex w-full flex-col items-center gap-6 text-center max-md:gap-4",
-          heroMessageMaxClassName
+          "flex w-full flex-col items-center gap-10",
+          heroDesktopStageClassName
         )}
         aria-hidden={!showHeroContent}
       >
-        <div className="flex w-full flex-col items-center gap-3 text-center">
-          <h1 className="type-display-2xl-medium tracking-figma-tighter text-(--text-primary-black)">
-            Home food should feel exciting, not repetitive, stressful, or boring.
+        {/* Top-left: headline, subtext, store badges (Figma Frame 7). */}
+        <div className="flex w-full max-w-[507px] flex-col items-start gap-2 text-left lg:absolute lg:top-0 lg:left-0 lg:z-10">
+          <h1 className="type-display-hero text-(--text-display)">
+            Fridge is full,
+            <br />
+            mind is empty?
           </h1>
           <p className="type-display-xs-medium text-text-brand-primary">
-            What if your kitchen knew what to cook?
+            Cookie turns the ingredients you already have into meals you
+            actually love to eat.
           </p>
+          <AppStoreBadges className="mt-2" />
         </div>
-        <WaitlistForm className="mx-auto w-full max-w-md" />
+
+        {/* Bottom-right: fridge scan. L-brackets hug the 400px fridge, not this 808px box. */}
+        <div className={heroFridgeClusterClassName}>
+          <FridgeScanStage
+            showFridge={showHeroContent}
+            startScan={showHeroContent}
+            stopAfterScan
+            boxClassName="relative h-[400px] w-full max-w-[808px] overflow-visible"
+          />
+          <div
+            className={cn(
+              heroStageFridgeViewportClassName,
+              "pointer-events-none z-20"
+            )}
+            aria-hidden
+          >
+            <Image
+              src={siteImages.scanBracketTr}
+              alt=""
+              width={40}
+              height={40}
+              unoptimized
+              className="absolute -top-2 right-0 size-10 origin-center -scale-y-100 rotate-90"
+            />
+            <Image
+              src={siteImages.scanBracketBl}
+              alt=""
+              width={40}
+              height={40}
+              unoptimized
+              className="absolute -bottom-px -left-1.5 size-10 origin-center -rotate-90 -scale-y-100"
+            />
+          </div>
+        </div>
       </motion.div>
     </Section>
   );

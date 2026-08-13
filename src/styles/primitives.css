@@ -82,6 +82,18 @@
   --primitive-danger-900: #7a271a;
   --primitive-danger-950: #55160c;
 
+  /* Launch Website palette (Figma Cookie App → Colors) */
+  --palette-maroon-900: #380306;
+  --palette-maroon-700: #650001;
+  --palette-orange-500: #ff4b00;
+  --palette-peach-300: #ffbe6f;
+  --palette-cream-100: #ffecca;
+  --palette-lime-400: #c1d803;
+  --palette-olive-900: #2a3700;
+  --palette-blue-500: #0095ff;
+  --palette-sky-300: #a0becb;
+  --palette-pink-300: #ffa4c7;
+
   /* Success */
   --primitive-success-25: #f6fef9;
   --primitive-success-50: #ecfdf3;

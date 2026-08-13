@@ -75,7 +75,7 @@ function FaqAccordionItem({
         className="relative z-2 flex w-full items-start gap-2 rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white) p-4 text-left transition-colors"
       >
         {/* Match body-md line-height (24px) so the icon centers on the first line only. */}
-        <span className="flex h-6 shrink-0 items-center" aria-hidden>
+        <span className="flex h-[24px] shrink-0 items-center" aria-hidden>
           <ChevronRight
             className={cn(
               "size-5 text-(--text-primary-black) transition-transform duration-300 ease-out",
@@ -105,11 +105,11 @@ function FaqAccordionItem({
             animate={isOpen ? "open" : "closed"}
             variants={panelContentVariants}
             className={cn(
-              "relative z-1 rounded-b-2xl bg-(--primitive-brand-100) pl-12 pr-4 pb-3 max-md:pl-6",
+              "relative z-1 rounded-b-2xl bg-(--surface-faq-panel) pl-12 pr-4 pb-3 max-md:pl-6",
               ANSWER_PANEL_TOP_PADDING_CLASS
             )}
           >
-            <p className="type-body-md-regular text-text-brand-primary">
+            <p className="type-body-md-regular text-(--text-primary-black)">
               {answer}
             </p>
           </motion.div>
@@ -127,16 +127,15 @@ export function Faq() {
       id="faq"
       reveal={false}
       className={cn(
-        "bg-(--primitive-brand-25) [overflow-anchor:none]",
+        "bg-(--surface-hero-gradient-end) [overflow-anchor:none]",
         sectionVerticalPaddingClassName
       )}
+      waveFill="var(--surface-hero-gradient-end)"
       contentClassName={cn(faqSectionContentClassName, "px-6")}
     >
       <div className="flex w-full flex-col items-center gap-10">
         <h2 className={cn(sectionHeaderClassName, "text-center")}>
           Got questions?
-          <br />
-          Here&apos;s the answers.
         </h2>
 
         <div className="flex w-full flex-col gap-6 [overflow-anchor:none]">

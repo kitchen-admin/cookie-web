@@ -1,13 +1,10 @@
-/** Navbar entrance: header fade → pill expand → nav content fade. */
-export const NAVBAR_HEADER_FADE_S = 0.25;
-export const NAVBAR_PILL_EXPAND_S = 0.65;
-export const NAVBAR_CONTENT_FADE_S = 0.3;
+/** Navbar is now a static bar — short delay before hero copy + scan. */
+export const NAVBAR_HEADER_FADE_S = 0.2;
+export const NAVBAR_PILL_EXPAND_S = 0;
+export const NAVBAR_CONTENT_FADE_S = 0;
 
-/** Milliseconds until navbar entrance is finished (hero content starts next). */
-export const NAVBAR_COMPLETE_MS = Math.round(
-  (NAVBAR_HEADER_FADE_S + NAVBAR_PILL_EXPAND_S + NAVBAR_CONTENT_FADE_S) *
-    1000
-);
+/** Milliseconds until hero content starts. */
+export const NAVBAR_COMPLETE_MS = 200;
 
 /** Hero headline + waitlist fade-in duration. */
 export const HERO_CONTENT_REVEAL_MS = 400;

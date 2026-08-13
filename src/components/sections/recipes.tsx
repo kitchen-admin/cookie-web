@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 
+import { AppStoreBadges } from "@/components/app-store-badges";
 import { HeroRecipeCard } from "@/components/sections/hero-recipe-card";
 import { Section } from "@/components/sections/section";
 import { SiteImage } from "@/components/ui/site-image";
@@ -29,16 +30,16 @@ export function Recipes() {
         "bg-(--primitive-base-white)",
         recipesSectionPaddingClassName
       )}
+      waveFill="var(--primitive-base-white)"
       contentClassName={cn(wideSectionContentClassName, "px-6")}
     >
       <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <h2 className={sectionHeaderClassName}>
-            Full fridge. Zero ideas. We get it.
-          </h2>
+        <div className="flex flex-col items-center gap-1 text-center">
+          <h2 className={sectionHeaderClassName}>Title goes here</h2>
           <p className="type-display-xs-medium text-text-brand-primary">
             Before you open Swiggy again, ask Cookie!
           </p>
+          <AppStoreBadges className="mt-1" />
         </div>
 
         <div className="relative mx-auto w-full max-w-[1204px]">

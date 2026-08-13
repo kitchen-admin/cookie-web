@@ -12,9 +12,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-bricolage);
+  --font-heading: var(--font-boldnova);
+  --font-display: var(--font-boldnova);
   --font-weight-regular: var(--type-weight-regular);
   --font-weight-medium: var(--type-weight-medium);
   --font-weight-semibold: var(--type-weight-semibold);
@@ -156,6 +157,7 @@
   }
   html {
     @apply font-sans;
+    overflow-anchor: none;
   }
   h1 {
     font-size: var(--type-h1-size);

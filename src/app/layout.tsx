@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Instrument_Sans } from "next/font/google";
+import localFont from "next/font/local";
 
+import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const boldnova = localFont({
+  src: "../../font/chef-font.otf",
+  variable: "--font-boldnova",
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -18,7 +27,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cookie — Know what to cook",
   description:
-    "Home food should feel exciting, not repetitive, stressful, or boring. What if your kitchen knew what to cook?",
+    "Cookie turns the ingredients you already have into meals you actually love to eat.",
 };
 
 export default function RootLayout({
@@ -30,12 +39,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${instrumentSans.variable} ${boldnova.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="m-0 flex min-h-full flex-col bg-background p-0">
         <Providers>
           <Navbar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

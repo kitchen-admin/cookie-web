@@ -14,6 +14,14 @@ export const wideSectionContentClassName = "max-w-[1280px]";
 /** Non-hero sections: 56px vertical padding desktop, 40px on mobile. */
 export const sectionVerticalPaddingClassName = "py-14 max-md:py-10";
 
+/**
+ * Height of the Figma footer wave (node 1502:4685, ~26.56px).
+ * Sections pull up by this amount so the wave sits on the previous block.
+ */
+export const SECTION_WAVE_HEIGHT_PX = 27;
+
+export const sectionWaveOverlapClassName = "-mt-[27px]";
+
 /** Problem section: horizontal page padding (Figma 80px at md+). */
 export const problemSectionPaddingClassName = "px-6 md:px-20";
 
@@ -66,6 +74,36 @@ export const FAQ_CONTENT_MAX_PX = 720;
 
 export const faqSectionContentClassName = "max-w-[720px]";
 
+/**
+ * Launch Website hero (Figma 1502:4598) is 740px with a 360px fridge.
+ * Our scan fridge is 400px, so the section is 40px taller to keep the same
+ * top-left copy / bottom-right fridge offset.
+ */
+export const HERO_SECTION_MIN_HEIGHT_PX = 780;
+
+export const heroSectionMinHeightClassName =
+  "min-h-[780px] max-md:min-h-dvh";
+
+/** Copy block top offset from the hero top (Figma Frame 7 y=136). */
+export const HERO_COPY_TOP_PX = 136;
+
+export const heroCopyPaddingTopClassName = "pt-32 md:pt-36 lg:pt-[136px]";
+
+/**
+ * Desktop stage height: 179px from copy top to fridge top (Figma) + 400px fridge.
+ * Copy sits top-left; fridge cluster sits bottom-right.
+ */
+export const HERO_DESKTOP_STAGE_MIN_HEIGHT_PX = 579;
+
+export const heroDesktopStageClassName =
+  "lg:relative lg:block lg:min-h-[579px]";
+
+/** Fridge + ingredient chips cluster (Figma Group 5 is 808×369). */
+export const HERO_FRIDGE_CLUSTER_WIDTH_PX = 808;
+
+export const heroFridgeClusterClassName =
+  "relative w-full max-w-[808px] shrink-0 lg:absolute lg:right-0 lg:bottom-0";
+
 /** Hero foreground image intrinsic size (hero_fg.png). */
 export const HERO_FG_WIDTH_PX = 2880;
 export const HERO_FG_HEIGHT_PX = 1200;
@@ -90,9 +128,9 @@ export const NAV_BUTTON_GAP_PX = 16;
 
 export const navButtonGapClassName = "gap-[16px]";
 
-/** Shared typography for section h2 headers (40px via --type-size-section-header). */
+/** Shared typography for section h2 headers (Boldnova 56px). */
 export const sectionHeaderClassName =
-  "type-section-header-medium tracking-figma-tighter text-(--text-primary-black)";
+  "type-display-section text-(--text-display)";
 
 /** Max width (px) for hero headline + subtext + waitlist form. */
 export const HERO_MESSAGE_MAX_PX = 960;

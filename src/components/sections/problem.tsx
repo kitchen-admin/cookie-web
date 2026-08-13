@@ -16,9 +16,10 @@ import { cn } from "@/lib/utils";
 export function Problem() {
   return (
     <Section
-      id="problem"
+      id="about"
       reveal={false}
       className={cn("bg-(--primitive-base-white)", sectionVerticalPaddingClassName)}
+      waveFill="var(--primitive-base-white)"
       contentClassName={cn(
         wideSectionContentClassName,
         problemSectionPaddingClassName

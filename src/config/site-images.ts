@@ -1,28 +1,26 @@
 /**
  * Site image URLs.
  *
- * Paste each image URL directly between the quotes below.
- * Use any public HTTPS URL (Vercel Blob, a CDN, etc.).
+ * Local paths under /public, or public HTTPS URLs (Vercel Blob, a CDN, etc.).
  * Leave a value as "" (empty) to show the design placeholder instead.
- *
- * TEMP paths under /figma-placeholders are local exports — replace with Blob URLs.
  */
 
 export const siteImages = {
-  /**
-   * Hero section foreground (counter + ingredients, 2880×1200).
-   * Bump `v` when the Blob file is replaced (cache bust for Next.js + CDN).
-   */
-  heroFg:
-    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/website/hero/hero_fg.png?v=2",
-  /** Navbar: logo + wordmark (display at 40px height) */
+  /** Hero fridge scan (Figma 1502:4266). */
+  fridge: "/hero/fridge.png",
+  /** Navbar cookie mark (Figma 1502:4627). */
+  logoMark: "/logo/cookie-mark.png",
+  /** Navbar COOKIE wordmark (Figma 1502:4629). */
+  logoWordmark: "/logo/cookie-wordmark.svg",
+  /** Navbar: logo + wordmark fallback (legacy combined asset). */
   logoLight:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/media-kit/logo_light_2.png",
   /** Hero cooking beat: Cookie mascot (after scan). */
   logoMascot:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/media-kit/logo-light-image.png",
-  /** How it works: open fridge (400×400) */
-  fridge: "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/fridge.png",
+  /** Scan corner brackets (Figma 1502:4267 / 1502:4268). */
+  scanBracketTr: "/hero/bracket-tr.svg",
+  scanBracketBl: "/hero/bracket-bl.svg",
   /** Floating cards: ingredient thumbnails (40×40) */
   carrot:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/ingredients/carrot.png",
@@ -38,17 +36,22 @@ export const siteImages = {
   /** Hero recipe: Paneer steak with pepper sauce & garlic beans */
   heroRecipePaneerSteak:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/recipes/lunch_5.png",
-  /** Problem section card illustrations — TEMP placeholder (brand-50 blocks in Figma). */
+  /** Problem / about section card illustrations */
   problemLunchbox: "",
   problemPantry: "",
   problemHealthy: "",
-  /** Recipes section: phone mockup — TEMP placeholder -> replace with Blob URL */
-  recipesPhoneMockup: "/figma-placeholders/recipes/phone-mockup.png",
-  /** Recipes section: floating card photos — TEMP -> replace with Blob URLs */
+  /** Recipes section: phone mockup (Figma 1502:4293) */
+  recipesPhoneMockup: "/recipes/phone-mockup.png",
+  /** Recipes section: floating card photos — TEMP placeholders */
   recipeAvocadoToast: "/figma-placeholders/recipes/breakfast-avocado-toast.png",
   recipeSoyaStroganoff: "/figma-placeholders/recipes/lunch-soya-stroganoff.png",
   recipeMushroomBourguignon:
     "/figma-placeholders/recipes/dinner-mushroom-bourguignon.png",
+  /** Store badges */
+  badgeAppStore: "/badges/app-store.svg",
+  badgePlayStore: "/badges/google-play.svg",
+  /** Footer wave + maroon fill */
+  footerCurve: "/footer/curve.svg",
 } as const;
 
 export type SiteImageKey = keyof typeof siteImages;

@@ -382,6 +382,26 @@
     font-weight: var(--type-button-weight);
   }
 
+  /* Launch Website display headings (Boldnova) */
+  .type-display-hero,
+  .type-display-section,
+  .type-display-footer {
+    font-family: var(--font-display), sans-serif;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: var(--type-weight-regular);
+  }
+
+  .type-display-hero,
+  .type-display-section {
+    font-size: var(--type-size-display-3xl);
+  }
+
+  .type-display-footer {
+    font-size: var(--type-size-display-2xl);
+  }
+
   /* Landing page headings — mobile-only scale (desktop >= 768px unchanged). */
   @media (width < 48rem) {
     .type-display-2xl-regular,
@@ -395,6 +415,15 @@
     .type-section-header-medium {
       font-size: 1.75rem; /* 28px */
       line-height: 2.125rem; /* 34px */
+    }
+
+    .type-display-hero,
+    .type-display-section {
+      font-size: 2rem; /* 32px */
+    }
+
+    .type-display-footer {
+      font-size: 1.75rem; /* 28px */
     }
 
     .type-display-xs-regular,

@@ -11,8 +11,19 @@
   --text-primary-white: var(--primitive-white-90);
   --text-secondary-white: var(--primitive-white-70);
   --text-tertiary-white: var(--primitive-white-50);
-  /* Primary brand color (Figma brand/700) */
-  --brand-primary: var(--primitive-brand-700);
+  /* Display / launch palette semantics */
+  --text-display: var(--palette-maroon-900);
+  --text-on-maroon: var(--palette-cream-100);
+  --surface-footer: var(--palette-maroon-900);
+  --surface-hero-gradient-end: var(--palette-cream-100);
+  --surface-faq-panel: color-mix(
+    in srgb,
+    var(--palette-peach-300) 32%,
+    transparent
+  );
+
+  /* Primary brand color — launch orange */
+  --brand-primary: var(--palette-orange-500);
   --text-brand-primary: var(--brand-primary);
   --text-brand-secondary: var(--primitive-brand-500);
   --text-brand-tertiary: var(--primitive-brand-300);

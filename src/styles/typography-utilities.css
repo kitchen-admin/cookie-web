@@ -417,9 +417,13 @@
       line-height: 2.125rem; /* 34px */
     }
 
-    .type-display-hero,
+    .type-display-hero {
+      font-size: 2rem; /* 32px — keep the hero headline from crowding the fridge */
+    }
+
+    /* Section titles must read larger than the orange subtext (20px). */
     .type-display-section {
-      font-size: 2rem; /* 32px */
+      font-size: 2.5rem; /* 40px */
     }
 
     .type-display-footer {

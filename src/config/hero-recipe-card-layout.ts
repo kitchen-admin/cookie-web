@@ -10,6 +10,10 @@ const s = (value: number) => Math.round(value * HERO_RECIPE_CARD_SCALE);
 /** Card shell */
 export const HERO_RECIPE_CARD_WIDTH_PX = s(280);
 export const HERO_RECIPE_CARD_IMAGE_HEIGHT_PX = s(200);
+
+/** Hero scan: smaller iMessage-style photo bubble. */
+export const HERO_RECIPE_BUBBLE_WIDTH_PX = 192;
+export const HERO_RECIPE_BUBBLE_HEIGHT_PX = 136;
 export const HERO_RECIPE_CARD_GAP_PX = s(29);
 export const HERO_RECIPE_CARD_RADIUS_PX = s(16);
 

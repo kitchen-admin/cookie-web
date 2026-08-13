@@ -41,24 +41,24 @@ export const HERO_RECIPES: HeroRecipe[] = [
   },
 ];
 
-/** Floating recipe cards around the phone mockup (Figma Section 4). */
+/** Floating recipe cards around the phone mockup. */
 export const RECIPES_SHOWCASE: (HeroRecipe & {
   placement: RecipesShowcasePlacement;
 })[] = [
   {
-    title: "Avocado chilli toast with jammy eggs and microgreens",
-    imageUrl: siteImages.recipeAvocadoToast,
-    servings: 3,
+    title: "Chicken Banh Mi",
+    imageUrl: siteImages.recipeChickenBanhMi,
+    servings: 2,
     difficulty: "Easy",
-    cookTime: "15 mins",
+    cookTime: "20 mins",
     diet: "non-veg",
     showHeaderDietBadge: false,
     placement: "top-left",
   },
   {
-    title: "Paneer steak with pepper sauce & garlic beans.",
-    imageUrl: siteImages.heroRecipePaneerSteak,
-    servings: 3,
+    title: "Masala omelette waffles",
+    imageUrl: siteImages.recipeMasalaOmeletteWaffles,
+    servings: 2,
     difficulty: "Easy",
     cookTime: "15 mins",
     diet: "veg",
@@ -66,21 +66,21 @@ export const RECIPES_SHOWCASE: (HeroRecipe & {
     placement: "top-right",
   },
   {
-    title: "Soya chunks stroganoff with herbed rice",
-    imageUrl: siteImages.recipeSoyaStroganoff,
+    title: "Broccoli rava idli",
+    imageUrl: siteImages.recipeBroccoliRavaIdli,
     servings: 3,
     difficulty: "Easy",
-    cookTime: "15 mins",
-    diet: "non-veg",
-    showHeaderDietBadge: false,
+    cookTime: "25 mins",
+    diet: "veg",
+    showHeaderDietBadge: true,
     placement: "bottom-left",
   },
   {
-    title: "Mushroom bourguignon with buttery mashed potatoes",
-    imageUrl: siteImages.recipeMushroomBourguignon,
-    servings: 3,
+    title: "Spinach & broad bean shakshuka",
+    imageUrl: siteImages.recipeSpinachBroadBeanShakshuka,
+    servings: 2,
     difficulty: "Easy",
-    cookTime: "15 mins",
+    cookTime: "20 mins",
     diet: "non-veg",
     showHeaderDietBadge: false,
     placement: "bottom-right",

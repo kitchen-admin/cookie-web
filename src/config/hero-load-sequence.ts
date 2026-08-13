@@ -24,3 +24,24 @@ export const HERO_RECIPE_CARD_REVEAL_S = 0.5;
 /** Recipe finale: logo → message → cards. Delays between each step. */
 export const HERO_RECIPE_SUGGESTION_MESSAGE_DELAY_MS = 180;
 export const HERO_RECIPE_SUGGESTION_CARDS_DELAY_MS = 120;
+
+/** Pause after all four ingredient cards are visible. */
+export const HERO_BUBBLE_HOLD_MS = 1100;
+
+/** Ingredient cards fade away as the recipe appears. */
+export const HERO_BUBBLE_MERGE_MS = 850;
+
+/** How far into the merge the recipe card starts to appear. */
+export const HERO_RECIPE_OVERLAP_MS = 350;
+
+/** Recipe card fade-in while ingredients are still merging. */
+export const HERO_RECIPE_APPEAR_MS = 550;
+
+/** How long the finished recipe stays on screen. */
+export const HERO_RECIPE_HOLD_MS = 1600;
+
+/** Recipe card flies off and disappears. */
+export const HERO_RECIPE_FLY_OFF_MS = 650;
+
+/** Quiet beat before the next ingredient set. */
+export const HERO_LOOP_PAUSE_MS = 600;

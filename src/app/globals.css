@@ -154,6 +154,7 @@
     line-height: var(--type-body-leading);
     letter-spacing: var(--type-body-tracking);
     font-weight: var(--type-body-weight);
+    overflow-x: hidden;
   }
   html {
     @apply font-sans;

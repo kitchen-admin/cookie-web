@@ -15,7 +15,7 @@ export interface SectionMeta {
 }
 
 export const SECTIONS: SectionMeta[] = [
-  { id: "hero", navLabel: "How it works?", showInNav: true },
+  { id: "hero", navLabel: "How it works?", showInNav: false },
   { id: "recipes", navLabel: "Recipes", showInNav: false },
   { id: "faq", navLabel: "FAQs", showInNav: true },
 ];
@@ -27,7 +27,6 @@ export type NavHref = {
 
 /** Navbar + footer primary links (Figma Launch Website). */
 export const NAV_ITEMS: NavHref[] = [
-  { label: "How it works?", href: "/#hero" },
   { label: "FAQs", href: "/#faq" },
   { label: "About us", href: "/about" },
 ];

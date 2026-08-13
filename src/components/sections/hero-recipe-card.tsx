@@ -127,8 +127,6 @@ export function HeroRecipeCard({
   index,
   className,
 }: HeroRecipeCardProps) {
-  const showHeaderBadge = recipe.showHeaderDietBadge ?? true;
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 4 }}
@@ -172,11 +170,7 @@ export function HeroRecipeCard({
         />
 
         <div className="relative z-10 flex h-full flex-col justify-between">
-          <div className="flex items-start justify-between">
-            <DietBadge
-              diet={recipe.diet}
-              className={cn(!showHeaderBadge && "pointer-events-none opacity-0")}
-            />
+          <div className="flex items-start justify-end">
             <button
               type="button"
               className="flex shrink-0 items-center justify-center rounded-full backdrop-blur-[2px]"

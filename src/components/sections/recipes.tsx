@@ -35,7 +35,9 @@ export function Recipes() {
     >
       <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
         <div className="flex flex-col items-center gap-1 text-center">
-          <h2 className={sectionHeaderClassName}>Title goes here</h2>
+          <h2 className={sectionHeaderClassName}>
+            What’s in there is dinner
+          </h2>
           <p className="type-display-xs-medium text-text-brand-primary">
             Before you open Swiggy again, ask Cookie!
           </p>
@@ -93,7 +95,7 @@ export function Recipes() {
               placeholderClassName="rounded-t-[40px] bg-(--primitive-brand-100)"
             />
             <div
-              className="flex w-full flex-col max-md:hidden"
+              className="flex w-full flex-col"
               style={{
                 marginTop: 24,
                 gap: 16,

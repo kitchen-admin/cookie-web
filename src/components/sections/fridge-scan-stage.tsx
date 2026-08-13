@@ -4,152 +4,182 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "motion/react";
 
 import {
-  HeroCookingBeat,
-  HeroRecipeRow,
-} from "@/components/sections/hero-cooking-presentation";
+  FloatingCard,
+  type FloatingCardProps,
+} from "@/components/sections/floating-card";
+import { HeroRecipeBubble } from "@/components/sections/hero-recipe-bubble";
+import { SiteImage } from "@/components/ui/site-image";
+import {
+  HERO_BUBBLE_HOLD_MS,
+  HERO_BUBBLE_MERGE_MS,
+  HERO_IMAGE_REVEAL_MS,
+  HERO_RECIPE_APPEAR_MS,
+  HERO_RECIPE_FLY_OFF_MS,
+  HERO_RECIPE_HOLD_MS,
+  HERO_RECIPE_OVERLAP_MS,
+} from "@/config/hero-load-sequence";
+import { HERO_SCAN_LOOPS } from "@/config/hero-scan-loops";
 import {
   heroBubbleMergeFocalClassName,
   heroInteractionBoxClassName,
   heroInteractionPhaseFillClassName,
+  heroRecipeAnchorClassName,
   heroStageFridgeBandClassName,
   heroStageFridgeClassName,
   heroStageFridgeViewportClassName,
   heroStageScanFrameClassName,
 } from "@/config/layout";
-import {
-  FloatingCard,
-  type FloatingCardProps,
-} from "@/components/sections/floating-card";
-import { SiteImage } from "@/components/ui/site-image";
-import {
-  HERO_COOKING_BEAT_MS,
-  HERO_IMAGE_REVEAL_MS,
-} from "@/config/hero-load-sequence";
 import { siteImages } from "@/config/site-images";
 import { cn } from "@/lib/utils";
 
-/** One sweep duration (seconds). */
-const SWEEP_DURATION = 1.15;
+/** One sweep duration (seconds). Scan keeps looping at this pace. */
+const SWEEP_DURATION = 1.3;
 
 /** Vertical range for the scan bar within the fridge frame (percent). */
 const SCAN_TOP = "12%";
 const SCAN_BOTTOM = "88%";
 
-const FRIDGE_COLLAPSE_MS = 550;
-const BUBBLE_MERGE_MS = 550;
+/** Tiny gap so the two cards on one swipe don’t pop at the same instant. */
+const PAIR_STAGGER_MS = 100;
 
 const sleep = (ms: number) =>
   new Promise<void>((resolve) => {
     window.setTimeout(resolve, ms);
   });
 
+type SweepDir = "down" | "up";
+
 type HeroStagePhase =
   | "idle"
   | "scanning"
-  | "collapsingFridge"
   | "mergingBubbles"
-  | "cooking"
-  | "recipes"
-  | "complete";
-
-export type IngredientBubbleConfig = Omit<
-  FloatingCardProps,
-  "delay" | "visible" | "layoutPhase"
->;
-
-/** Original hero positions; reveal order follows scan sweeps. */
-const INGREDIENT_BUBBLES: IngredientBubbleConfig[] = [
-  {
-    name: "Broccoli",
-    days: 4,
-    imageUrl: siteImages.broccoli,
-    side: "left",
-    positionClassName:
-      "left-[7%] top-[27%] max-md:left-0 max-md:top-[10%]",
-  },
-  {
-    name: "Mushroom",
-    days: 4,
-    imageUrl: siteImages.mushroom,
-    side: "left",
-    positionClassName:
-      "left-0 top-[56%] max-md:left-0 max-md:top-[56%]",
-  },
-  {
-    name: "Carrots",
-    days: 2,
-    imageUrl: siteImages.carrot,
-    side: "right",
-    positionClassName:
-      "right-[0%] top-[3%] max-md:right-0 max-md:top-[6%]",
-  },
-  {
-    name: "Mixed berry",
-    days: 2,
-    imageUrl: siteImages.berry,
-    side: "right",
-    positionClassName:
-      "right-[0%] top-[54%] max-md:right-0 max-md:top-[52%]",
-  },
-];
+  | "showingRecipe"
+  | "flyingOff";
 
 type FridgeScanStageProps = {
   showFridge: boolean;
   startScan: boolean;
-  /** When true, animation ends after scan + bubbles (no cooking/recipe finale). */
-  stopAfterScan?: boolean;
-  /** Override the 560×400 stage shell (e.g. overflow-visible in How it Works). */
+  /** Override the 560×400 stage shell. */
   boxClassName?: string;
-  /** Recipe finale alignment inside the stage. */
-  finaleAlign?: "start" | "end" | "center";
-  /** Let recipe finale extend past the stage bounds (how-it-works mobile). */
-  allowFinaleOverflow?: boolean;
 };
 
 function bubbleLayoutPhase(
   phase: HeroStagePhase
 ): FloatingCardProps["layoutPhase"] {
-  if (phase === "mergingBubbles") return "merging";
+  if (phase === "mergingBubbles" || phase === "showingRecipe") {
+    return "merging";
+  }
   return "scattered";
 }
 
-const BUBBLE_VISIBLE_PHASES: HeroStagePhase[] = [
-  "scanning",
-  "collapsingFridge",
-  "mergingBubbles",
-  "complete",
-];
-
 /**
- * Hero visual: scan → fridge shrinks away → bubbles merge & hide →
- * Cookie mascot + copy → recipe cards.
+ * Hero visual: scan never stops. Each swipe down finds the top two
+ * ingredients, each swipe up finds the bottom two. Those four become a
+ * recipe, it flies off, and the next set starts with no pause.
  */
 export function FridgeScanStage({
   showFridge,
   startScan,
-  stopAfterScan = false,
   boxClassName = heroInteractionBoxClassName,
-  finaleAlign = "end",
-  allowFinaleOverflow = false,
 }: FridgeScanStageProps) {
   const barControls = useAnimation();
+  const mergeAnchorRef = useRef<HTMLDivElement>(null);
   const scanStartedRef = useRef(false);
+  const sweepWaitersRef = useRef<Array<(dir: SweepDir) => void>>([]);
+  const acceptDetectionsRef = useRef(false);
+  const [loopIndex, setLoopIndex] = useState(0);
   const [phase, setPhase] = useState<HeroStagePhase>("idle");
   const [revealed, setRevealed] = useState<boolean[]>(() =>
-    INGREDIENT_BUBBLES.map(() => false)
+    HERO_SCAN_LOOPS[0].ingredients.map(() => false)
   );
-  const [showScanBar, setShowScanBar] = useState(true);
 
-  const fridgeShrunk =
-    phase === "collapsingFridge" ||
+  const loop = HERO_SCAN_LOOPS[loopIndex] ?? HERO_SCAN_LOOPS[0];
+  const showBubbles =
+    phase === "scanning" ||
     phase === "mergingBubbles" ||
-    phase === "cooking" ||
-    phase === "recipes";
-
-  const showCooking = phase === "cooking";
-  const showRecipes = phase === "recipes";
-  const showBubbles = BUBBLE_VISIBLE_PHASES.includes(phase);
+    phase === "showingRecipe";
+  const showRecipeCard =
+    phase === "showingRecipe" || phase === "flyingOff";
   const bubblePhase = bubbleLayoutPhase(phase);
+
+  function notifySweep(dir: SweepDir) {
+    if (!acceptDetectionsRef.current) return;
+    const waiter = sweepWaitersRef.current.shift();
+    if (waiter) waiter(dir);
+  }
+
+  function waitForSweep() {
+    return new Promise<SweepDir>((resolve) => {
+      sweepWaitersRef.current.push(resolve);
+    });
+  }
+
+  async function waitForDir(wanted: SweepDir, isCancelled: () => boolean) {
+    while (!isCancelled()) {
+      const dir = await waitForSweep();
+      if (dir === wanted) return;
+    }
+  }
+
+  function resetRevealed(count: number) {
+    setRevealed(Array.from({ length: count }, () => false));
+  }
+
+  function revealAt(index: number) {
+    setRevealed((prev) => {
+      const next = [...prev];
+      next[index] = true;
+      return next;
+    });
+  }
+
+  async function revealPair(first: number, second: number) {
+    revealAt(first);
+    await sleep(PAIR_STAGGER_MS);
+    revealAt(second);
+  }
+
+  // Scan line never stops — it keeps sweeping while recipes are made.
+  useEffect(() => {
+    if (!startScan) return;
+
+    let cancelled = false;
+
+    async function sweepForever() {
+      await barControls.set({ top: SCAN_TOP, opacity: 1 });
+
+      while (!cancelled) {
+        const downSweep = barControls.start({
+          top: SCAN_BOTTOM,
+          opacity: 1,
+          transition: { duration: SWEEP_DURATION, ease: "easeInOut" },
+        });
+        // Mid-swipe: the line is crossing the fridge, so detect now.
+        await sleep((SWEEP_DURATION * 1000) / 2);
+        if (cancelled) return;
+        notifySweep("down");
+        await downSweep;
+        if (cancelled) return;
+
+        const upSweep = barControls.start({
+          top: SCAN_TOP,
+          opacity: 1,
+          transition: { duration: SWEEP_DURATION, ease: "easeInOut" },
+        });
+        await sleep((SWEEP_DURATION * 1000) / 2);
+        if (cancelled) return;
+        notifySweep("up");
+        await upSweep;
+      }
+    }
+
+    void sweepForever();
+
+    return () => {
+      cancelled = true;
+      barControls.stop();
+    };
+  }, [startScan, barControls]);
 
   useEffect(() => {
     if (!startScan || scanStartedRef.current) return;
@@ -157,152 +187,159 @@ export function FridgeScanStage({
 
     let cancelled = false;
 
-    async function runSequence() {
-      setPhase("scanning");
-      await barControls.set({ top: SCAN_TOP, opacity: 1 });
+    async function runLoops() {
+      let index = 0;
 
-      for (let i = 0; i < INGREDIENT_BUBBLES.length; i++) {
-        const targetY = i % 2 === 0 ? SCAN_BOTTOM : SCAN_TOP;
+      while (!cancelled) {
+        const current = HERO_SCAN_LOOPS[index];
+        setLoopIndex(index);
+        resetRevealed(current.ingredients.length);
+        setPhase("scanning");
+        sweepWaitersRef.current = [];
+        acceptDetectionsRef.current = true;
 
-        await barControls.start({
-          top: targetY,
-          opacity: 1,
-          transition: { duration: SWEEP_DURATION, ease: "easeInOut" },
-        });
-
+        // Swipe down → only the top two.
+        await waitForDir("down", () => cancelled);
+        if (cancelled) return;
+        await revealPair(0, 1);
         if (cancelled) return;
 
-        setRevealed((prev) => {
-          const next = [...prev];
-          next[i] = true;
-          return next;
-        });
+        // Swipe up → only the bottom two.
+        await waitForDir("up", () => cancelled);
+        if (cancelled) return;
+        await revealPair(2, 3);
+        if (cancelled) return;
+
+        // Stop listening so leftover swipes can’t dump the next set.
+        acceptDetectionsRef.current = false;
+
+        // All four are out. Let them sit, then merge into the recipe.
+        await sleep(HERO_BUBBLE_HOLD_MS);
+        if (cancelled) return;
+
+        setPhase("mergingBubbles");
+        await sleep(HERO_RECIPE_OVERLAP_MS);
+        if (cancelled) return;
+
+        setPhase("showingRecipe");
+        await sleep(
+          HERO_BUBBLE_MERGE_MS -
+            HERO_RECIPE_OVERLAP_MS +
+            HERO_RECIPE_APPEAR_MS +
+            HERO_RECIPE_HOLD_MS
+        );
+        if (cancelled) return;
+
+        setPhase("flyingOff");
+        await sleep(HERO_RECIPE_FLY_OFF_MS);
+        if (cancelled) return;
+
+        index = (index + 1) % HERO_SCAN_LOOPS.length;
       }
-
-      if (cancelled) return;
-
-      await barControls.start({
-        opacity: 0,
-        transition: { duration: 0.35, ease: "easeOut" },
-      });
-      setShowScanBar(false);
-
-      if (stopAfterScan) {
-        setPhase("complete");
-        return;
-      }
-
-      setPhase("collapsingFridge");
-      await sleep(FRIDGE_COLLAPSE_MS);
-      if (cancelled) return;
-
-      setPhase("mergingBubbles");
-      await sleep(BUBBLE_MERGE_MS);
-      if (cancelled) return;
-
-      setPhase("cooking");
-      await sleep(HERO_COOKING_BEAT_MS);
-      if (cancelled) return;
-
-      setPhase("recipes");
     }
 
-    void runSequence();
+    void runLoops();
 
     return () => {
       cancelled = true;
+      acceptDetectionsRef.current = false;
+      sweepWaitersRef.current.splice(0).forEach((resolve) => {
+        resolve("down");
+      });
     };
-  }, [startScan, barControls, stopAfterScan]);
-
-  const fridgeOnScreen = showFridge && !fridgeShrunk;
+  }, [startScan]);
 
   return (
     <div className={boxClassName}>
-      {/* Scan → cook — lives inside the same 560×400 box as the recipe finale. */}
-      {!showRecipes ? (
       <div className={heroInteractionPhaseFillClassName}>
-      <div className={heroStageFridgeBandClassName}>
-      <div className={heroStageFridgeViewportClassName}>
-      {/* Fridge image — shrinks to zero after scan */}
-      {(showFridge || fridgeShrunk) && (
-        <motion.div
-          initial={false}
-          animate={{
-            opacity: fridgeOnScreen ? 1 : 0,
-            scale: fridgeOnScreen ? 1 : 0,
-            y: 0,
-          }}
-          transition={{
-            duration: fridgeShrunk
-              ? FRIDGE_COLLAPSE_MS / 1000
-              : HERO_IMAGE_REVEAL_MS / 1000,
-            ease: "easeInOut",
-          }}
-          className={heroStageFridgeClassName}
-          aria-hidden={!fridgeOnScreen}
-        >
-          <SiteImage
-            src={siteImages.fridge}
-            alt="Open refrigerator filled with fresh ingredients"
-            width={400}
-            height={400}
-            priority
-            className="max-h-full w-auto max-w-full rounded-3xl object-contain"
-            style={{ width: "auto", height: "auto", maxHeight: "100%" }}
-            placeholderClassName="size-full rounded-3xl"
-          />
-        </motion.div>
-      )}
+        <div className={heroStageFridgeBandClassName}>
+          <div className={heroStageFridgeViewportClassName}>
+            {showFridge ? (
+              <motion.div
+                initial={false}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  duration: HERO_IMAGE_REVEAL_MS / 1000,
+                  ease: "easeInOut",
+                }}
+                className={heroStageFridgeClassName}
+              >
+                <SiteImage
+                  src={siteImages.fridge}
+                  alt="Open refrigerator filled with fresh ingredients"
+                  width={400}
+                  height={400}
+                  priority
+                  className="max-h-full w-auto max-w-full rounded-3xl object-contain"
+                  style={{ width: "auto", height: "auto", maxHeight: "100%" }}
+                  placeholderClassName="size-full rounded-3xl"
+                />
+              </motion.div>
+            ) : null}
 
-      {/* Scan bar — sweeps the centered fridge viewport */}
-      {startScan && showScanBar ? (
-        <div className={heroStageScanFrameClassName}>
-          <motion.div
-            initial={{ top: SCAN_TOP, opacity: 1 }}
-            animate={barControls}
-            className="absolute right-0 left-0"
+            {startScan ? (
+              <div className={heroStageScanFrameClassName}>
+                <motion.div
+                  initial={{ top: SCAN_TOP, opacity: 1 }}
+                  animate={barControls}
+                  className="absolute right-0 left-0"
+                  aria-hidden
+                >
+                  <div className="h-[2px] bg-(--primitive-brand-500)/45 shadow-[0_0_8px_rgba(255,68,5,0.35)]" />
+                  <div className="h-5 bg-linear-to-b from-(--primitive-brand-500)/18 via-(--primitive-brand-500)/8 to-transparent" />
+                </motion.div>
+              </div>
+            ) : null}
+          </div>
+
+          <div
+            ref={mergeAnchorRef}
+            className={cn(
+              "pointer-events-none absolute z-0 h-px w-px",
+              heroRecipeAnchorClassName
+            )}
             aria-hidden
-          >
-            <div className="h-[2px] bg-(--primitive-brand-500)/45 shadow-[0_0_8px_rgba(255,68,5,0.35)]" />
-            <div className="h-5 bg-linear-to-b from-(--primitive-brand-500)/18 via-(--primitive-brand-500)/8 to-transparent" />
-          </motion.div>
+          />
+
+          {startScan && showBubbles
+            ? loop.ingredients.map((bubble, index) =>
+                revealed[index] ? (
+                  <FloatingCard
+                    key={`${loop.recipe.title}-${bubble.name}`}
+                    {...bubble}
+                    visible
+                    layoutPhase={bubblePhase}
+                    mergeAnchorRef={mergeAnchorRef}
+                  />
+                ) : null
+              )
+            : null}
+
+          {showRecipeCard ? (
+            <motion.div
+              className={cn(
+                "pointer-events-none absolute z-40",
+                heroBubbleMergeFocalClassName
+              )}
+              initial={{ opacity: 0, filter: "blur(0px)" }}
+              animate={
+                phase === "flyingOff"
+                  ? { opacity: 0, filter: "blur(8px)" }
+                  : { opacity: 1, filter: "blur(0px)" }
+              }
+              transition={{
+                duration:
+                  phase === "flyingOff"
+                    ? HERO_RECIPE_FLY_OFF_MS / 1000
+                    : HERO_RECIPE_APPEAR_MS / 1000,
+                ease: "easeIn",
+              }}
+            >
+              <HeroRecipeBubble imageUrl={loop.recipe.imageUrl} />
+            </motion.div>
+          ) : null}
         </div>
-      ) : null}
       </div>
-
-      {/* Ingredient bubbles */}
-      {startScan && showBubbles
-        ? INGREDIENT_BUBBLES.map((bubble, index) => (
-            <FloatingCard
-              key={bubble.name}
-              {...bubble}
-              visible={revealed[index]}
-              layoutPhase={bubblePhase}
-            />
-          ))
-        : null}
-
-      {/* Logo + copy at bubble merge focal point (42% of stage band) */}
-      {showCooking ? (
-        <div
-          className={cn(
-            "pointer-events-none absolute z-20",
-            heroBubbleMergeFocalClassName
-          )}
-        >
-          <HeroCookingBeat showLogo showCopy />
-        </div>
-      ) : null}
-      </div>
-      </div>
-      ) : null}
-
-      <HeroRecipeRow
-        active={showRecipes}
-        fillBox
-        finaleAlign={finaleAlign}
-        allowOverflow={allowFinaleOverflow}
-      />
     </div>
   );
 }

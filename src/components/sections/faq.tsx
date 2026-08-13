@@ -105,7 +105,7 @@ function FaqAccordionItem({
             animate={isOpen ? "open" : "closed"}
             variants={panelContentVariants}
             className={cn(
-              "relative z-1 rounded-b-2xl bg-(--surface-faq-panel) pl-12 pr-4 pb-3 max-md:pl-6",
+              "relative z-1 rounded-b-2xl bg-(--surface-faq-panel) pl-12 pr-4 pb-3 max-md:pl-[46px]",
               ANSWER_PANEL_TOP_PADDING_CLASS
             )}
           >

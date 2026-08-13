@@ -45,7 +45,7 @@ export const RECIPES_PHONE_HEIGHT_PX = 727;
 export const RECIPES_PHONE_MOBILE_WIDTH_PX = 280;
 
 export const recipesPhoneMobileSizeClassName =
-  "max-md:w-[280px] max-md:max-w-[280px]";
+  "max-md:w-full max-md:max-w-[280px]";
 
 /** Horizontal gap from phone edge to top-row recipe cards. */
 export const RECIPES_CARD_TOP_ROW_GAP_FROM_PHONE_PX = 56;
@@ -82,7 +82,7 @@ export const faqSectionContentClassName = "max-w-[720px]";
 export const HERO_SECTION_MIN_HEIGHT_PX = 780;
 
 export const heroSectionMinHeightClassName =
-  "min-h-[780px] max-md:min-h-dvh";
+  "min-h-[780px] max-md:h-dvh max-md:min-h-dvh max-md:max-h-dvh";
 
 /** Copy block top offset from the hero top (Figma Frame 7 y=136). */
 export const HERO_COPY_TOP_PX = 136;
@@ -102,7 +102,7 @@ export const heroDesktopStageClassName =
 export const HERO_FRIDGE_CLUSTER_WIDTH_PX = 808;
 
 export const heroFridgeClusterClassName =
-  "relative w-full max-w-[808px] shrink-0 lg:absolute lg:right-0 lg:bottom-0";
+  "relative w-full max-w-[808px] shrink-0 lg:absolute lg:right-0 lg:bottom-0 max-md:mt-auto max-md:flex max-md:min-h-0 max-md:w-full max-md:max-w-none max-md:flex-1 max-md:flex-col max-md:justify-end";
 
 /** Hero foreground image intrinsic size (hero_fg.png). */
 export const HERO_FG_WIDTH_PX = 2880;
@@ -176,6 +176,16 @@ export const heroInteractionBoxClassName =
 export const howItWorksInteractionBoxClassName =
   "relative h-[400px] w-[560px] max-w-full shrink-0 overflow-visible";
 
+/**
+ * Phones: a square fridge sits at the bottom of the leftover hero space.
+ * Recipe paints above that square (between the store badges and the fridge).
+ */
+export const heroMobileStageClipClassName =
+  "max-md:relative max-md:mx-auto max-md:aspect-square max-md:w-full max-md:max-h-full max-md:overflow-visible md:contents";
+
+export const heroMobileStageInnerClassName =
+  "relative max-md:size-full md:h-auto md:w-auto";
+
 /** Mobile-only scale on the fridge animation wrapper (text inside compensates via --hiw-mobile-scale). */
 export const HOW_IT_WORKS_MOBILE_STAGE_SCALE = 0.72;
 
@@ -208,9 +218,9 @@ export const heroInteractionRecipeCenterClassName =
 /** Fridge band — full interaction viewport. */
 export const heroStageFridgeBandClassName = "relative size-full";
 
-/** Centered 400×400 zone for fridge image + scan line (inside 560×400 box). */
+/** Fridge photo + scan line — full square on phones, 400px on the right from md up. */
 export const heroStageFridgeViewportClassName =
-  "absolute top-1/2 left-1/2 z-0 size-[400px] max-h-full max-w-full -translate-x-1/2 -translate-y-1/2";
+  "absolute top-0 right-0 z-0 aspect-square w-full max-md:inset-0 max-md:size-full md:top-1/2 md:w-[400px] md:max-w-full md:-translate-y-1/2";
 
 export const heroStageFridgeClassName =
   "relative z-0 flex size-full items-center justify-center origin-center";
@@ -219,9 +229,18 @@ export const heroStageFridgeClassName =
 export const heroStageScanFrameClassName =
   "pointer-events-none absolute inset-0 z-[5] overflow-hidden rounded-3xl";
 
-/** Bubble merge + cooking beat focal point (42% of the 400px band). */
-export const heroBubbleMergePositionClassName = "left-1/2 top-[42%]";
+/**
+ * Meeting point for the ingredient cards.
+ * Desktop: 12px into the fridge, centered on the 400px fridge.
+ * Phone: just above the fridge, in the gap under the store badges.
+ */
+export const heroRecipeAnchorClassName =
+  "-translate-x-1/2 max-md:left-1/2 max-md:top-0 max-md:-translate-y-[calc((clamp(6.75rem,40vw,12rem)*136/192/2)+8px)] md:left-[calc(100%-200px)] md:top-0 md:translate-y-[12px]";
 
-/** Centered anchor at the merge point (logo + copy). */
+/**
+ * Recipe photo.
+ * Desktop: overlaps the fridge top by 12px.
+ * Phone: sits between the store badges and the fridge (8px above the fridge).
+ */
 export const heroBubbleMergeFocalClassName =
-  `${heroBubbleMergePositionClassName} -translate-x-1/2 -translate-y-1/2`;
+  "-translate-x-1/2 max-md:left-1/2 max-md:top-0 max-md:-translate-y-[calc(100%+8px)] md:left-[calc(100%-200px)] md:top-0 md:-translate-y-[calc(100%-12px)]";

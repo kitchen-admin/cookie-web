@@ -71,18 +71,11 @@ export function Navbar() {
         >
           <Image
             src={siteImages.logoMark}
-            alt=""
-            width={37}
+            alt="Cookie"
+            width={188}
             height={40}
             priority
-            className="h-10 w-[37px] object-contain"
-          />
-          <img
-            src={siteImages.logoWordmark}
-            alt="Cookie"
-            width={150}
-            height={23}
-            className="h-[23px] w-auto object-contain object-left"
+            className="h-10 w-auto object-contain object-left"
           />
         </Link>
 

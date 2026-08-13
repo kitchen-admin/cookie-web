@@ -1,10 +1,11 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { motion } from "motion/react";
 
-import { NumberTicker } from "@/components/ui/number-ticker";
+import { ImessageBubble } from "@/components/ui/imessage-bubble";
 import { SiteImage } from "@/components/ui/site-image";
-import { heroBubbleMergePositionClassName } from "@/config/layout";
+import { HERO_BUBBLE_MERGE_MS } from "@/config/hero-load-sequence";
 import { cn } from "@/lib/utils";
 
 export type FloatingCardProps = {
@@ -19,8 +20,10 @@ export type FloatingCardProps = {
   positionClassName?: string;
   /** Controlled by fridge scan animation; when false, card stays hidden. */
   visible?: boolean;
-  /** After scan: scattered around fridge, or merging to center while fading out. */
+  /** After scan: sit on the left, or fly to the recipe spot and dissolve. */
   layoutPhase?: "scattered" | "merging";
+  /** Invisible point on the fridge — cards travel here, then fade. */
+  mergeAnchorRef?: RefObject<HTMLElement | null>;
 };
 
 export function FloatingCard({
@@ -33,20 +36,38 @@ export function FloatingCard({
   positionClassName,
   visible = true,
   layoutPhase = "scattered",
+  mergeAnchorRef,
 }: FloatingCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mergeTo, setMergeTo] = useState<{ x: number; y: number } | null>(
+    null
+  );
   const isScattered = layoutPhase === "scattered";
   const isMerging = layoutPhase === "merging";
+  const mergeMs = HERO_BUBBLE_MERGE_MS / 1000;
+
+  useLayoutEffect(() => {
+    if (!isMerging) {
+      setMergeTo(null);
+      return;
+    }
+
+    const card = cardRef.current?.getBoundingClientRect();
+    const anchor = mergeAnchorRef?.current?.getBoundingClientRect();
+    if (!card || !anchor) return;
+
+    // Move this card’s center to the recipe meeting point on the fridge.
+    setMergeTo({
+      x: anchor.left - (card.left + card.width / 2),
+      y: anchor.top - (card.top + card.height / 2),
+    });
+  }, [isMerging, mergeAnchorRef]);
 
   return (
     <motion.div
-      layout
-      className={cn(
-        "absolute z-30",
-        isScattered && positionClassName,
-        isMerging && heroBubbleMergePositionClassName,
-        className
-      )}
-      initial={{ opacity: 0, scale: 0.94 }}
+      ref={cardRef}
+      className={cn("absolute z-30", positionClassName, className)}
+      initial={{ opacity: 0, scale: 0.94, filter: "blur(0px)" }}
       animate={
         isScattered
           ? {
@@ -54,16 +75,25 @@ export function FloatingCard({
               scale: visible ? 1 : 0.94,
               x: 0,
               y: 0,
+              filter: "blur(0px)",
             }
-          : {
-              x: "-50%",
-              y: "-50%",
-              opacity: 0,
-              scale: 0.8,
-            }
+          : mergeTo
+            ? {
+                x: mergeTo.x,
+                y: mergeTo.y,
+                opacity: 0,
+                scale: 0.88,
+                filter: "blur(8px)",
+              }
+            : {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                filter: "blur(0px)",
+              }
       }
       transition={{
-        duration: isScattered ? 0.35 : 0.55,
+        duration: isScattered ? 0.35 : mergeMs,
         ease: isMerging ? "easeIn" : "easeOut",
       }}
     >
@@ -78,36 +108,34 @@ export function FloatingCard({
               }
             : { duration: 0 }
         }
-        className={cn(
-          "flex max-w-[200px] items-center gap-[8px] rounded-2xl p-2",
-          "max-md:max-w-[9.5rem] max-md:gap-1.5 max-md:p-1.5",
-          side === "left" && "rounded-br-none",
-          side === "right" && "rounded-bl-none",
-          "bg-(--primitive-base-white)"
-        )}
+        className="max-w-[200px] max-md:w-[clamp(8.25rem,52vw,12.5rem)] max-md:max-w-[85%]"
       >
-        <SiteImage
-          src={imageUrl}
-          alt=""
-          width={40}
-          height={40}
-          className="size-10 shrink-0 rounded-full"
-          placeholderClassName="rounded-full"
-        />
-        <p className="type-body-sm-regular max-md:type-label-md-regular text-left text-(--text-primary-black)">
-          <span className="type-body-sm-semibold max-md:type-label-md-medium">
-            {name}
-          </span>{" "}
-          will be{" "}
-          <span className="type-body-sm-medium max-md:type-label-md-medium text-text-brand-primary">
-            going bad in{" "}
-            <NumberTicker
-              value={days}
-              className="text-text-brand-primary"
-            />{" "}
-            days
-          </span>
-        </p>
+        <ImessageBubble>
+          <div
+            className={cn(
+              "flex items-center gap-[8px] bg-(--primitive-base-white) px-3 py-2",
+              "max-md:gap-[clamp(0.35rem,1.8vw,0.5rem)] max-md:px-[clamp(0.5rem,2.2vw,0.75rem)] max-md:py-[clamp(0.3rem,1.4vw,0.45rem)]"
+            )}
+          >
+            <SiteImage
+              src={imageUrl}
+              alt=""
+              width={40}
+              height={40}
+              className="size-10 shrink-0 rounded-full max-md:size-[clamp(1.75rem,8.5vw,2.5rem)]"
+              placeholderClassName="rounded-full"
+            />
+            <p className="type-body-sm-regular max-md:type-label-md-regular text-left text-(--text-primary-black)">
+              <span className="type-body-sm-semibold max-md:type-label-md-medium">
+                {name}
+              </span>{" "}
+              will be{" "}
+              <span className="type-body-sm-medium max-md:type-label-md-medium text-text-brand-primary">
+                going bad in {days} days
+              </span>
+            </p>
+          </div>
+        </ImessageBubble>
       </motion.div>
     </motion.div>
   );

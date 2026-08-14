@@ -417,25 +417,26 @@
       line-height: 2.125rem; /* 34px */
     }
 
-    .type-display-hero {
-      font-size: 2rem; /* 32px — keep the hero headline from crowding the fridge */
-    }
-
-    /* Section titles must read larger than the orange subtext (20px). */
+    .type-display-hero,
     .type-display-section {
-      font-size: 2.5rem; /* 40px */
+      font-size: 2.25rem; /* 36px */
     }
 
     .type-display-footer {
-      font-size: 1.75rem; /* 28px */
+      font-size: 2.25rem; /* 36px */
     }
 
-    .type-display-xs-regular,
-    .type-display-xs-medium,
     .type-display-xs-semibold,
     .type-display-xs-bold {
-      font-size: 1.25rem; /* 20px */
+      font-size: 1.25rem; /* 20px — card titles stay a step above body copy */
       line-height: 1.75rem; /* 28px */
+    }
+
+    /* Section subtext under the big titles (hero, recipes). */
+    .type-display-xs-regular,
+    .type-display-xs-medium {
+      font-size: 1rem; /* 16px */
+      line-height: 1.5rem; /* 24px */
     }
   }
 }

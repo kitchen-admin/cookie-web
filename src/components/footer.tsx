@@ -28,32 +28,32 @@ export function Footer() {
       <div className="-mt-px bg-(--surface-footer)">
         <div className="mx-auto flex min-h-[380px] w-full max-w-[1280px] flex-col justify-end px-6 pb-10 pt-12 md:px-20">
           <div className="flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between">
-            <div className="flex max-w-[534px] flex-col gap-2">
-              <h2 className="type-display-footer text-(--text-on-maroon)">
+            <div className="flex max-w-[534px] flex-col gap-2 max-md:mx-auto max-md:items-center max-md:text-center">
+              <h2 className="type-display-footer text-center text-(--text-on-maroon) md:text-left">
                 {headingLine1}
                 <br />
                 {headingLine2}
               </h2>
-              <AppStoreBadges className="mt-2" />
+              <AppStoreBadges className="mt-2 justify-center md:justify-start" />
               <p className="type-body-sm-regular mt-2 text-(--text-on-maroon)">
                 {FOOTER_COPYRIGHT}
               </p>
             </div>
 
-            <div className="flex w-full max-w-[144px] flex-col items-start gap-4 md:items-end">
-              <nav className="flex w-full flex-col gap-4 md:items-end">
+            <div className="flex w-full max-w-[144px] flex-col items-center gap-4 max-md:mx-auto md:items-end">
+              <nav className="flex w-full flex-col items-center gap-4 md:items-end">
                 {FOOTER_NAV_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={(event) => handleHashNavClick(event, link.href)}
-                    className="type-body-md-semibold w-full text-left text-(--text-on-maroon) md:text-right"
+                    className="type-body-md-semibold w-full text-center text-(--text-on-maroon) md:text-right"
                   >
                     {link.label}
                   </Link>
                 ))}
               </nav>
-              <SocialLinks className="md:justify-end" />
+              <SocialLinks className="justify-center md:justify-end" />
             </div>
           </div>
         </div>

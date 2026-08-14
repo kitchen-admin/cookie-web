@@ -18,7 +18,7 @@ export function AppStoreBadges({ className }: AppStoreBadgesProps) {
   return (
     <div
       className={cn(
-        "flex h-auto min-h-[52px] w-auto max-w-full flex-wrap items-center justify-center gap-3 sm:justify-start sm:gap-4",
+        "flex h-auto min-h-[52px] w-auto max-w-full flex-wrap items-center justify-center gap-3 md:justify-start md:gap-4",
         className
       )}
     >

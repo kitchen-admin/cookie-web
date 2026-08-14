@@ -18,7 +18,10 @@ import {
   HERO_RECIPE_HOLD_MS,
   HERO_RECIPE_OVERLAP_MS,
 } from "@/config/hero-load-sequence";
-import { HERO_SCAN_LOOPS } from "@/config/hero-scan-loops";
+import {
+  HERO_MOBILE_SCAN_INGREDIENT_COUNT,
+  HERO_SCAN_LOOPS,
+} from "@/config/hero-scan-loops";
 import {
   heroBubbleMergeFocalClassName,
   heroInteractionBoxClassName,
@@ -41,6 +44,33 @@ const SCAN_BOTTOM = "88%";
 
 /** Tiny gap so the two cards on one swipe don’t pop at the same instant. */
 const PAIR_STAGGER_MS = 100;
+
+/** Matches Tailwind `md` — phones are anything narrower than 768px. */
+const PHONE_MEDIA = "(max-width: 767px)";
+
+function isPhoneViewport() {
+  return window.matchMedia(PHONE_MEDIA).matches;
+}
+
+function useIsPhone() {
+  const [isPhone, setIsPhone] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(PHONE_MEDIA);
+    const update = () => setIsPhone(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isPhone;
+}
+
+function detectCountForViewport(total: number) {
+  return isPhoneViewport()
+    ? Math.min(HERO_MOBILE_SCAN_INGREDIENT_COUNT, total)
+    : total;
+}
 
 const sleep = (ms: number) =>
   new Promise<void>((resolve) => {
@@ -74,14 +104,15 @@ function bubbleLayoutPhase(
 
 /**
  * Hero visual: scan never stops. Each swipe down finds the top two
- * ingredients, each swipe up finds the bottom two. Those four become a
- * recipe, it flies off, and the next set starts with no pause.
+ * ingredients. Swipe up finds the rest (two on desktop, one on phones).
+ * Those become a recipe, it flies off, and the next set starts with no pause.
  */
 export function FridgeScanStage({
   showFridge,
   startScan,
   boxClassName = heroInteractionBoxClassName,
 }: FridgeScanStageProps) {
+  const isPhone = useIsPhone();
   const barControls = useAnimation();
   const mergeAnchorRef = useRef<HTMLDivElement>(null);
   const scanStartedRef = useRef(false);
@@ -94,6 +125,9 @@ export function FridgeScanStage({
   );
 
   const loop = HERO_SCAN_LOOPS[loopIndex] ?? HERO_SCAN_LOOPS[0];
+  const ingredients = isPhone
+    ? loop.ingredients.slice(0, HERO_MOBILE_SCAN_INGREDIENT_COUNT)
+    : loop.ingredients;
   const showBubbles =
     phase === "scanning" ||
     phase === "mergingBubbles" ||
@@ -192,28 +226,33 @@ export function FridgeScanStage({
 
       while (!cancelled) {
         const current = HERO_SCAN_LOOPS[index];
+        const detectCount = detectCountForViewport(current.ingredients.length);
         setLoopIndex(index);
-        resetRevealed(current.ingredients.length);
+        resetRevealed(detectCount);
         setPhase("scanning");
         sweepWaitersRef.current = [];
         acceptDetectionsRef.current = true;
 
-        // Swipe down → only the top two.
+        // Swipe down → top two.
         await waitForDir("down", () => cancelled);
         if (cancelled) return;
         await revealPair(0, 1);
         if (cancelled) return;
 
-        // Swipe up → only the bottom two.
+        // Swipe up → last one on phones, last two on desktop.
         await waitForDir("up", () => cancelled);
         if (cancelled) return;
-        await revealPair(2, 3);
+        if (detectCount <= 3) {
+          revealAt(2);
+        } else {
+          await revealPair(2, 3);
+        }
         if (cancelled) return;
 
         // Stop listening so leftover swipes can’t dump the next set.
         acceptDetectionsRef.current = false;
 
-        // All four are out. Let them sit, then merge into the recipe.
+        // Cards are out. Let them sit, then merge into the recipe.
         await sleep(HERO_BUBBLE_HOLD_MS);
         if (cancelled) return;
 
@@ -302,7 +341,7 @@ export function FridgeScanStage({
           />
 
           {startScan && showBubbles
-            ? loop.ingredients.map((bubble, index) =>
+            ? ingredients.map((bubble, index) =>
                 revealed[index] ? (
                   <FloatingCard
                     key={`${loop.recipe.title}-${bubble.name}`}

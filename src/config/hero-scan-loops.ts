@@ -10,23 +10,24 @@ export type IngredientBubbleConfig = Omit<
 
 /**
  * All four messages sit on the left of the fridge, top to bottom.
- * Swipe down finds the top pair; swipe up finds the bottom pair.
+ * Phones only show the first three, spaced a little more openly.
+ * Swipe down finds the top pair; swipe up finds the rest.
  */
 const BUBBLE_SLOTS = {
   left1: {
     side: "left" as const,
     positionClassName:
-      "right-[392px] top-[4%] max-md:right-auto max-md:left-[2%] max-md:top-[6%]",
+      "right-[392px] top-[4%] max-md:right-auto max-md:left-[2%] max-md:top-[8%]",
   },
   left2: {
     side: "left" as const,
     positionClassName:
-      "right-[392px] top-[28%] max-md:right-auto max-md:left-[2%] max-md:top-[28%]",
+      "right-[392px] top-[28%] max-md:right-auto max-md:left-[2%] max-md:top-[36%]",
   },
   left3: {
     side: "left" as const,
     positionClassName:
-      "right-[392px] top-[52%] max-md:right-auto max-md:left-[2%] max-md:top-[50%]",
+      "right-[392px] top-[52%] max-md:right-auto max-md:left-[2%] max-md:top-[64%]",
   },
   left4: {
     side: "left" as const,
@@ -34,6 +35,9 @@ const BUBBLE_SLOTS = {
       "right-[392px] top-[76%] max-md:right-auto max-md:left-[2%] max-md:top-[72%]",
   },
 };
+
+/** Phones only pop this many “going bad” cards per scan. Desktop still uses all four. */
+export const HERO_MOBILE_SCAN_INGREDIENT_COUNT = 3;
 
 export type HeroScanLoop = {
   /** Four “going bad” ingredients for this scan. */

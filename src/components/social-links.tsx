@@ -7,10 +7,10 @@ type SocialLinksProps = {
   className?: string;
 };
 
-/** Footer social icons (24px, 12px gap). */
+/** Footer social icons — 20px on phones, 24px from tablet up. */
 export function SocialLinks({ className }: SocialLinksProps) {
   return (
-    <div className={cn("flex items-center gap-3", className)}>
+    <div className={cn("flex items-center gap-5", className)}>
       {SOCIAL_LINKS.map((link) => (
         <a
           key={link.name}
@@ -18,7 +18,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.name}
-          className="flex size-6 items-center justify-center"
+          className="flex size-5 items-center justify-center md:size-6"
         >
           <Image
             src={link.iconSrc}

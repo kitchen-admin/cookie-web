@@ -12,7 +12,6 @@ import {
   RECIPES_PHONE_WIDTH_PX,
   recipesPhoneBorderDesktopClassName,
   recipesPhoneBorderMobileClassName,
-  recipesPhoneMobileSizeClassName,
   recipesSectionPaddingClassName,
   sectionHeaderClassName,
   wideSectionContentClassName,
@@ -80,42 +79,39 @@ export function Recipes() {
             ))}
           </div>
 
-          {/* Mobile / tablet: stacked layout */}
-          <div className="flex flex-col items-center lg:hidden">
-            <SiteImage
-              src={siteImages.recipesPhoneMockup}
-              alt="Cookie app on a phone showing recipe suggestions"
-              width={RECIPES_PHONE_WIDTH_PX}
-              height={RECIPES_PHONE_HEIGHT_PX}
-              className={cn(
-                "aspect-[400/727] w-full max-w-[320px] rounded-t-[40px] object-cover object-top",
-                recipesPhoneMobileSizeClassName,
-                recipesPhoneBorderMobileClassName
-              )}
-              placeholderClassName="rounded-t-[40px] bg-(--primitive-brand-100)"
-            />
+          {/* Phone / tablet: cards scroll behind the phone. Swipe anywhere. */}
+          <div className="relative w-full lg:hidden">
             <div
-              className="flex w-full flex-col"
-              style={{
-                marginTop: 24,
-                gap: 16,
-              }}
+              className={cn(
+                "absolute top-[42%] left-1/2 z-10 flex w-screen -translate-x-1/2 -translate-y-1/2 gap-4 overflow-x-auto px-4",
+                "snap-x snap-mandatory overscroll-x-contain",
+                "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              )}
+              aria-label="Recipe cards"
             >
-              {[0, 1].map((row) => (
-                <div key={row} className="flex w-full flex-col gap-4">
-                  {RECIPES_SHOWCASE.slice(row * 2, row * 2 + 2).map(
-                    (recipe, index) => (
-                      <HeroRecipeCard
-                        key={`${recipe.title}-mobile-${row * 2 + index}`}
-                        recipe={recipe}
-                        visible
-                        index={row * 2 + index}
-                        className="mx-auto"
-                      />
-                    )
-                  )}
-                </div>
+              {RECIPES_SHOWCASE.map((recipe, index) => (
+                <HeroRecipeCard
+                  key={`${recipe.title}-mobile-${index}`}
+                  recipe={recipe}
+                  visible
+                  index={index}
+                  className="snap-start shrink-0"
+                />
               ))}
+            </div>
+
+            <div className="pointer-events-none relative z-20 mx-auto w-full max-w-[320px] max-md:max-w-[280px]">
+              <SiteImage
+                src={siteImages.recipesPhoneMockup}
+                alt="Cookie app on a phone showing recipe suggestions"
+                width={RECIPES_PHONE_WIDTH_PX}
+                height={RECIPES_PHONE_HEIGHT_PX}
+                className={cn(
+                  "aspect-[400/727] w-full rounded-t-[40px] object-cover object-top",
+                  recipesPhoneBorderMobileClassName
+                )}
+                placeholderClassName="rounded-t-[40px] bg-(--primitive-brand-100)"
+              />
             </div>
           </div>
         </div>

@@ -7,8 +7,7 @@ export const FOOTER_COPYRIGHT =
 
 export const FOOTER_NAV_LINKS: NavHref[] = [
   ...NAV_ITEMS,
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Legal", href: "/legal" },
 ];
 
 export type SocialLink = {

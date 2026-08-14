@@ -17,6 +17,10 @@ const PANEL_OPEN_DURATION_S = 0.32;
 const PANEL_CLOSE_DURATION_S = 0.26;
 /** Pull answer panel up under the question card (covers border + removes visible gap). */
 const ANSWER_PANEL_OVERLAP_PX = 28;
+/** Inner padding on each FAQ question button. */
+const FAQ_QUESTION_PADDING_PX = 12;
+/** Pill shape — fully round ends on the FAQ question button. */
+const FAQ_QUESTION_RADIUS_PX = 9999;
 /** Extra space above answer copy after overlap with question card. */
 const ANSWER_PANEL_TOP_PADDING_CLASS = "pt-10";
 
@@ -72,10 +76,14 @@ function FaqAccordionItem({
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={answerPanelId}
-        className="relative z-2 flex w-full items-start gap-2 rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white) p-4 text-left transition-colors"
+        className="relative z-2 flex w-full items-start gap-2 bg-(--primitive-base-white) text-left transition-colors"
+        style={{
+          padding: FAQ_QUESTION_PADDING_PX,
+          borderRadius: FAQ_QUESTION_RADIUS_PX,
+        }}
       >
         {/* Match body-md line-height (24px) so the icon centers on the first line only. */}
-        <span className="flex h-[24px] shrink-0 items-center" aria-hidden>
+        <span className="flex h-6 shrink-0 items-center" aria-hidden>
           <ChevronRight
             className={cn(
               "size-5 text-(--text-primary-black) transition-transform duration-300 ease-out",
@@ -105,7 +113,7 @@ function FaqAccordionItem({
             animate={isOpen ? "open" : "closed"}
             variants={panelContentVariants}
             className={cn(
-              "relative z-1 rounded-b-2xl bg-(--surface-faq-panel) pl-12 pr-4 pb-3 max-md:pl-[46px]",
+              "relative z-1 rounded-b-2xl bg-(--surface-faq-panel) pl-12 pr-4 pb-3 max-md:pl-11.5",
               ANSWER_PANEL_TOP_PADDING_CLASS
             )}
           >

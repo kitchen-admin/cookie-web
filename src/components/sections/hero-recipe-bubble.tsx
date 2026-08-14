@@ -48,7 +48,7 @@ export function HeroRecipeBubble({ imageUrl }: HeroRecipeBubbleProps) {
   };
 
   return (
-    <div className="relative aspect-[192/136] w-[192px] max-md:w-[clamp(6.75rem,40vw,12rem)]">
+    <div className="relative aspect-192/136 w-48 max-md:w-[clamp(6.75rem,40vw,12rem)]">
       <svg
         aria-hidden
         className="pointer-events-none absolute top-0 left-0 size-0 overflow-visible"

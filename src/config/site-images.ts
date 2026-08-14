@@ -8,6 +8,9 @@
 export const siteImages = {
   /** Hero fridge scan (Figma 1502:4266). */
   fridge: "/hero/fridge.png",
+  /** Browser tab icon (chef-hat mark). */
+  favicon:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/brand-assets/logo_cookie.png",
   /** Navbar combined Cookie mark + wordmark. */
   logoMark:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/brand-assets/cookie_logo.png",

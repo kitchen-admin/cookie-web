@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Problem } from "@/components/sections/problem";
 
 export const metadata: Metadata = {
-  title: "About us — Cookie",
+  title: "About us",
   description:
     "The problem is not food. It is deciding. Cookie helps you turn what you have into meals you love.",
 };

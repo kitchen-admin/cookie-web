@@ -9,7 +9,7 @@ export const sectionContentClassName =
   "mx-auto w-full min-w-0 max-w-[800px] px-6";
 
 /** Overrides default max width for wide section inner content. */
-export const wideSectionContentClassName = "max-w-[1280px]";
+export const wideSectionContentClassName = "max-w-7xl";
 
 /** Non-hero sections: 56px vertical padding desktop, 40px on mobile. */
 export const sectionVerticalPaddingClassName = "py-14 max-md:py-10";
@@ -45,7 +45,7 @@ export const RECIPES_PHONE_HEIGHT_PX = 727;
 export const RECIPES_PHONE_MOBILE_WIDTH_PX = 280;
 
 export const recipesPhoneMobileSizeClassName =
-  "max-md:w-full max-md:max-w-[280px]";
+  "max-md:w-full max-md:max-w-70";
 
 /** Horizontal gap from phone edge to top-row recipe cards. */
 export const RECIPES_CARD_TOP_ROW_GAP_FROM_PHONE_PX = 56;
@@ -72,7 +72,7 @@ export const recipesPhoneBorderMobileClassName =
 /** FAQ accordion max width (Figma 720px). */
 export const FAQ_CONTENT_MAX_PX = 720;
 
-export const faqSectionContentClassName = "max-w-[720px]";
+export const faqSectionContentClassName = "max-w-180";
 
 /**
  * Launch Website hero (Figma 1502:4598) is 740px with a 360px fridge.

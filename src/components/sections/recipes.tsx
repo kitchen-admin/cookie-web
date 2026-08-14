@@ -35,17 +35,17 @@ export function Recipes() {
       <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
         <div className="flex flex-col items-center gap-1 text-center">
           <h2 className={sectionHeaderClassName}>
-            What’s in there is dinner
+            Never wonder what to cook again
           </h2>
           <p className="type-display-xs-medium text-text-brand-primary">
-            Before you open Swiggy again, ask Cookie!
+            Before you open a food delivery app, ask Cookie!
           </p>
           <AppStoreBadges className="mt-1" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-[1204px]">
+        <div className="relative mx-auto w-full max-w-301">
           {/* Desktop: phone center + floating cards */}
-          <div className="relative hidden min-h-[727px] lg:block">
+          <div className="relative hidden min-h-181.75 lg:block">
             <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2">
               <SiteImage
                 src={siteImages.recipesPhoneMockup}
@@ -85,7 +85,7 @@ export function Recipes() {
               className={cn(
                 "absolute top-[42%] left-1/2 z-10 flex w-screen -translate-x-1/2 -translate-y-1/2 gap-4 overflow-x-auto px-4",
                 "snap-x snap-mandatory overscroll-x-contain",
-                "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                "scrollbar-none"
               )}
               aria-label="Recipe cards"
             >
@@ -100,14 +100,14 @@ export function Recipes() {
               ))}
             </div>
 
-            <div className="pointer-events-none relative z-20 mx-auto w-full max-w-[320px] max-md:max-w-[280px]">
+            <div className="pointer-events-none relative z-20 mx-auto w-full max-w-80 max-md:max-w-70">
               <SiteImage
                 src={siteImages.recipesPhoneMockup}
                 alt="Cookie app on a phone showing recipe suggestions"
                 width={RECIPES_PHONE_WIDTH_PX}
                 height={RECIPES_PHONE_HEIGHT_PX}
                 className={cn(
-                  "aspect-[400/727] w-full rounded-t-[40px] object-cover object-top",
+                  "aspect-400/727 w-full rounded-t-[40px] object-cover object-top",
                   recipesPhoneBorderMobileClassName
                 )}
                 placeholderClassName="rounded-t-[40px] bg-(--primitive-brand-100)"

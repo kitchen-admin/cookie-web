@@ -108,12 +108,12 @@ export function FloatingCard({
               }
             : { duration: 0 }
         }
-        className="max-w-[200px] max-md:w-[clamp(8.25rem,52vw,12.5rem)] max-md:max-w-[85%]"
+        className="max-w-50 max-md:w-[clamp(8.25rem,52vw,12.5rem)] max-md:max-w-[85%]"
       >
         <ImessageBubble>
           <div
             className={cn(
-              "flex items-center gap-[8px] bg-(--primitive-base-white) px-3 py-2",
+              "flex items-center gap-2 bg-(--primitive-base-white) px-3 py-2",
               "max-md:gap-[clamp(0.35rem,1.8vw,0.5rem)] max-md:px-[clamp(0.5rem,2.2vw,0.75rem)] max-md:py-[clamp(0.3rem,1.4vw,0.45rem)]"
             )}
           >
@@ -125,12 +125,12 @@ export function FloatingCard({
               className="size-10 shrink-0 rounded-full max-md:size-[clamp(1.75rem,8.5vw,2.5rem)]"
               placeholderClassName="rounded-full"
             />
-            <p className="type-body-sm-regular max-md:type-label-md-regular text-left text-(--text-primary-black)">
-              <span className="type-body-sm-semibold max-md:type-label-md-medium">
+            <p className="type-body-sm-regular max-md:text-[12px] max-md:leading-4 text-left text-(--text-primary-black)">
+              <span className="type-body-sm-semibold max-md:text-[12px] max-md:leading-4">
                 {name}
               </span>{" "}
               will be{" "}
-              <span className="type-body-sm-medium max-md:type-label-md-medium text-text-brand-primary">
+              <span className="type-body-sm-medium max-md:text-[12px] max-md:leading-4 text-text-brand-primary">
                 going bad in {days} days
               </span>
             </p>

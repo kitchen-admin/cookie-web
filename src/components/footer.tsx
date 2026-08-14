@@ -26,9 +26,9 @@ export function Footer() {
     >
       <SectionWave fill="var(--surface-footer)" />
       <div className="-mt-px bg-(--surface-footer)">
-        <div className="mx-auto flex min-h-[380px] w-full max-w-[1280px] flex-col justify-end px-6 pb-10 pt-12 md:px-20">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-10 pt-10 md:px-20">
           <div className="flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between">
-            <div className="flex max-w-[534px] flex-col gap-2 max-md:mx-auto max-md:items-center max-md:text-center">
+            <div className="flex max-w-133.5 flex-col gap-2 max-md:mx-auto max-md:items-center max-md:text-center">
               <h2 className="type-display-footer text-center text-(--text-on-maroon) md:text-left">
                 {headingLine1}
                 <br />
@@ -40,7 +40,7 @@ export function Footer() {
               </p>
             </div>
 
-            <div className="flex w-full max-w-[144px] flex-col items-center gap-4 max-md:mx-auto md:items-end">
+            <div className="flex w-full max-w-36 flex-col items-center gap-4 max-md:mx-auto md:items-end">
               <nav className="flex w-full flex-col items-center gap-4 md:items-end">
                 {FOOTER_NAV_LINKS.map((link) => (
                   <Link

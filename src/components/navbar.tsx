@@ -51,7 +51,7 @@ export function Navbar() {
 
   return (
     <header className="absolute inset-x-0 top-10 z-50 flex flex-col items-center px-6 md:px-20">
-      <nav className="mx-auto flex h-10 w-full max-w-[1120px] items-center justify-between">
+      <nav className="mx-auto flex h-10 w-full max-w-280 items-center justify-between">
         <Link
           href="/"
           className="flex items-center gap-0.5"
@@ -100,7 +100,7 @@ export function Navbar() {
       {mobileOpen ? (
         <nav
           id="mobile-nav-menu"
-          className="mx-auto mt-2 w-full max-w-[1120px] rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white)/95 p-3 shadow-lg backdrop-blur-md sm:hidden"
+          className="mx-auto mt-2 w-full max-w-280 rounded-2xl border-2 border-(--primitive-black-8) bg-(--primitive-base-white)/95 p-3 shadow-lg backdrop-blur-md sm:hidden"
         >
           <NavLinks
             className="flex flex-col gap-1"

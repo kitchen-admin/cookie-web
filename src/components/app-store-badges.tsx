@@ -18,7 +18,7 @@ export function AppStoreBadges({ className }: AppStoreBadgesProps) {
   return (
     <div
       className={cn(
-        "flex h-auto min-h-[52px] w-auto max-w-full flex-wrap items-center justify-center gap-3 md:justify-start md:gap-4",
+        "flex h-auto min-h-13 w-auto max-w-full flex-wrap items-center justify-center gap-3 md:justify-start md:gap-4",
         className
       )}
     >
@@ -34,7 +34,7 @@ export function AppStoreBadges({ className }: AppStoreBadgesProps) {
           width={120}
           height={40}
           unoptimized
-          className="h-10 w-[120px] shrink-0"
+          className="h-10 w-30 shrink-0"
         />
       </a>
       <a
@@ -49,7 +49,7 @@ export function AppStoreBadges({ className }: AppStoreBadgesProps) {
           width={135}
           height={40}
           unoptimized
-          className="h-10 w-[135px] shrink-0"
+          className="h-10 w-33.75 shrink-0"
         />
       </a>
     </div>

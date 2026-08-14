@@ -223,6 +223,7 @@ export function FridgeScanStage({
 
     async function runLoops() {
       let index = 0;
+      let isFirstLoop = true;
 
       while (!cancelled) {
         const current = HERO_SCAN_LOOPS[index];
@@ -233,14 +234,22 @@ export function FridgeScanStage({
         sweepWaitersRef.current = [];
         acceptDetectionsRef.current = true;
 
-        // Swipe down → top two.
-        await waitForDir("down", () => cancelled);
-        if (cancelled) return;
+        if (isFirstLoop) {
+          // First loop: wait for the down swipe so the scan “finds” the cards.
+          await waitForDir("down", () => cancelled);
+          if (cancelled) return;
+        }
+
         await revealPair(0, 1);
         if (cancelled) return;
 
-        // Swipe up → last one on phones, last two on desktop.
-        await waitForDir("up", () => cancelled);
+        // Rest of the set: next swipe (up on the first loop, whichever comes
+        // next after that so we don’t sit on an empty fridge).
+        if (isFirstLoop) {
+          await waitForDir("up", () => cancelled);
+        } else {
+          await waitForSweep();
+        }
         if (cancelled) return;
         if (detectCount <= 3) {
           revealAt(2);
@@ -248,6 +257,7 @@ export function FridgeScanStage({
           await revealPair(2, 3);
         }
         if (cancelled) return;
+        isFirstLoop = false;
 
         // Stop listening so leftover swipes can’t dump the next set.
         acceptDetectionsRef.current = false;
@@ -324,7 +334,7 @@ export function FridgeScanStage({
                   className="absolute right-0 left-0"
                   aria-hidden
                 >
-                  <div className="h-[2px] bg-(--primitive-brand-500)/45 shadow-[0_0_8px_rgba(255,68,5,0.35)]" />
+                  <div className="h-0.5 bg-(--primitive-brand-500)/45 shadow-[0_0_8px_rgba(255,68,5,0.35)]" />
                   <div className="h-5 bg-linear-to-b from-(--primitive-brand-500)/18 via-(--primitive-brand-500)/8 to-transparent" />
                 </motion.div>
               </div>

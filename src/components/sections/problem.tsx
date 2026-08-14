@@ -26,7 +26,7 @@ export function Problem() {
       )}
     >
       <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
-        <h2 className={cn(sectionHeaderClassName, "max-w-[1113px] text-center")}>
+        <h2 className={cn(sectionHeaderClassName, "max-w-278.25 text-center")}>
           The problem is not food.{" "}
           <span className="text-text-brand-primary">It is deciding.</span>
         </h2>
@@ -48,8 +48,8 @@ export function Problem() {
                 alt=""
                 width={373}
                 height={PROBLEM_CARD_IMAGE_HEIGHT_PX}
-                className="w-full rounded-[40px] object-cover max-md:h-[260px]!"
-                placeholderClassName="w-full rounded-[40px] bg-(--primitive-brand-50) blur-sm max-md:h-[260px]!"
+                className="w-full rounded-[40px] object-cover max-md:h-65!"
+                placeholderClassName="w-full rounded-[40px] bg-(--primitive-brand-50) blur-sm max-md:h-65!"
                 style={{ height: PROBLEM_CARD_IMAGE_HEIGHT_PX }}
               />
               <div className="flex flex-col gap-0.5">

@@ -32,7 +32,7 @@ export function Hero() {
         heroSectionMinHeightClassName
       )}
       contentClassName={cn(
-        "flex min-h-full flex-1 flex-col px-6 pb-10 md:px-20 lg:max-w-[1280px] lg:pb-14",
+        "flex min-h-full flex-1 flex-col px-6 pb-10 md:px-20 lg:max-w-7xl lg:pb-14",
         "max-md:h-full max-md:min-h-0 max-md:pb-0",
         heroCopyPaddingTopClassName
       )}
@@ -56,7 +56,7 @@ export function Hero() {
         aria-hidden={!showHeroContent}
       >
         {/* Top-left: headline, subtext, store badges (Figma Frame 7). */}
-        <div className="relative z-20 flex w-full max-w-[507px] shrink-0 flex-col items-start gap-2 text-left max-md:items-center max-md:text-center lg:absolute lg:top-0 lg:left-0">
+        <div className="relative z-20 flex w-full max-w-126.75 shrink-0 flex-col items-start gap-2 text-left max-md:items-center max-md:text-center lg:absolute lg:top-0 lg:left-0">
           <h1 className="type-display-hero text-(--text-display)">
             Fridge is full,
             <br />

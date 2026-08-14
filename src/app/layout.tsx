@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
+import { siteImages } from "@/config/site-images";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -25,9 +26,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cookie — Know what to cook",
+  title: {
+    default: "Cookie",
+    template: "Cookie: %s",
+  },
   description:
     "Cookie turns the ingredients you already have into meals you actually love to eat.",
+  icons: {
+    icon: [{ url: siteImages.favicon, type: "image/png" }],
+    apple: siteImages.favicon,
+  },
 };
 
 export default function RootLayout({

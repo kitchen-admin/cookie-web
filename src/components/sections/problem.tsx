@@ -1,16 +1,14 @@
 "use client";
 
 import { Section } from "@/components/sections/section";
-import { SiteImage } from "@/components/ui/site-image";
+import { ABOUT_COPY } from "@/config/about";
 import {
-  PROBLEM_CARD_IMAGE_HEIGHT_PX,
-  problemCardGridGapClassName,
+  faqSectionContentClassName,
   problemSectionPaddingClassName,
   sectionHeaderClassName,
   sectionVerticalPaddingClassName,
   wideSectionContentClassName,
 } from "@/config/layout";
-import { PROBLEM_CARDS } from "@/config/problem-cards";
 import { cn } from "@/lib/utils";
 
 export function Problem() {
@@ -25,43 +23,38 @@ export function Problem() {
         problemSectionPaddingClassName
       )}
     >
-      <div className="flex w-full flex-col items-center gap-14 max-md:gap-10">
-        <h2 className={cn(sectionHeaderClassName, "max-w-278.25 text-center")}>
-          The problem is not food.{" "}
-          <span className="text-text-brand-primary">It is deciding.</span>
+      <div
+        className={cn(
+          "mx-auto flex w-full flex-col items-center text-center",
+          faqSectionContentClassName
+        )}
+      >
+        <h2 className={sectionHeaderClassName}>
+          {ABOUT_COPY.headlineBefore}
+          <span className="text-text-brand-primary">
+            {ABOUT_COPY.headlineAccent}
+          </span>
         </h2>
 
-        <div
-          className={cn(
-            "grid w-full grid-cols-1 md:grid-cols-3",
-            problemCardGridGapClassName,
-            "max-md:gap-10"
-          )}
-        >
-          {PROBLEM_CARDS.map((card) => (
-            <article
-              key={card.title}
-              className="flex flex-col items-center gap-6 text-center"
-            >
-              <SiteImage
-                src={card.imageUrl}
-                alt=""
-                width={373}
-                height={PROBLEM_CARD_IMAGE_HEIGHT_PX}
-                className="w-full rounded-[40px] object-cover max-md:h-65!"
-                placeholderClassName="w-full rounded-[40px] bg-(--primitive-brand-50) blur-sm max-md:h-65!"
-                style={{ height: PROBLEM_CARD_IMAGE_HEIGHT_PX }}
-              />
-              <div className="flex flex-col gap-0.5">
-                <h3 className="type-display-xs-semibold text-(--text-primary-black)">
-                  {card.title}
-                </h3>
-                <p className="type-body-lg-regular text-(--text-tertiary-black)">
-                  {card.description}
-                </p>
-              </div>
-            </article>
-          ))}
+        <div className="mt-10 flex flex-col items-center gap-6 max-md:mt-8">
+          <p className="type-body-lg-regular text-(--text-tertiary-black)">
+            {ABOUT_COPY.lead}
+          </p>
+          <p className="type-display-xs-semibold text-(--text-primary-black)">
+            {ABOUT_COPY.question}
+          </p>
+          <p className="type-body-lg-regular text-(--text-tertiary-black)">
+            {ABOUT_COPY.body}
+          </p>
+          <p className="type-display-xs-semibold text-(--text-primary-black)">
+            {ABOUT_COPY.why}
+          </p>
+          <p className="type-body-lg-regular text-(--text-tertiary-black)">
+            {ABOUT_COPY.product}
+          </p>
+          <p className="type-display-xs-medium text-text-brand-primary">
+            {ABOUT_COPY.closer}
+          </p>
         </div>
       </div>
     </Section>

@@ -76,10 +76,6 @@ export const siteImages = {
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/recipes/spinach-broad-bean-shakshuka.png",
   recipeSpinachEggMuffins:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/recipes/spinach-egg-muffins.png",
-  /** Problem / about section card illustrations */
-  problemLunchbox: "",
-  problemPantry: "",
-  problemHealthy: "",
   /** Recipes section: app screenshot shown inside the CSS phone frame. */
   recipesPhoneMockup:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/mock_home_screen.png",

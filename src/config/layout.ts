@@ -62,12 +62,50 @@ export const RECIPES_CARD_ROW_GAP_PX = 40;
  */
 export const recipesSectionPaddingClassName = "pt-14 pb-0 max-md:pt-10 max-md:pb-0";
 
-/** Phone mockup frame — top + sides only (Figma has no bottom bezel). */
-export const recipesPhoneBorderDesktopClassName =
-  "border-t-10 border-x-10 border-b-0 border-(--primitive-base-black)";
+/** Phone mockup frame — top + sides only (no bottom bezel; bleeds off the section). */
+export const recipesPhoneFrameClassName =
+  "rounded-t-[40px] bg-(--primitive-base-black) lg:rounded-t-[56px]";
 
-export const recipesPhoneBorderMobileClassName =
-  "border-t-8 border-x-8 border-b-0 border-(--primitive-base-black)";
+/** Black bezel drawn on top of the screen so cards can tuck underneath. */
+export const recipesPhoneBezelClassName =
+  "rounded-t-[40px] border-t-8 border-x-8 border-b-0 border-(--primitive-base-black) lg:rounded-t-[56px] lg:border-t-10 lg:border-x-10";
+
+/** Inner screenshot corners, slightly tighter than the outer shell. */
+export const recipesPhoneScreenClassName =
+  "rounded-t-[32px] lg:rounded-t-[46px]";
+
+/**
+ * Vertical start of the recipe-card track, as a % of the phone height.
+ * Sits in the empty “Top choice right now” band on the mock (~15–45% of the
+ * screenshot, plus the CSS bezel).
+ */
+export const recipesCardTrackTopClassName = "top-[16%] translate-y-4";
+
+/** Gap from the inner bezel edge to the recipe card on each side. */
+export const RECIPES_CARD_INSET_PX = 8;
+
+/** Recipe card width on the phone mock (capped so it still fits smaller phones). */
+export const RECIPES_CARD_WIDTH_PX = 340;
+
+/** Coverflow: 1 step away from the phone, then 2 steps away. */
+export const RECIPES_CARD_SCALE_NEAR = 0.9;
+export const RECIPES_CARD_SCALE_FAR = 0.7;
+
+/**
+ * Cards this many steps from the phone stay fully sharp
+ * (2 left + 1 in the frame + 2 right = 5 visible cards).
+ */
+export const RECIPES_CARD_SHARP_DISTANCE = 2;
+
+/** Below this card width, showcase titles and badges shrink for small phones. */
+export const RECIPES_CARD_COMPACT_BELOW_PX = 320;
+
+/** Side bezel thickness — matches `recipesPhoneBezelClassName`. */
+export const RECIPES_PHONE_BEZEL_PX = 8;
+export const RECIPES_PHONE_BEZEL_DESKTOP_PX = 10;
+
+/** How long a card sits on the phone before the next one slides in. */
+export const RECIPES_CARD_AUTO_ADVANCE_MS = 3200;
 
 /** FAQ accordion max width (Figma 720px). */
 export const FAQ_CONTENT_MAX_PX = 720;
@@ -178,7 +216,7 @@ export const howItWorksInteractionBoxClassName =
 
 /**
  * Phones: a square fridge sits at the bottom of the leftover hero space.
- * Recipe paints above that square (between the store badges and the fridge).
+ * The recipe photo appears in the middle of that fridge square.
  */
 export const heroMobileStageClipClassName =
   "max-md:relative max-md:mx-auto max-md:aspect-square max-md:w-full max-md:max-h-full max-md:overflow-visible md:contents";
@@ -232,15 +270,15 @@ export const heroStageScanFrameClassName =
 /**
  * Meeting point for the ingredient cards.
  * Desktop: 12px into the fridge, centered on the 400px fridge.
- * Phone: just above the fridge, in the gap under the store badges.
+ * Phone: dead center of the fridge square.
  */
 export const heroRecipeAnchorClassName =
-  "-translate-x-1/2 max-md:left-1/2 max-md:top-0 max-md:-translate-y-[calc((clamp(6.75rem,40vw,12rem)*136/192/2)+8px)] md:left-[calc(100%-200px)] md:top-0 md:translate-y-[12px]";
+  "-translate-x-1/2 max-md:top-1/2 max-md:left-1/2 max-md:-translate-y-1/2 md:left-[calc(100%-200px)] md:top-0 md:translate-y-[12px]";
 
 /**
  * Recipe photo.
  * Desktop: overlaps the fridge top by 12px.
- * Phone: sits between the store badges and the fridge (8px above the fridge).
+ * Phone: centered on the fridge image.
  */
 export const heroBubbleMergeFocalClassName =
-  "-translate-x-1/2 max-md:left-1/2 max-md:top-0 max-md:-translate-y-[calc(100%+8px)] md:left-[calc(100%-200px)] md:top-0 md:-translate-y-[calc(100%-12px)]";
+  "-translate-x-1/2 max-md:top-1/2 max-md:left-1/2 max-md:-translate-y-1/2 md:left-[calc(100%-200px)] md:top-0 md:-translate-y-[calc(100%-12px)]";

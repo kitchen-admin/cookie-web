@@ -80,8 +80,9 @@ export const siteImages = {
   problemLunchbox: "",
   problemPantry: "",
   problemHealthy: "",
-  /** Recipes section: phone mockup (Figma 1502:4293) */
-  recipesPhoneMockup: "/recipes/phone-mockup.png",
+  /** Recipes section: app screenshot shown inside the CSS phone frame. */
+  recipesPhoneMockup:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/mock_home_screen.png",
   /** Recipes section: floating card photos — TEMP placeholders */
   recipeAvocadoToast: "/figma-placeholders/recipes/breakfast-avocado-toast.png",
   recipeSoyaStroganoff: "/figma-placeholders/recipes/lunch-soya-stroganoff.png",

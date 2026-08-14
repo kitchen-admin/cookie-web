@@ -42,25 +42,60 @@ type HeroRecipeCardProps = {
   /** Left → right: 0 = first card, 1 = second (tiny delay only). */
   index: number;
   className?: string;
+  /** Defaults to the hero card width. Recipes carousel passes a phone-based size. */
+  width?: number;
+  /** Defaults to the hero image height. Grow this with `width` to keep the photo ratio. */
+  imageHeight?: number;
+  /**
+   * `showcase` = recipes-section card: no white shell, bigger semibold title,
+   * tighter photo + title so the card sits in the phone’s peach band.
+   */
+  variant?: "hero" | "showcase";
+  /** Smaller type and badges when the phone (and card) is narrow. */
+  compact?: boolean;
 };
+
+/** Equilateral non-veg mark with rounded corners (FSSAI-style triangle). */
+function NonVegTriangle({ px }: { px: number }) {
+  return (
+    <svg
+      width={px}
+      height={px}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+    >
+      <polygon
+        points="12,4.5 20,18.356 4,18.356"
+        fill="var(--primitive-danger-600)"
+        stroke="var(--primitive-danger-600)"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 function DietBadge({
   diet,
   className,
+  large = false,
 }: {
   diet: HeroRecipeDiet;
   className?: string;
+  large?: boolean;
 }) {
   const isVeg = diet === "veg";
-  const badgeBorderPx = Math.max(1, Math.round(1.5 * 0.8));
+  const k = large ? 1.35 : 1;
+  const badgeBorderPx = Math.max(1, Math.round(1.5 * 0.8 * k));
 
   return (
     <div
       className={cn("flex shrink-0 items-center justify-center bg-(--primitive-base-white)", className)}
       style={{
-        width: HERO_RECIPE_CARD_DIET_BADGE_PX,
-        height: HERO_RECIPE_CARD_DIET_BADGE_PX,
-        borderRadius: HERO_RECIPE_CARD_DIET_BADGE_RADIUS_PX,
+        width: Math.round(HERO_RECIPE_CARD_DIET_BADGE_PX * k),
+        height: Math.round(HERO_RECIPE_CARD_DIET_BADGE_PX * k),
+        borderRadius: Math.round(HERO_RECIPE_CARD_DIET_BADGE_RADIUS_PX * k),
         borderWidth: badgeBorderPx,
         borderStyle: "solid",
         borderColor: isVeg
@@ -73,20 +108,12 @@ function DietBadge({
         <span
           className="rounded-full bg-(--primitive-success-600)"
           style={{
-            width: HERO_RECIPE_CARD_DIET_DOT_PX,
-            height: HERO_RECIPE_CARD_DIET_DOT_PX,
+            width: Math.round(HERO_RECIPE_CARD_DIET_DOT_PX * k),
+            height: Math.round(HERO_RECIPE_CARD_DIET_DOT_PX * k),
           }}
         />
       ) : (
-        <span
-          className="size-0 border-x-transparent border-b-(--primitive-danger-600)"
-          style={{
-            borderLeftWidth: Math.round(4 * 0.8),
-            borderRightWidth: Math.round(4 * 0.8),
-            borderBottomWidth: Math.round(7 * 0.8),
-            marginTop: 1,
-          }}
-        />
+        <NonVegTriangle px={Math.round(HERO_RECIPE_CARD_DIET_DOT_PX * k * 1.5)} />
       )}
     </div>
   );
@@ -95,25 +122,38 @@ function DietBadge({
 function MetaPill({
   icon: Icon,
   label,
+  large = false,
 }: {
   icon: LucideIcon;
   label: string;
+  large?: boolean;
 }) {
+  const k = large ? 1.35 : 1;
+  const iconPx = Math.round(HERO_RECIPE_CARD_META_ICON_PX * k);
+
   return (
     <div
-      className="flex shrink-0 items-center gap-1 rounded-full bg-(--primitive-black-20) py-0.5 backdrop-blur-[20px]"
-      style={{ paddingInline: HERO_RECIPE_CARD_META_PADDING_X_PX }}
+      className={cn(
+        "flex shrink-0 items-center rounded-full bg-(--primitive-black-20) backdrop-blur-[20px]",
+        large ? "gap-1.5 py-1" : "gap-1 py-0.5"
+      )}
+      style={{ paddingInline: Math.round(HERO_RECIPE_CARD_META_PADDING_X_PX * k) }}
     >
       <Icon
         className="shrink-0 text-(--primitive-white-90)"
         style={{
-          width: HERO_RECIPE_CARD_META_ICON_PX,
-          height: HERO_RECIPE_CARD_META_ICON_PX,
+          width: iconPx,
+          height: iconPx,
         }}
         strokeWidth={2}
         aria-hidden
       />
-      <span className="type-label-sm-medium whitespace-nowrap text-(--text-primary-white)">
+      <span
+        className={cn(
+          "whitespace-nowrap text-(--text-primary-white)",
+          large ? "type-label-md-medium" : "type-label-sm-medium"
+        )}
+      >
         {label}
       </span>
     </div>
@@ -126,10 +166,23 @@ export function HeroRecipeCard({
   visible,
   index,
   className,
+  width = HERO_RECIPE_CARD_WIDTH_PX,
+  imageHeight = HERO_RECIPE_CARD_IMAGE_HEIGHT_PX,
+  variant = "hero",
+  compact = false,
 }: HeroRecipeCardProps) {
+  const isShowcase = variant === "showcase";
+  const largeMeta = isShowcase && !compact;
+  const titleClass = !isShowcase
+    ? "type-body-sm-medium"
+    : compact
+      ? "type-body-sm-semibold"
+      : "type-body-lg-semibold";
+  const footerPad = compact ? 8 : 12;
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 4 }}
+      initial={isShowcase ? false : { opacity: 0, y: 4 }}
       animate={{
         opacity: visible ? 1 : 0,
         y: visible ? 0 : 4,
@@ -140,22 +193,27 @@ export function HeroRecipeCard({
         ease: "easeInOut",
       }}
       className={cn(
-        "flex shrink-0 flex-col overflow-hidden bg-(--primitive-base-white)",
+        "flex shrink-0 flex-col",
+        isShowcase
+          ? "bg-transparent"
+          : "overflow-hidden bg-(--primitive-base-white)",
         !visible && "pointer-events-none",
         className
       )}
       style={{
-        width: HERO_RECIPE_CARD_WIDTH_PX,
+        width,
         borderRadius: HERO_RECIPE_CARD_RADIUS_PX,
       }}
       aria-hidden={!visible}
     >
       {/* Image + overlay meta */}
       <div
-        className="relative flex shrink-0 flex-col gap-2 overflow-hidden"
+        className="relative z-20 flex shrink-0 flex-col gap-2 overflow-hidden"
         style={{
-          height: HERO_RECIPE_CARD_IMAGE_HEIGHT_PX,
-          marginBottom: -HERO_RECIPE_CARD_IMAGE_OVERLAP_PX,
+          height: imageHeight,
+          marginBottom: isShowcase
+            ? -HERO_RECIPE_CARD_RADIUS_PX
+            : -HERO_RECIPE_CARD_IMAGE_OVERLAP_PX,
           padding: HERO_RECIPE_CARD_IMAGE_PADDING_PX,
           borderRadius: HERO_RECIPE_CARD_RADIUS_PX,
         }}
@@ -163,8 +221,8 @@ export function HeroRecipeCard({
         <SiteImage
           src={recipe.imageUrl}
           alt=""
-          width={HERO_RECIPE_CARD_WIDTH_PX}
-          height={HERO_RECIPE_CARD_IMAGE_HEIGHT_PX}
+          width={width}
+          height={imageHeight}
           className="absolute inset-0 size-full object-cover"
           placeholderClassName="absolute inset-0 size-full rounded-[13px]"
         />
@@ -193,30 +251,61 @@ export function HeroRecipeCard({
 
           <div
             className="flex flex-wrap items-center"
-            style={{ gap: HERO_RECIPE_CARD_META_GAP_PX }}
+            style={{
+              gap: largeMeta
+                ? Math.round(HERO_RECIPE_CARD_META_GAP_PX * 1.35)
+                : HERO_RECIPE_CARD_META_GAP_PX,
+            }}
           >
-            <DietBadge diet={recipe.diet} />
-            <MetaPill icon={Users} label={`x${recipe.servings}`} />
-            <MetaPill icon={ChefHat} label={recipe.difficulty} />
-            <MetaPill icon={Hourglass} label={recipe.cookTime} />
+            <DietBadge diet={recipe.diet} large={largeMeta} />
+            <MetaPill
+              icon={Users}
+              label={`x${recipe.servings}`}
+              large={largeMeta}
+            />
+            <MetaPill
+              icon={ChefHat}
+              label={recipe.difficulty}
+              large={largeMeta}
+            />
+            <MetaPill
+              icon={Hourglass}
+              label={recipe.cookTime}
+              large={largeMeta}
+            />
           </div>
         </div>
       </div>
 
-      {/* Title footer — overlaps image per Figma */}
+      {/* Title — hero sits on a white footer; showcase sits in a boxed label. */}
       <div
-        className="relative z-10 flex items-center border-t-0 border-(--primitive-black-8)"
+        className={cn(
+          "relative z-0 flex items-center border-(--primitive-black-8)",
+          "border-t-0"
+        )}
         style={{
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
           borderBottomLeftRadius: HERO_RECIPE_CARD_RADIUS_PX,
           borderBottomRightRadius: HERO_RECIPE_CARD_RADIUS_PX,
           borderWidth: HERO_RECIPE_CARD_FOOTER_BORDER_PX,
+          borderTopWidth: 0,
           borderStyle: "solid",
-          paddingInline: HERO_RECIPE_CARD_FOOTER_PADDING_X_PX,
-          paddingBottom: HERO_RECIPE_CARD_FOOTER_PADDING_BOTTOM_PX,
-          paddingTop: HERO_RECIPE_CARD_FOOTER_PADDING_TOP_PX,
+          paddingInline: isShowcase ? footerPad : HERO_RECIPE_CARD_FOOTER_PADDING_X_PX,
+          paddingBottom: isShowcase
+            ? footerPad
+            : HERO_RECIPE_CARD_FOOTER_PADDING_BOTTOM_PX,
+          paddingTop: isShowcase
+            ? footerPad + HERO_RECIPE_CARD_RADIUS_PX
+            : HERO_RECIPE_CARD_FOOTER_PADDING_TOP_PX,
         }}
       >
-        <h3 className="type-body-sm-medium min-w-0 flex-1 text-left text-(--text-primary-black)">
+        <h3
+          className={cn(
+            "min-w-0 flex-1 text-left text-(--text-primary-black)",
+            titleClass
+          )}
+        >
           {recipe.title}
         </h3>
       </div>

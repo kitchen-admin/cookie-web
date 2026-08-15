@@ -4,7 +4,6 @@
  * visitor’s device, then shows manual links if the redirect is blocked.
  */
 export const DOWNLOADS_COPY = {
-  title: "Cookie",
   lead: "Taking you to the right place...",
   fallbackLead: "If you aren't redirected automatically:",
   websiteLabel: "Website",

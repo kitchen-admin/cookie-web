@@ -58,19 +58,17 @@ export function DownloadRedirect() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center bg-linear-to-b from-white to-(--surface-hero-gradient-end) px-6 py-16">
       <div className="flex w-full max-w-md flex-col items-center text-center">
-        <Image
-          src={siteImages.logoMark}
-          alt="Cookie"
-          width={188}
-          height={40}
-          priority
-          className="h-10 w-auto object-contain"
-        />
-
-        <h1 className="type-display-section mt-8 text-(--text-display)">
-          {DOWNLOADS_COPY.title}
+        <h1>
+          <Image
+            src={siteImages.logoMark}
+            alt="Cookie"
+            width={188}
+            height={40}
+            priority
+            className="h-10 w-auto object-contain"
+          />
         </h1>
-        <p className="type-body-xl-regular mt-3 text-(--text-primary-black)">
+        <p className="type-body-xl-regular mt-6 text-(--text-primary-black)">
           {DOWNLOADS_COPY.lead}
         </p>
 

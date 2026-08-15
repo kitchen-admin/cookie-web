@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: "/legal/terms",
         permanent: true,
       },
+      {
+        source: "/download",
+        destination: "/downloads",
+        permanent: true,
+      },
     ];
   },
   images: {

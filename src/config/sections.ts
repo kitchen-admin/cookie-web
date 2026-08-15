@@ -29,4 +29,5 @@ export type NavHref = {
 export const NAV_ITEMS: NavHref[] = [
   { label: "FAQs", href: "/#faq" },
   { label: "About us", href: "/about" },
+  { label: "Download", href: "/downloads" },
 ];

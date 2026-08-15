@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { AppStoreBadges } from "@/components/app-store-badges";
 import { SectionWave } from "@/components/section-wave";
@@ -15,7 +16,13 @@ import { handleHashNavClick } from "@/lib/hash-nav";
 import { cn } from "@/lib/utils";
 
 export function Footer() {
+  const pathname = usePathname();
   const [headingLine1, headingLine2] = FOOTER_HEADING.split("\n");
+
+  // /downloads is a store-redirect interstitial — no site chrome.
+  if (pathname === "/downloads") {
+    return null;
+  }
 
   return (
     <footer

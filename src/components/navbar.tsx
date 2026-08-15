@@ -43,10 +43,16 @@ function NavLinks({
 }
 
 export function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   function closeMobileMenu() {
     setMobileOpen(false);
+  }
+
+  // /downloads is a store-redirect interstitial — no site chrome.
+  if (pathname === "/downloads") {
+    return null;
   }
 
   return (

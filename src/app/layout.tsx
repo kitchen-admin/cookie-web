@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Sans } from "next/font/google";
+import { Caveat, Geist_Mono, Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Footer } from "@/components/footer";
@@ -25,6 +25,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+/** Handwritten signature on About us (Figma "Divyanshu, Krishna & Chahat"). */
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Cookie",
@@ -35,6 +42,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: siteImages.favicon, type: "image/png" }],
     apple: siteImages.favicon,
+  },
+  // Site-wide social preview card. Pages inherit this unless they set their
+  // own `openGraph`/`twitter`, so it also covers About us.
+  openGraph: {
+    type: "website",
+    siteName: "Cookie",
+    images: [
+      {
+        url: siteImages.socialPreview,
+        width: 1200,
+        height: 640,
+        alt: "Cookie — turn what's already in your fridge into meals you'll actually love",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [siteImages.socialPreview],
   },
 };
 
@@ -47,7 +72,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${instrumentSans.variable} ${boldnova.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${instrumentSans.variable} ${boldnova.variable} ${geistMono.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="m-0 flex min-h-full flex-col bg-background p-0">
         <Providers>

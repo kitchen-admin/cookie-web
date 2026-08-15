@@ -89,8 +89,18 @@ export const siteImages = {
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/brand-assets/appstore.svg",
   badgePlayStore:
     "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/brand-assets/playstore.svg",
+  /** About us: founders rising out of the footer wave. */
+  founderDivyanshu:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/Divyanshu.webp",
+  founderGj:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/GJ.webp",
+  founderChahat:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/Chahat.webp",
   /** Footer wave + maroon fill */
   footerCurve: "/footer/curve.svg",
+  /** Site-wide social preview (Open Graph / Twitter card), 1200x640. */
+  socialPreview:
+    "https://7gexo7oc4kxixfb3.public.blob.vercel-storage.com/cookie-website/social_preivew.png",
 } as const;
 
 export type SiteImageKey = keyof typeof siteImages;

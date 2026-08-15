@@ -16,6 +16,7 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-boldnova);
   --font-display: var(--font-boldnova);
+  --font-script: var(--font-caveat);
   --font-weight-regular: var(--type-weight-regular);
   --font-weight-medium: var(--type-weight-medium);
   --font-weight-semibold: var(--type-weight-semibold);

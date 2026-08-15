@@ -19,17 +19,17 @@ export type SocialLink = {
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/heycookieapp/",
     iconSrc: "/social/instagram.svg",
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/cookie-kitchen/",
     iconSrc: "/social/linkedin.svg",
   },
   {
     name: "X",
-    href: "https://x.com",
+    href: "https://x.com/heycookieapp",
     iconSrc: "/social/x.svg",
   },
 ];
